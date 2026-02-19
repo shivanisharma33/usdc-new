@@ -1,4 +1,4 @@
-import { Cpu, Wind, Recycle, Globe } from 'lucide-react';
+import { Globe } from 'lucide-react';
 
 const WhatWeDo = () => {
     const brandNavy = "#001738";

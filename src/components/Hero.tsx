@@ -1,4 +1,4 @@
-import { MoveRight, Trophy } from 'lucide-react';
+import { MoveRight } from 'lucide-react';
 
 const Hero = () => {
     return (
@@ -60,7 +60,7 @@ const Hero = () => {
                 {/* Floating Banner (IDC MarketScape) */}
                 <div className="absolute bottom-12 left-6 md:left-16 lg:left-24 right-6 md:right-auto">
                     <div className="group bg-black/30 backdrop-blur-xl border border-white/20 p-6 md:p-8 rounded-2xl flex flex-col md:flex-row items-start md:items-center gap-6 max-w-2xl transition-all hover:bg-black/40">
-                        
+
 
                         <div className="space-y-3">
                             <h3 className="text-white text-base md:text-lg font-bold leading-tight tracking-wide">
