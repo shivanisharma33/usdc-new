@@ -20,7 +20,7 @@ const EarthSection = () => {
     ];
 
     return (
-        <section className="relative min-h-[150vh] flex items-center justify-center overflow-hidden bg-white">
+        <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-white">
             {/* Background removed per request */}
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full text-center">
@@ -50,21 +50,6 @@ const EarthSection = () => {
                                 </div>
 
                                 <p className="mt-6 text-center text-base md:text-lg text-gray-600 font-medium max-w-[300px] leading-relaxed">{stat.label}</p>
-
-                                <div className="mt-6 w-full">
-                                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                                        <div className="h-2 rounded-full" style={{ width: `${Math.min(100, 20 + i * 30)}%`, background: 'linear-gradient(90deg,#40D1FB,#0078FF)' }} />
-                                    </div>
-                                </div>
-
-                                <motion.div
-                                    className="absolute -top-4 right-6 bg-white/70 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-700 shadow"
-                                    initial={{ scale: 0.9 }}
-                                    whileInView={{ scale: 1 }}
-                                    transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
-                                >
-                                    Highlight
-                                </motion.div>
                             </motion.div>
                         ))}
                     </div>

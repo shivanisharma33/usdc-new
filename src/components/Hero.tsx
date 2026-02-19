@@ -10,7 +10,7 @@ const Hero = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover scale-105"
+                    className="w-full h-full object-cover scale-105 blur-[2px]"
                 >
                     <source
                         src="./Untitled design (2) (1).mp4"
@@ -60,7 +60,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-             
+
             </div>
 
             {/* Visual Accents */}

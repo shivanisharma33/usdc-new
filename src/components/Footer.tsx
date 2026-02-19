@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-[#40D1FB]">USDC</h3>
+            <Link to="/" className="text-xl font-bold text-[#40D1FB] hover:opacity-80 transition-opacity">USDC</Link>
             <p className="text-gray-400 text-sm leading-relaxed">
               Powering the future of data with state-of-the-art data center infrastructure and solutions for the digital economy.
             </p>
@@ -29,10 +30,11 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Home</a></li>
+              <li><a href="/" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Home</a></li>
+              <li><a href="/about-us" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">About Us</a></li>
+              <li><a href="/investors" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Investors</a></li>
               <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Data Centers</a></li>
               <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Solutions</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">About Us</a></li>
               <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Blog</a></li>
             </ul>
           </div>

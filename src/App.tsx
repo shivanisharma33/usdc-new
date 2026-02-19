@@ -3,6 +3,11 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
+import Investors from './pages/Investors';
+import Insights from './pages/Insights';
+import Management from './pages/Management';
+import Locations from './pages/Locations';
+import Careers from './pages/Careers';
 import './App.css';
 
 function App() {
@@ -13,6 +18,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/investors" element={<Investors />} />
+          <Route path="/insights" element={<Insights />} />
+          <Route path="/management" element={<Management />} />
+          <Route path="/locations" element={<Locations />} />
+          <Route path="/careers" element={<Careers />} />
         </Routes>
         <Footer />
       </div>

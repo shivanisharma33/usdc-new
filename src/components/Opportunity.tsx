@@ -32,7 +32,7 @@ const Opportunity = () => {
                     className="mt-10 bg-white shadow-2xl border border-slate-100 overflow-hidden"
                 >
                     {/* Replace `/opportunity-chart.png` with the exact image file in your public folder */}
-                    <img src={`./Picture1.webp`} alt="Opportunity chart" className="w-full h-auto block" />
+                    <img src={`./midis post (3).jpg`} alt="Opportunity chart" className="w-full h-auto block" />
                 </motion.div>
             </div>
         </section>

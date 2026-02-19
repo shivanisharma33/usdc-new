@@ -6,32 +6,34 @@ const Navbar = () => {
     return (
         <nav className="flex items-center justify-between px-6 md:px-12 py-3 bg-white sticky top-0 z-50">
             {/* Logo Section */}
-            <Logo />
+            <Link to="/" className="cursor-pointer">
+                <Logo />
+            </Link>
 
             {/* Navigation Links */}
             <div className="hidden lg:flex items-center space-x-10">
-            <Link to="/about-us" className="flex items-center gap-1 cursor-pointer group">
+                <Link to="/about-us" className="flex items-center gap-1 cursor-pointer group">
                     <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">About us </span>
                     <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#40D1FB]" />
                 </Link>
-                <div className="flex items-center gap-1 cursor-pointer group">
+                <Link to="/investors" className="flex items-center gap-1 cursor-pointer group">
                     <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Investor</span>
                     <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#40D1FB]" />
-                </div>
-                <div className="cursor-pointer group">
+                </Link>
+                <Link to="/insights" className="cursor-pointer group">
                     <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">News & insight</span>
-                </div>
-                <div className="cursor-pointer group">
+                </Link>
+                <Link to="/management" className="cursor-pointer group">
                     <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Management Team</span>
-                </div>
-                
-                <div className="cursor-pointer group">
+                </Link>
+
+                <Link to="/locations" className="cursor-pointer group">
                     <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Location</span>
-                </div>
-                <div className="flex items-center gap-1 cursor-pointer group">
-                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Carrer</span>
+                </Link>
+                <Link to="/careers" className="flex items-center gap-1 cursor-pointer group">
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Careers</span>
                     <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#40D1FB]" />
-                </div>
+                </Link>
             </div>
 
             {/* CTA Button */}

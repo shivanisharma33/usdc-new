@@ -5,10 +5,7 @@ const WhatWeDo = () => {
 
     return (
         <section className="relative py-24 bg-gray-50/50 overflow-hidden">
-            {/* Decorative Background Text */}
-            <div className="absolute top-0 right-0 text-[15rem] font-bold text-gray-100/50 leading-none select-none pointer-events-none translate-x-20 -translate-y-10">
-                USDC
-            </div>
+          
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                 <div className="flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-24">
@@ -52,10 +49,7 @@ const WhatWeDo = () => {
                                 className="w-full h-full object-cover grayscale-[0.2] transition-transform duration-[2s] group-hover:scale-110"
                             />
 
-                            {/* Animated Floating Overlay */}
-                            <div className="absolute top-10 right-10 w-32 h-32 bg-cyan-400/20 backdrop-blur-md rounded-full border border-white/30 animate-pulse-slow flex items-center justify-center">
-                                <div className="w-16 h-16 bg-white/20 rounded-full animate-ping" />
-                            </div>
+                         
 
                             {/* Bottom Interactive Card */}
                             <div className="absolute bottom-10 left-10 right-10 bg-white/10 backdrop-blur-2xl p-6 rounded-2xl border border-white/20 shadow-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">
@@ -64,15 +58,13 @@ const WhatWeDo = () => {
                                         <p className="text-white font-bold text-lg">Next-Gen HPC</p>
                                         <p className="text-white/70 text-sm">Sustainability First</p>
                                     </div>
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-400 text-white shadow-lg">
-                                        <Globe className="w-6 h-6 animate-spin-slow" />
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
 
                         {/* Geometric Accents */}
-                        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-cyan-100 rounded-full mix-blend-multiply opacity-70 animate-blob" />
+                        
                         <div className="absolute -top-6 -left-6 w-32 h-32 bg-blue-100 rounded-full mix-blend-multiply opacity-70 animate-blob animation-delay-2000" />
                     </div>
 
