@@ -1,4 +1,5 @@
 import { ChevronDown, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
 const Navbar = () => {
@@ -9,10 +10,10 @@ const Navbar = () => {
 
             {/* Navigation Links */}
             <div className="hidden lg:flex items-center space-x-10">
-                <div className="flex items-center gap-1 cursor-pointer group">
+            <Link to="/about-us" className="flex items-center gap-1 cursor-pointer group">
                     <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">About us </span>
                     <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#40D1FB]" />
-                </div>
+                </Link>
                 <div className="flex items-center gap-1 cursor-pointer group">
                     <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Investor</span>
                     <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#40D1FB]" />

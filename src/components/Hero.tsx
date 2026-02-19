@@ -13,7 +13,7 @@ const Hero = () => {
                     className="w-full h-full object-cover scale-105"
                 >
                     <source
-                        src="https://www.pexels.com/download/video/3129576/"
+                        src="./Untitled design (2) (1).mp4"
                         type="video/mp4"
                     />
                 </video>
@@ -30,52 +30,37 @@ const Hero = () => {
             <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-16 lg:px-24">
                 <div className="max-w-4xl space-y-8">
                     {/* Subheader */}
-                    <div className="animate-fade-in-up">
-                        <p className="text-white text-[13px] md:text-[15px] font-bold tracking-[0.25em] uppercase opacity-90">
-                            India's Largest Data Center Network
+                    <div className="animate-fade-in-up flex items-center gap-2">
+                        <span className="inline-block w-3 h-3 rounded-full bg-[#40D1FB]"></span>
+                        <p className="text-[#40D1FB] text-xs md:text-sm font-bold tracking-[0.2em] uppercase opacity-95">
+                            Premium Data Center Solutions
                         </p>
                     </div>
 
                     {/* Main Heading */}
-                    <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1]">
-                        <span className="hero-title-italic block md:inline mr-4">Sustainable</span>
-                        <span className="font-sans block md:inline">by choice</span>
+                    <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
+                        Powering the <span className="bg-gradient-to-r from-[#40D1FB] to-blue-400 bg-clip-text text-transparent">Future of Data</span>: Expert Development for the Digital Age
                     </h1>
 
                     {/* Tagline */}
-                    <p className="text-white/95 text-lg md:text-2xl font-medium max-w-2xl leading-relaxed">
-                        Scalable, secure and resilient data centers<br className="hidden md:block" />
-                        for future-ready enterprises
+                    <p className="text-white/90 text-base md:text-lg font-medium max-w-3xl leading-relaxed">
+                        We specialize in building and managing state-of-the-art data centers, providing infrastructure solutions tailored for the evolving needs of the digital economy.
                     </p>
 
                     {/* Button */}
-                    <div className="pt-4">
-                        <button className="group flex items-center gap-3 border-2 border-white text-white px-8 py-4 rounded hover:bg-[#40D1FB] hover:border-[#40D1FB] transition-all duration-300 font-bold text-lg">
+                    <div className="pt-6 flex gap-4 items-center flex-wrap">
+                        <button className="group relative flex items-center gap-3 bg-[#40D1FB] text-black px-7 py-3 font-bold text-base overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#40D1FB]/50 hover:scale-105">
                             <span>Explore Data Centers</span>
-                            <MoveRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                            <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                         </button>
+                        <a href="/company-overview.pdf" download className="group relative flex items-center gap-3 border-2 border-white text-white px-7 py-3 font-bold text-base hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                            <span>Download PDF</span>
+                            <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                        </a>
                     </div>
                 </div>
 
-                {/* Floating Banner (IDC MarketScape) */}
-                <div className="absolute bottom-12 left-6 md:left-16 lg:left-24 right-6 md:right-auto">
-                    <div className="group bg-black/30 backdrop-blur-xl border border-white/20 p-6 md:p-8 rounded-2xl flex flex-col md:flex-row items-start md:items-center gap-6 max-w-2xl transition-all hover:bg-black/40">
-
-
-                        <div className="space-y-3">
-                            <h3 className="text-white text-base md:text-lg font-bold leading-tight tracking-wide">
-                                Nxtra emerged as a leader in the 2024 IDC MarketScape<br className="hidden md:block" />
-                                data center services
-                            </h3>
-                            <div className="flex items-center gap-2 cursor-pointer transition-all hover:translate-x-1">
-                                <span className="text-white text-sm md:text-base font-bold border-b-2 border-transparent hover:border-white transition-all uppercase tracking-wider">
-                                    Read full report
-                                </span>
-                                <MoveRight className="w-5 h-5 text-white" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+             
             </div>
 
             {/* Visual Accents */}
