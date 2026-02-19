@@ -8,6 +8,7 @@ import Insights from './pages/Insights';
 import Management from './pages/Management';
 import Locations from './pages/Locations';
 import Careers from './pages/Careers';
+import ContactPage from './pages/ContactPage';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/management" element={<Management />} />
           <Route path="/locations" element={<Locations />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
       </div>
