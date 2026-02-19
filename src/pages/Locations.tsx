@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { MapPin, Globe, Zap, ArrowUpRight, ChevronDown, Activity, Server, Cpu, ShieldCheck } from 'lucide-react';
+import { MapPin, Globe, Zap, ArrowUpRight, ChevronDown, Activity, ShieldCheck } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const Locations = () => {

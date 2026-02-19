@@ -1,11 +1,11 @@
-import { Globe } from 'lucide-react';
+// Globe import removed as it was unused
 
 const WhatWeDo = () => {
     const brandNavy = "#001738";
 
     return (
         <section className="relative py-24 bg-gray-50/50 overflow-hidden">
-          
+
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                 <div className="flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-24">
@@ -49,7 +49,7 @@ const WhatWeDo = () => {
                                 className="w-full h-full object-cover grayscale-[0.2] transition-transform duration-[2s] group-hover:scale-110"
                             />
 
-                         
+
 
                             {/* Bottom Interactive Card */}
                             <div className="absolute bottom-10 left-10 right-10 bg-white/10 backdrop-blur-2xl p-6 rounded-2xl border border-white/20 shadow-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">
@@ -58,13 +58,13 @@ const WhatWeDo = () => {
                                         <p className="text-white font-bold text-lg">Next-Gen HPC</p>
                                         <p className="text-white/70 text-sm">Sustainability First</p>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
 
                         {/* Geometric Accents */}
-                        
+
                         <div className="absolute -top-6 -left-6 w-32 h-32 bg-blue-100 rounded-full mix-blend-multiply opacity-70 animate-blob animation-delay-2000" />
                     </div>
 
