@@ -10,21 +10,25 @@ const Navbar = () => {
             {/* Navigation Links */}
             <div className="hidden lg:flex items-center space-x-10">
                 <div className="flex items-center gap-1 cursor-pointer group">
-                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Data Centers</span>
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">About us </span>
                     <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#40D1FB]" />
                 </div>
                 <div className="flex items-center gap-1 cursor-pointer group">
-                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Solutions</span>
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Investor</span>
                     <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#40D1FB]" />
                 </div>
                 <div className="cursor-pointer group">
-                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Digital Initiatives</span>
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">News & insight</span>
                 </div>
                 <div className="cursor-pointer group">
-                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Sustainability</span>
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Management Team</span>
+                </div>
+                
+                <div className="cursor-pointer group">
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Location</span>
                 </div>
                 <div className="flex items-center gap-1 cursor-pointer group">
-                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">About Us</span>
+                    <span className="text-[15px] font-semibold text-gray-700 group-hover:text-[#40D1FB] transition-colors">Carrer</span>
                     <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#40D1FB]" />
                 </div>
             </div>
@@ -32,7 +36,7 @@ const Navbar = () => {
             {/* CTA Button */}
             <button className="flex items-center gap-2 bg-[#40D1FB] text-white px-5 py-2.5 rounded hover:bg-[#32B8E0] transition-all font-bold text-sm tracking-wide">
                 <MessageSquare className="w-4 h-4" />
-                <span className="uppercase">Talk To An Expert</span>
+                <span className="uppercase">Contact us</span>
             </button>
         </nav>
     );

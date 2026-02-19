@@ -4,6 +4,7 @@ import RedefiningSection from './components/RedefiningSection';
 import WhatWeDo from './components/WhatWeDo';
 import Opportunity from './components/Opportunity';
 import EarthSection from './components/EarthSection';
+import LatestNews from './components/LatestNews';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <WhatWeDo />
         <Opportunity />
         <EarthSection />
+        <LatestNews />
       </main>
 
       {/* Optional: Add a footer or rest of the page content here */}

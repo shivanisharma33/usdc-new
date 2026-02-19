@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 
 const EarthSection = () => {
     const cyanColor = "#40D1FB";
+    // Map removed — focusing on attractive stats presentation
 
     const stats = [
         {
@@ -19,24 +20,8 @@ const EarthSection = () => {
     ];
 
     return (
-        <section className="relative min-h-[150vh] flex items-center justify-center overflow-hidden bg-black">
-            {/* Background Earth Video */}
-            <div className="absolute inset-0 z-0">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover opacity-60"
-                >
-                    <source
-                        src="https://www.pexels.com/download/video/3129957/"
-                        type="video/mp4"
-                    />
-                </video>
-                {/* Overlay to ensure text readability */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
-            </div>
+        <section className="relative min-h-[150vh] flex items-center justify-center overflow-hidden bg-white">
+            {/* Background removed per request */}
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full text-center">
                 <motion.div
@@ -46,43 +31,48 @@ const EarthSection = () => {
                     className="space-y-16"
                 >
                     {/* Header */}
-                    <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
+                    <h2 className="text-4xl md:text-6xl font-bold text-gray-900 tracking-tight">
                         USDC By The <span style={{ color: cyanColor }}>Numbers</span>
                     </h2>
 
-                    {/* Stats Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+                    {/* Stats Grid - upgraded cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
                         {stats.map((stat, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: i * 0.2 }}
-                                className="flex flex-col items-center space-y-4"
+                                transition={{ duration: 0.7, delay: i * 0.15 }}
+                                className="relative bg-white p-8 md:p-10 shadow-lg border border-slate-100 flex flex-col items-center"
                             >
-                                <span className="text-6xl md:text-8xl font-black text-white tracking-tighter">
-                                    {stat.number}
-                                </span>
-                                <p className="text-lg md:text-xl text-gray-300 font-medium max-w-[250px] leading-relaxed transition-colors hover:text-white">
-                                    {stat.label}
-                                </p>
+                                <div className="w-28 h-28 md:w-32 md:h-32 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(64,209,251,0.12), rgba(7,89,190,0.12))' }}>
+                                    <span className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">{stat.number}</span>
+                                </div>
 
-                                {/* Decorative underline that glows on view */}
+                                <p className="mt-6 text-center text-base md:text-lg text-gray-600 font-medium max-w-[300px] leading-relaxed">{stat.label}</p>
+
+                                <div className="mt-6 w-full">
+                                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                                        <div className="h-2 rounded-full" style={{ width: `${Math.min(100, 20 + i * 30)}%`, background: 'linear-gradient(90deg,#40D1FB,#0078FF)' }} />
+                                    </div>
+                                </div>
+
                                 <motion.div
-                                    initial={{ width: 0 }}
-                                    whileInView={{ width: "60px" }}
-                                    transition={{ duration: 1, delay: 0.5 + (i * 0.2) }}
-                                    className="h-1 bg-cyan-400 rounded-full"
-                                    style={{ boxShadow: `0 0 15px ${cyanColor}` }}
-                                />
+                                    className="absolute -top-4 right-6 bg-white/70 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-700 shadow"
+                                    initial={{ scale: 0.9 }}
+                                    whileInView={{ scale: 1 }}
+                                    transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
+                                >
+                                    Highlight
+                                </motion.div>
                             </motion.div>
                         ))}
                     </div>
                 </motion.div>
             </div>
 
-            {/* Subtle atmospheric glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-900/10 rounded-full blur-[150px] pointer-events-none" />
+            {/* Soft background accent */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-slate-50 rounded-full blur-[140px] pointer-events-none" />
         </section>
     );
 };
