@@ -19,11 +19,11 @@ const Hero = () => {
                 </video>
 
                 {/* The Split Filter Overlay */}
-                {/* Left side: Dark data center feel */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-10" />
+                {/* Left side: Dark data center feel (Left Shadow for Visibility) */}
+                <div className="absolute inset-y-0 left-0 w-full md:w-2/3 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-10" />
 
                 {/* Right side: Light/Green nature feel overlay (To mimic the image's split look) */}
-                <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-green-900/20 to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-green-900/10 to-transparent z-10 pointer-events-none" />
             </div>
 
             {/* Content Container */}
