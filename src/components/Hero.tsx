@@ -53,7 +53,12 @@ const Hero = () => {
                             <span>Explore Data Centers</span>
                             <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                         </button>
-                        <a href="/company-overview.pdf" download className="group relative flex items-center gap-3 border-2 border-white text-white px-7 py-3 font-bold text-base hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                        <a
+                            href="https://static1.squarespace.com/static/6765fcde25dea733d4a4c593/t/6785eb72626f767ed5792eea/1736829812905/USDC+Deck_PS+1.6.25.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative flex items-center gap-3 border-2 border-white text-white px-7 py-3 font-bold text-base hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                        >
                             <span>Download PDF</span>
                             <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                         </a>

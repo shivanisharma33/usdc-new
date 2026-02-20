@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 
 const Footer = () => {
   return (
@@ -9,7 +10,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <Link to="/" className="text-xl font-bold text-[#40D1FB] hover:opacity-80 transition-opacity">USDC</Link>
+            <Link to="/" className="hover:opacity-80 transition-opacity flex items-center">
+              <Logo />
+            </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
               Powering the future of data with state-of-the-art data center infrastructure and solutions for the digital economy.
             </p>

@@ -25,7 +25,7 @@ const ContactUs = () => {
   };
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-white">
+    <section className="relative pt-8 pb-24 md:pt-12 md:pb-32 overflow-hidden bg-white">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-[#40D1FB]/10 rounded-full blur-[120px]" />
@@ -36,7 +36,7 @@ const ContactUs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
           {/* Left: Content Area */}
-          <div className="lg:col-span-5 space-y-12">
+          <div className="lg:col-span-4 space-y-12">
             <div className="space-y-6">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -95,12 +95,12 @@ const ContactUs = () => {
           </div>
 
           {/* Right: Form Area */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-[40px] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-12 relative overflow-hidden"
+              className="bg-white rounded-[40px] shadow-[0_32px_96px_-16px_rgba(0,0,0,0.12)] border border-slate-100 p-10 md:p-16 relative overflow-hidden"
             >
               <AnimatePresence mode="wait">
                 {!sent ? (
@@ -120,7 +120,7 @@ const ContactUs = () => {
                           name="name"
                           required
                           placeholder="John Doe"
-                          className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 font-bold placeholder:text-slate-300"
+                          className="w-full bg-slate-50 border-none px-8 py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-lg font-bold placeholder:text-slate-300"
                         />
                       </div>
                       <div className="space-y-2 group">
@@ -130,7 +130,7 @@ const ContactUs = () => {
                           type="email"
                           required
                           placeholder="john@company.com"
-                          className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 font-bold placeholder:text-slate-300"
+                          className="w-full bg-slate-50 border-none px-8 py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-lg font-bold placeholder:text-slate-300"
                         />
                       </div>
                     </div>
@@ -139,10 +139,10 @@ const ContactUs = () => {
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-focus-within:text-[#40D1FB] transition-colors">How can we help?</label>
                       <textarea
                         name="message"
-                        rows={4}
+                        rows={5}
                         required
                         placeholder="Tell us about your project or inquiry..."
-                        className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 font-bold placeholder:text-slate-300 resize-none"
+                        className="w-full bg-slate-50 border-none px-8 py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-lg font-bold placeholder:text-slate-300 resize-none"
                       />
                     </div>
 
@@ -150,7 +150,7 @@ const ContactUs = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       disabled={submitting}
-                      className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all duration-300 shadow-xl shadow-[#40D1FB]/20 ${submitting
+                      className={`w-full py-7 rounded-2xl font-black uppercase tracking-widest text-base flex items-center justify-center gap-3 transition-all duration-300 shadow-2xl shadow-[#40D1FB]/20 ${submitting
                         ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
                         : 'bg-slate-950 text-white hover:bg-slate-900'
                         }`}

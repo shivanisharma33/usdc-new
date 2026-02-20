@@ -95,9 +95,14 @@ const AboutUs = () => {
             </motion.p>
 
             <motion.div variants={item} className="flex gap-4 pt-4">
-              <button className="px-8 py-3 bg-gradient-to-r from-[#40D1FB] to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+              <a
+                href="https://static1.squarespace.com/static/6765fcde25dea733d4a4c593/t/6785eb72626f767ed5792eea/1736829812905/USDC+Deck_PS+1.6.25.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 bg-gradient-to-r from-[#40D1FB] to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all inline-block"
+              >
                 Download Overview
-              </button>
+              </a>
               <button className="px-8 py-3 bg-white border-2 border-slate-200 text-slate-900 font-semibold rounded-lg hover:border-[#40D1FB] transition-all">
                 Get in Touch
               </button>
