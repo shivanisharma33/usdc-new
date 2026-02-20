@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { Cpu, Zap, Globe, ArrowUpRight } from 'lucide-react';
+import { Cpu, Globe, ArrowUpRight } from 'lucide-react';
 
 const Arm200 = () => {
-    const brandNavy = "#001738";
 
     return (
         <section className="relative py-24 bg-slate-950 overflow-hidden text-white">
