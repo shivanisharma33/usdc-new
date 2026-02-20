@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { Zap, Leaf, Shield, TrendingUp, Users, Target } from 'lucide-react';
+import { TrendingUp, Target } from 'lucide-react';
 
 const container: Variants = {
   hidden: {},
@@ -19,32 +19,32 @@ const item: Variants = {
 const AboutUs = () => {
   const values = [
     {
-      icon: Zap,
+      image: '/usdc/high performance.png',
       title: 'High Performance',
       description: 'Delivering cutting-edge GPU/CPU infrastructure for demanding HPC workloads',
     },
     {
-      icon: Leaf,
+      image: '/usdc/sustainability.png',
       title: 'Sustainability',
       description: 'Integrating renewable energy and efficient cooling systems',
     },
     {
-      icon: Shield,
+      image: '/usdc/reliability.png',
       title: 'Reliability',
       description: 'Tier-III redundancy standards with 99.99% uptime guarantee',
     },
     {
-      icon: TrendingUp,
+      image: '/usdc/peak performance.png',
       title: 'Innovation',
       description: 'Pioneering next-generation data center architectures',
     },
     {
-      icon: Users,
+      image: '/usdc/hpc ready.png',
       title: 'Partnership',
       description: 'Collaborating closely with industry leaders and research institutions',
     },
     {
-      icon: Target,
+      image: '/usdc/excellence.png',
       title: 'Excellence',
       description: 'Committed to operational perfection and customer success',
     },
@@ -112,7 +112,7 @@ const AboutUs = () => {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-24 md:py-32 bg-white">
+      <section id="mission" className="py-24 md:py-32 bg-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={container} className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Mission */}
@@ -171,7 +171,7 @@ const AboutUs = () => {
       </section>
 
       {/* Core Values Section */}
-      <section className="py-24 md:py-32 bg-gradient-to-br from-slate-50 to-white">
+      <section id="values" className="py-24 md:py-32 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={container} className="space-y-12">
             <motion.div variants={item} className="text-center space-y-4">
@@ -183,18 +183,21 @@ const AboutUs = () => {
 
             <motion.div variants={container} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {values.map((value, idx) => {
-                const Icon = value.icon;
                 return (
                   <motion.div
                     key={idx}
                     variants={item}
                     className="group bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-[#40D1FB]/30 transition-all"
                   >
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#40D1FB]/10 to-blue-500/10 flex items-center justify-center mb-4 group-hover:from-[#40D1FB]/20 group-hover:to-blue-500/20 transition-all">
-                      <Icon className="w-6 h-6 text-[#40D1FB]" />
+                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-slate-50 to-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-sm border border-slate-100">
+                      <img
+                        src={value.image}
+                        alt={value.title}
+                        className="w-10 h-10 object-contain"
+                      />
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 mb-2">{value.title}</h3>
-                    <p className="text-slate-600">{value.description}</p>
+                    <p className="text-slate-600 leading-relaxed">{value.description}</p>
                   </motion.div>
                 );
               })}
@@ -232,7 +235,7 @@ const AboutUs = () => {
       </section>
 
       {/* Why Choose USDC */}
-      <section className="py-24 md:py-32 bg-gradient-to-br from-blue-50 via-white to-slate-50">
+      <section id="why" className="py-24 md:py-32 bg-gradient-to-br from-blue-50 via-white to-slate-50">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={container} className="space-y-12">
             <motion.div variants={item} className="text-center space-y-4">

@@ -1,9 +1,22 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { MapPin, Globe, Zap, ArrowUpRight, ChevronDown, Activity, ShieldCheck } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const Locations = () => {
+    const { hash } = useLocation();
+
+    // Scroll to section based on hash
+    useEffect(() => {
+        if (hash) {
+            const element = document.getElementById(hash.slice(1));
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [hash]);
+
     // Parallax Hero
     const heroRef = useRef(null);
     const { scrollYProgress: heroScroll } = useScroll({
@@ -15,6 +28,7 @@ const Locations = () => {
 
     const locations = [
         {
+            id: "virginia",
             city: "Northern Virginia",
             region: "USA East",
             status: "Operational",
@@ -25,6 +39,7 @@ const Locations = () => {
             coords: "39.0438° N"
         },
         {
+            id: "ohio",
             city: "Columbus, Ohio",
             region: "USA Central",
             status: "Expanding",
@@ -35,6 +50,7 @@ const Locations = () => {
             coords: "39.9612° N"
         },
         {
+            id: "helsinki",
             city: "Helsinki",
             region: "Europe North",
             status: "Operational",
@@ -45,6 +61,7 @@ const Locations = () => {
             coords: "60.1699° N"
         },
         {
+            id: "singapore",
             city: "Singapore",
             region: "Asia Pacific",
             status: "Strategic",
@@ -145,7 +162,7 @@ const Locations = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-1 bg-slate-100 border border-slate-100">
                         {locations.map((loc, i) => (
-                            <div key={i} className="bg-white p-12 group cursor-pointer relative overflow-hidden">
+                            <div key={i} id={loc.id} className="bg-white p-12 group cursor-pointer relative overflow-hidden">
                                 {/* Hover Gradient Reveal */}
                                 <div className="absolute inset-0 bg-slate-950 scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-500 -z-0" />
 
