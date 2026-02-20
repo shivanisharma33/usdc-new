@@ -80,22 +80,17 @@ const Management = () => {
                     />
                 </motion.div>
 
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto space-y-8">
+                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto space-y-8 pt-20 md:pt-32">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
                     >
-                        <div className="inline-flex items-center gap-3 px-5 py-2 border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md mb-6">
-                            <span className="w-2 h-2 bg-cyan-400 animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-300">Executive Leadership</span>
-                        </div>
+
                         <h1 className="text-7xl md:text-9xl font-black text-white tracking-tighter leading-none mb-8">
                             STOCKED WITH <br /> <span className="text-cyan-400">EXPERTISE</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed">
-                            A global group of industry veterans committed to building the infrastructure for the next generation of digital value.
-                        </p>
+
                     </motion.div>
                 </div>
 
@@ -151,7 +146,7 @@ const Management = () => {
                         </div>
                         <h2 className="text-5xl lg:text-7xl font-black text-slate-900 leading-tight">
                             The Minds Behind <br />
-                            <span className="text-slate-300">Sustainable Growth</span>
+                            <span className="text-cyan-400">Sustainable Growth</span>
                         </h2>
                     </div>
 

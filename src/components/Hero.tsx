@@ -10,7 +10,7 @@ const Hero = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover scale-105 blur-[2px]"
+                    className="w-full h-full object-cover scale-105"
                 >
                     <source
                         src="./Untitled design (2) (1).mp4"

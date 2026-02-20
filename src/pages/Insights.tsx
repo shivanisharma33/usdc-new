@@ -106,23 +106,18 @@ const Insights = () => {
                     />
                 </motion.div>
 
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20 md:pt-32">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, ease: "easeOut" }}
                         className="space-y-8"
                     >
-                        <div className="inline-flex items-center gap-3 px-5 py-3 rounded-none bg-cyan-500/10 backdrop-blur-md border border-cyan-400/20">
-                            <span className="w-2 h-2 rounded-none bg-cyan-400 animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-300">Market Intelligence</span>
-                        </div>
+
                         <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none">
                             CENTRAL <br /> <span className="text-cyan-400">DATA HUB</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
-                            The latest updates, reports, and breakthroughs from the USDC engineering and environmental teams.
-                        </p>
+
                     </motion.div>
                 </div>
 
@@ -146,7 +141,7 @@ const Insights = () => {
                             <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Latest Updates</span>
                         </div>
                         <h2 className="text-5xl lg:text-7xl font-black text-slate-900 leading-tight">
-                            Global <br /><span className="text-slate-200">Insights</span>
+                            Global <br /><span className="text-cyan-400">Insights</span>
                         </h2>
                     </div>
 

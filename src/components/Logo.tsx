@@ -2,15 +2,15 @@ const Logo = () => {
     const cyanColor = "#40D1FB"; // The bright cyan from the logo
 
     return (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1">
             {/* Stylized U Icon */}
             <svg
-                width="50"
-                height="50"
+                width="28"
+                height="28"
                 viewBox="0 0 100 100"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-10 h-10 md:w-12 md:h-12"
+                className="w-7 h-7 md:w-8 md:h-8"
             >
                 {/* Left Side Slant */}
                 <path
@@ -37,13 +37,13 @@ const Logo = () => {
             {/* Text Section */}
             <div className="flex flex-col leading-none">
                 <h1
-                    className="text-3xl md:text-4xl font-normal tracking-tight"
+                    className="text-lg md:text-xl font-normal tracking-tight"
                     style={{ color: cyanColor, fontFamily: 'sans-serif' }}
                 >
                     USDC
                 </h1>
                 <p
-                    className="text-[10px] md:text-[12px] font-medium tracking-[0.05em] whitespace-nowrap"
+                    className="text-[8px] md:text-[9px] font-medium tracking-[0.05em] whitespace-nowrap"
                     style={{ color: cyanColor, fontFamily: 'sans-serif' }}
                 >
                     US Data Centers Inc.

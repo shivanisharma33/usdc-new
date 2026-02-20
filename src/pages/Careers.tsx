@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, ChevronDown, Users, Zap, Heart, Star, Target, ShieldCheck, Briefcase } from 'lucide-react';
+import { ArrowUpRight, Users, Zap, Heart, Star, Target, ShieldCheck, Briefcase } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const Careers = () => {
@@ -72,7 +72,7 @@ const Careers = () => {
     return (
         <div className="bg-white">
             {/* Parallax Hero Section */}
-            <section ref={heroRef} className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-slate-950">
+            <section ref={heroRef} className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-slate-950">
                 <motion.div
                     style={{ y: heroY, opacity: heroOpacity }}
                     className="absolute inset-0 z-0"
@@ -85,33 +85,23 @@ const Careers = () => {
                     />
                 </motion.div>
 
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto space-y-8">
+                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto space-y-8 pt-20 md:pt-32">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
                     >
-                        <div className="inline-flex items-center gap-3 px-5 py-2 border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md mb-6">
-                            <span className="w-2 h-2 bg-cyan-400 animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-300">Join the Mission</span>
-                        </div>
+
                         <h1 className="text-7xl md:text-9xl font-black text-white tracking-tighter leading-none mb-8 uppercase">
                             Build the <br /> <span className="text-cyan-400">Future</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed">
+                        {/* <p className="text-xl md:text-2xl text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed">
                             USDC is looking for visionaries, engineers, and problem-solvers to architect the sustainable backbone of the digital economy.
-                        </p>
+                        </p> */}
                     </motion.div>
                 </div>
 
-                <motion.div
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30 flex flex-col items-center gap-2"
-                >
-                    <span className="text-[10px] uppercase tracking-[0.4em] font-bold">Open Positions</span>
-                    <ChevronDown className="w-5 h-5 text-cyan-400" />
-                </motion.div>
+                {/* 'Open Positions' floating label removed per request */}
             </section>
 
             {/* Why Join Us Section */}
@@ -151,7 +141,7 @@ const Careers = () => {
                                 <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Our Culture</span>
                             </div>
                             <h2 className="text-5xl lg:text-7xl font-black text-slate-900 uppercase leading-[0.9]">
-                                Intelligence <br /><span className="text-slate-300">at Scale</span>
+                                Intelligence <br /><span className="text-cyan-400">at Scale</span>
                             </h2>
                         </div>
                         <div className="space-y-6">
@@ -202,7 +192,7 @@ const Careers = () => {
                                 <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Find your role</span>
                             </div>
                             <h2 className="text-5xl lg:text-7xl font-black text-slate-900 leading-tight uppercase">
-                                Open <span className="text-slate-200">Positions</span>
+                                Open <span className="text-cyan-400">Positions</span>
                             </h2>
                         </div>
                         <p className="text-slate-500 font-bold uppercase tracking-widest text-sm mb-2">{jobs.length} Active Openings</p>

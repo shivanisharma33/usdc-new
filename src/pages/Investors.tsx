@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, TrendingUp, ShieldCheck, Globe, Zap, BarChart3, PieChart, Users, ChevronDown } from 'lucide-react';
+import { TrendingUp, ShieldCheck, Globe, Zap, BarChart3, PieChart, Users, ChevronDown, ArrowUpRight } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const Investors = () => {
@@ -70,7 +70,7 @@ const Investors = () => {
                     />
                 </motion.div>
 
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20 md:pt-32">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -84,9 +84,7 @@ const Investors = () => {
                         <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-white leading-[0.9]">
                             FUTURE <span className="text-cyan-400">VALUE</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-300 font-medium max-w-2xl mx-auto">
-                            Transforming energy infrastructure into high-performance computing assets for the digital economy.
-                        </p>
+                      
                     </motion.div>
                 </div>
 
