@@ -1,6 +1,6 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, Calendar, User, ChevronDown } from 'lucide-react';
+import { useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform, useAnimation, useInView } from 'framer-motion';
+import { ArrowUpRight, Calendar, User, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const Insights = () => {
@@ -40,7 +40,7 @@ const Insights = () => {
             category: "Industry News",
             date: "May 12, 2024",
             author: "David Ross",
-            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
+            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070",
             color: "bg-blue-50 text-blue-600"
         },
         {
@@ -85,7 +85,7 @@ const Insights = () => {
             category: "Sustainability",
             date: "April 08, 2024",
             author: "Samuel Lee",
-            image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=2070",
+            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
             color: "bg-emerald-50 text-emerald-600"
         }
     ];
@@ -113,11 +113,9 @@ const Insights = () => {
                         transition={{ duration: 1, ease: "easeOut" }}
                         className="space-y-8"
                     >
-
                         <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none">
                             CENTRAL <br /> <span className="text-cyan-400">DATA HUB</span>
                         </h1>
-
                     </motion.div>
                 </div>
 
@@ -131,48 +129,17 @@ const Insights = () => {
                 </motion.div>
             </section>
 
-            {/* Content Section */}
-            <div className="max-w-7xl mx-auto px-6 py-20">
-                {/* Header and Filter */}
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-4">
-                            <div className="h-[2px] w-12 bg-cyan-400" />
-                            <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Latest Updates</span>
-                        </div>
-                        <h2 className="text-5xl lg:text-7xl font-black text-slate-900 leading-tight">
-                            Global <br /><span className="text-cyan-400">Insights</span>
-                        </h2>
-                    </div>
+            {/* ─── AUTO-SLIDING CARD SECTION ─── */}
+            <AutoSlideNewsSection insights={allInsights} categories={categories} />
 
-                    <div className="flex items-center gap-8 overflow-x-auto no-scrollbar scroll-smooth w-full lg:w-auto border-b border-slate-100 lg:border-none pb-4 lg:pb-0">
-                        {categories.map((cat, i) => (
-                            <button
-                                key={i}
-                                className={`whitespace-nowrap text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:text-cyan-500 ${i === 0 ? 'text-cyan-500' : 'text-slate-400'}`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* News Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                    {allInsights.map((insight, i) => (
-                        <NewsCard key={i} index={i} {...insight} />
-                    ))}
-                </div>
-
-                {/* Load More Button */}
-                <div className="mt-24 text-center">
-                    <button className="px-12 py-5 bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-cyan-500 transition-all rounded-none flex items-center gap-3 mx-auto">
-                        View Archive <ArrowUpRight className="w-5 h-5" />
-                    </button>
-                </div>
+            {/* Load More */}
+            <div className="py-24 text-center bg-white border-t border-slate-50">
+                <button className="px-12 py-5 bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-cyan-500 transition-all flex items-center gap-3 mx-auto">
+                    View Full Archive <ArrowUpRight className="w-5 h-5" />
+                </button>
             </div>
 
-            {/* Premium CTA / Newsletter */}
+            {/* Newsletter */}
             <section className="bg-slate-950 py-32 text-center text-white relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20 pointer-events-none">
                     <div className="w-full h-full bg-[radial-gradient(circle_at_50%_0%,#40D1FB_0%,transparent_50%)]" />
@@ -186,9 +153,9 @@ const Insights = () => {
                         <input
                             type="email"
                             placeholder="Enter your email"
-                            className="px-8 py-5 bg-white/5 border border-white/10 rounded-none text-white focus:outline-none focus:border-cyan-400 transition-all min-w-[350px]"
+                            className="px-8 py-5 bg-white/5 border border-white/10 text-white focus:outline-none focus:border-cyan-400 transition-all min-w-[350px]"
                         />
-                        <button className="px-12 py-5 bg-cyan-500 text-slate-900 font-black uppercase tracking-widest hover:bg-white transition-all rounded-none">
+                        <button className="px-12 py-5 bg-cyan-500 text-slate-900 font-black uppercase tracking-widest hover:bg-white transition-all">
                             Subscribe
                         </button>
                     </div>
@@ -200,43 +167,175 @@ const Insights = () => {
     );
 };
 
-// Simplified News Card Component
-const NewsCard = ({ index, title, description, category, date, author, image, color }: any) => {
+/* ─────────────────────────────────────────────
+   AUTO-SLIDE NEWS SECTION
+   - Normal page scroll
+   - When section enters viewport, cards animate RIGHT → LEFT one by one
+   - Shows 3 cards at a time
+   - Manual prev/next controls also available
+───────────────────────────────────────────── */
+const AutoSlideNewsSection = ({ insights, categories }: { insights: any[], categories: string[] }) => {
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+    const controls = useAnimation();
+    const trackRef = useRef(null);
+
+    // Card width: 33.33% of container - gap
+    // Total slide distance: (total - 3) * cardWidth+gap
+    // We animate x from 0 to -(n-3) * (cardWidth+gap)
+    const CARD_WIDTH_PERCENT = 33.333;
+    const GAP = 24; // px gap between cards
+    const TOTAL = insights.length;
+    const SLIDES = TOTAL - 3; // how many steps to slide
+
+    useEffect(() => {
+        if (isInView) {
+            // Start animation: slide all cards right→left one by one
+            // Each step slides by one card width (approx 33.33% of container)
+            controls.start({
+                x: [`0%`, `-${SLIDES * (CARD_WIDTH_PERCENT + 1)}%`],
+                transition: {
+                    duration: SLIDES * 1.4, // ~1.4s per card
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                    delay: 0.5,
+                }
+            });
+        }
+    }, [isInView]);
+
+    const handlePrev = () => {
+        controls.stop();
+        controls.start({ x: '0%', transition: { duration: 0.6, ease: 'easeInOut' } });
+    };
+
+    const handleNext = () => {
+        controls.stop();
+        controls.start({
+            x: `-${SLIDES * (CARD_WIDTH_PERCENT + 1)}%`,
+            transition: { duration: SLIDES * 1.4, ease: [0.25, 0.46, 0.45, 0.94] }
+        });
+    };
+
+    return (
+        <section ref={sectionRef} className="py-24 bg-white overflow-hidden">
+            {/* Header */}
+            <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-12 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
+                <div className="space-y-3">
+                    <div className="flex items-center gap-4">
+                        <div className="h-[2px] w-12 bg-cyan-400" />
+                        <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Latest Updates</span>
+                    </div>
+                    <h2 className="text-5xl lg:text-6xl font-black text-slate-900 leading-none">
+                        Latest <span className="text-cyan-400">News</span>
+                    </h2>
+                </div>
+
+                <div className="flex items-center gap-6">
+                    {/* Category filters */}
+                    <div className="hidden lg:flex items-center gap-5 overflow-x-auto">
+                        {categories.map((cat, i) => (
+                            <button
+                                key={i}
+                                className={`whitespace-nowrap text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:text-cyan-500 ${i === 0 ? 'text-cyan-500' : 'text-slate-400'}`}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Manual controls */}
+                    <div className="flex items-center gap-2 ml-4">
+                        <button
+                            onClick={handlePrev}
+                            className="w-10 h-10 rounded-full border border-slate-200 hover:border-cyan-400 hover:text-cyan-500 flex items-center justify-center text-slate-500 transition-all"
+                        >
+                            <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <button
+                            onClick={handleNext}
+                            className="w-10 h-10 rounded-full border border-slate-200 hover:border-cyan-400 hover:bg-cyan-50 hover:text-cyan-500 flex items-center justify-center text-slate-500 transition-all"
+                        >
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Cards Track — clipped to viewport width, cards slide inside */}
+            <div className="max-w-7xl mx-auto px-6 lg:px-10">
+                <div className="overflow-hidden">
+                    <motion.div
+                        ref={trackRef}
+                        animate={controls}
+                        initial={{ x: '0%' }}
+                        className="flex gap-6"
+                        style={{ width: `${(TOTAL / 3) * 100}%` }}
+                    >
+                        {insights.map((insight, i) => (
+                            <SlideCard key={i} index={i} isInView={isInView} {...insight} />
+                        ))}
+                    </motion.div>
+                </div>
+
+                {/* Progress dots */}
+                <div className="flex items-center justify-center gap-2 mt-10">
+                    {Array.from({ length: SLIDES + 1 }).map((_, i) => (
+                        <div
+                            key={i}
+                            className={`rounded-full transition-all duration-300 ${i === 0 ? 'w-6 h-1.5 bg-cyan-500' : 'w-1.5 h-1.5 bg-slate-200'}`}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+/* ─── Individual Slide Card ─── */
+const SlideCard = ({ index, title, description, category, date, author, image, color, isInView }: any) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: (index % 3) * 0.1 }}
-            viewport={{ once: true }}
-            className="group cursor-pointer"
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{
+                duration: 0.6,
+                delay: Math.min(index, 2) * 0.15, // only first 3 stagger on entry
+                ease: [0.22, 1, 0.36, 1]
+            }}
+            className="flex-1 min-w-0 group cursor-pointer"
         >
-            <div className="relative aspect-[16/10] overflow-hidden rounded-none mb-6 bg-slate-100">
+            {/* Image */}
+            <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 mb-5 rounded-sm">
                 <img
                     src={image}
                     alt={title}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale-[0.15] group-hover:grayscale-0"
                 />
-                <div className="absolute top-4 left-4">
-                    <div className={`px-4 py-1.5 rounded-none backdrop-blur-md shadow-lg font-black text-[9px] uppercase tracking-widest ${color}`}>
+                <div className="absolute top-3 left-3">
+                    <div className={`px-3 py-1 text-[9px] font-black uppercase tracking-widest backdrop-blur-md ${color}`}>
                         {category}
                     </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-3 right-3 text-white/20 text-5xl font-black leading-none select-none">
+                    {String(index + 1).padStart(2, '0')}
+                </div>
             </div>
 
-            <div className="space-y-4">
-                <div className="flex items-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">
-                    <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-cyan-500" /> {date}</span>
-                    <span className="flex items-center gap-1.5"><User className="w-4 h-4 text-cyan-500" /> {author}</span>
+            {/* Content */}
+            <div className="space-y-3">
+                <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em]">
+                    <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-cyan-500" /> {date}</span>
+                    <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5 text-cyan-500" /> {author}</span>
                 </div>
-                <h3 className="text-2xl font-black text-slate-900 leading-tight group-hover:text-cyan-600 transition-colors duration-300">
+                <h3 className="text-xl font-black text-slate-900 leading-snug group-hover:text-cyan-600 transition-colors duration-300 line-clamp-2">
                     {title}
                 </h3>
-                <p className="text-slate-500 leading-relaxed font-medium line-clamp-2">
+                <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
                     {description}
                 </p>
-                <div className="flex items-center gap-2 pt-2 text-[10px] font-black uppercase tracking-widest text-slate-950 group-hover:text-cyan-500 transition-all">
-                    Explore Article <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <div className="flex items-center gap-2 pt-1 text-[10px] font-black uppercase tracking-widest text-slate-900 group-hover:text-cyan-500 transition-all">
+                    Read Article <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
             </div>
         </motion.div>
