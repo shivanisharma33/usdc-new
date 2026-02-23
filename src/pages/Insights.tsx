@@ -184,7 +184,6 @@ const AutoSlideNewsSection = ({ insights, categories }: { insights: any[], categ
     // Total slide distance: (total - 3) * cardWidth+gap
     // We animate x from 0 to -(n-3) * (cardWidth+gap)
     const CARD_WIDTH_PERCENT = 33.333;
-    const GAP = 24; // px gap between cards
     const TOTAL = insights.length;
     const SLIDES = TOTAL - 3; // how many steps to slide
 

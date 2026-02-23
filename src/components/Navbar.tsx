@@ -1,10 +1,26 @@
 import { useState, useEffect } from 'react';
-import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, TrendingUp, BookOpen, BarChart3, Layout, Newspaper, Lightbulb, Satellite, ArrowUpRight } from 'lucide-react';
+import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, BookOpen, BarChart3, Layout, Newspaper, Lightbulb, Satellite, ArrowUpRight } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
-const navLinks = [
+interface SubLink {
+    name: string;
+    path: string;
+    icon?: LucideIcon;
+    desc?: string;
+    external?: boolean;
+    region?: string;
+}
+
+interface NavLink {
+    name: string;
+    path: string;
+    subLinks?: SubLink[];
+}
+
+const navLinks: NavLink[] = [
     {
         name: 'About us',
         path: '/about-us',
@@ -72,8 +88,8 @@ const Navbar = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className={`max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-6 py-3 rounded-2xl transition-all duration-500 ${scrolled
-                        ? 'bg-white/90 backdrop-blur-2xl shadow-[0_4px_40px_rgba(0,0,0,0.1)] border border-white/60'
-                        : 'bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_2px_20px_rgba(0,0,0,0.05)]'
+                    ? 'bg-white/90 backdrop-blur-2xl shadow-[0_4px_40px_rgba(0,0,0,0.1)] border border-white/60'
+                    : 'bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_2px_20px_rgba(0,0,0,0.05)]'
                     }`}
             >
                 {/* Logo */}
@@ -93,8 +109,8 @@ const Navbar = () => {
                             {/* Nav Link Button */}
                             <Link to={link.path} className="no-underline">
                                 <div className={`flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13.5px] font-semibold tracking-wide transition-all duration-200 select-none ${isActive(link.path) || activeDropdown === link.name
-                                        ? 'text-[#40D1FB] bg-[#40D1FB]/8'
-                                        : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
+                                    ? 'text-[#40D1FB] bg-[#40D1FB]/8'
+                                    : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
                                     }`}>
                                     {link.name}
                                     {link.subLinks && (
