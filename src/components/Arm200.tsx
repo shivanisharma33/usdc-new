@@ -21,7 +21,7 @@ const Arm200 = () => {
                             viewport={{ once: true }}
                             className="space-y-6"
                         >
-                            <h2 className="text-5xl md:text-6xl font-black tracking-tight text-slate-900 leading-none text-left italic uppercase">
+                            <h2 className="text-5xl md:text-6xl font-black tracking-tight text-slate-900 leading-none text-left uppercase">
                                 ARMS 200 <span className="text-cyan-500">System</span>
                             </h2>
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-medium max-w-xl">
@@ -78,11 +78,13 @@ const Arm200 = () => {
                             transition={{ duration: 0.8 }}
                             className="relative z-10"
                         >
-                            <img
-                                src="/arms.webp"
-                                alt="ARMS 200 System"
-                                className="w-full h-auto rounded-[2.5rem] shadow-2xl"
-                            />
+                            <div className="max-w-[480px] mx-auto">
+                                <img
+                                    src="/arms.webp"
+                                    alt="ARMS 200 System"
+                                    className="w-full h-auto rounded-[2.5rem] shadow-2xl"
+                                />
+                            </div>
 
                             {/* Floating Certificate */}
                             <motion.div
