@@ -1,10 +1,20 @@
-import { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useAnimation, useInView } from 'framer-motion';
-import { ArrowUpRight, Calendar, User, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useAnimation, useInView, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Calendar, User, ChevronDown, ChevronLeft, ChevronRight, Zap } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
+const brandNavy = "#001738";
+const cyanColor = "#40D1FB";
+
+const CATEGORY_COLORS: Record<string, string> = {
+    "Technology": "#40D1FB",
+    "Sustainability": "#34d399",
+    "Industry News": "#818cf8",
+    "Case Studies": "#fb923c",
+    "All": "#40D1FB",
+};
+
 const Insights = () => {
-    // Parallax Hero
     const heroRef = useRef(null);
     const { scrollYProgress: heroScroll } = useScroll({
         target: heroRef,
@@ -23,7 +33,6 @@ const Insights = () => {
             date: "May 24, 2024",
             author: "Sarah Johnson",
             image: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?auto=format&fit=crop&q=80&w=2070",
-            color: "bg-cyan-50 text-cyan-600"
         },
         {
             title: "Converting Stranded Energy into Digital Gold",
@@ -32,7 +41,6 @@ const Insights = () => {
             date: "May 18, 2024",
             author: "Michael Chen",
             image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
-            color: "bg-emerald-50 text-emerald-600"
         },
         {
             title: "USDC Expands Footprint in Northern Virginia",
@@ -41,7 +49,6 @@ const Insights = () => {
             date: "May 12, 2024",
             author: "David Ross",
             image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070",
-            color: "bg-blue-50 text-blue-600"
         },
         {
             title: "Achieving Net Zero: A Real-World Case Study",
@@ -50,7 +57,6 @@ const Insights = () => {
             date: "May 05, 2024",
             author: "Emma Wilson",
             image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=2070",
-            color: "bg-purple-50 text-purple-600"
         },
         {
             title: "AI-Driven Efficiency: Optimization at the Edge",
@@ -59,7 +65,6 @@ const Insights = () => {
             date: "April 28, 2024",
             author: "Justin Blake",
             image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070",
-            color: "bg-cyan-50 text-cyan-600"
         },
         {
             title: "Security in Hyperscale: Future-Proofing Data",
@@ -68,7 +73,6 @@ const Insights = () => {
             date: "April 20, 2024",
             author: "Robert Vance",
             image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=2070",
-            color: "bg-blue-50 text-blue-600"
         },
         {
             title: "The Impact of Cloud Edge on Local Economies",
@@ -77,7 +81,6 @@ const Insights = () => {
             date: "April 15, 2024",
             author: "Alicia Keys",
             image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2070",
-            color: "bg-purple-50 text-purple-600"
         },
         {
             title: "Integrating Renewables into the Grid Mix",
@@ -86,78 +89,143 @@ const Insights = () => {
             date: "April 08, 2024",
             author: "Samuel Lee",
             image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
-            color: "bg-emerald-50 text-emerald-600"
         }
     ];
 
     return (
         <div className="bg-white">
-            {/* Parallax Hero Section */}
-            <section ref={heroRef} className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-slate-900 text-white">
+            {/* ── Parallax Hero ── */}
+            <section ref={heroRef} className="relative h-[80vh] flex items-center justify-center overflow-hidden text-white" style={{ background: brandNavy }}>
                 <motion.div
                     style={{ y: heroY, opacity: heroOpacity }}
                     className="absolute inset-0 z-0"
                 >
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/20 to-white z-10" />
+                    <div className="absolute inset-0 z-10" style={{ background: `linear-gradient(to bottom, ${brandNavy}99, ${brandNavy}cc)` }} />
                     <img
                         src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072"
                         alt="News & Insights"
-                        className="w-full h-full object-cover grayscale opacity-50 contrast-125"
+                        className="w-full h-full object-cover opacity-30"
                     />
                 </motion.div>
 
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20 md:pt-32">
+                {/* Hero grid */}
+                <div
+                    className="absolute inset-0 z-[5] pointer-events-none"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(64,209,251,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(64,209,251,0.06) 1px, transparent 1px)`,
+                        backgroundSize: '60px 60px',
+                    }}
+                />
+
+                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20 md:pt-28">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="space-y-8"
+                        className="space-y-6"
                     >
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="flex justify-center"
+                        >
+                            <div
+                                className="flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.25em]"
+                                style={{ background: `${cyanColor}18`, border: `1px solid ${cyanColor}35`, color: cyanColor }}
+                            >
+                                <Zap className="w-3.5 h-3.5" />
+                                USDC Data Hub
+                            </div>
+                        </motion.div>
+
                         <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none">
-                            CENTRAL <br /> <span className="text-cyan-400">DATA HUB</span>
+                            CENTRAL <br />
+                            <span style={{ color: cyanColor }}>DATA HUB</span>
                         </h1>
+
+                        <p className="text-slate-400 text-base max-w-xl mx-auto tracking-wider">
+                            Perspectives on digital infrastructure, sustainability, and the future of computing.
+                        </p>
                     </motion.div>
                 </div>
 
                 <motion.div
                     animate={{ y: [0, 10, 0] }}
                     transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 flex flex-col items-center gap-2"
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                    style={{ color: 'rgba(255,255,255,0.3)' }}
                 >
                     <span className="text-[10px] uppercase tracking-[0.4em] font-bold">Discover</span>
                     <ChevronDown className="w-5 h-5" />
                 </motion.div>
             </section>
 
-            {/* ─── AUTO-SLIDING CARD SECTION ─── */}
+            {/* ── Auto-Sliding Card Section ── */}
             <AutoSlideNewsSection insights={allInsights} categories={categories} />
 
-            {/* Load More */}
-            <div className="py-24 text-center bg-white border-t border-slate-50">
-                <button className="px-12 py-5 bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-cyan-500 transition-all flex items-center gap-3 mx-auto">
-                    View Full Archive <ArrowUpRight className="w-5 h-5" />
-                </button>
+            {/* ── Load More ── */}
+            <div className="py-24 text-center bg-white border-t" style={{ borderColor: 'rgba(0,23,56,0.07)' }}>
+                <motion.button
+                    whileHover={{ scale: 1.04, y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center gap-3 px-12 py-5 font-bold text-white uppercase tracking-widest rounded-full shadow-xl text-sm"
+                    style={{ background: `linear-gradient(135deg, ${brandNavy} 0%, #002860 100%)` }}
+                >
+                    View Full Archive
+                    <span className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: cyanColor }}>
+                        <ArrowUpRight className="w-4 h-4 text-white" />
+                    </span>
+                </motion.button>
             </div>
 
-            {/* Newsletter */}
-            <section className="bg-slate-950 py-32 text-center text-white relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20 pointer-events-none">
-                    <div className="w-full h-full bg-[radial-gradient(circle_at_50%_0%,#40D1FB_0%,transparent_50%)]" />
+            {/* ── Newsletter ── */}
+            <section className="py-32 text-center text-white relative overflow-hidden" style={{ background: brandNavy }}>
+                <div className="absolute inset-0 opacity-30 pointer-events-none">
+                    <div className="w-full h-full" style={{ background: `radial-gradient(ellipse at 50% 0%, ${cyanColor}55 0%, transparent 60%)` }} />
                 </div>
+                <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(64,209,251,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(64,209,251,0.05) 1px, transparent 1px)`,
+                        backgroundSize: '60px 60px',
+                    }}
+                />
                 <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-12">
-                    <div className="space-y-4">
-                        <h2 className="text-4xl md:text-6xl font-black tracking-tighter">Stay ahead with <span className="text-cyan-400">USDC Direct</span>.</h2>
-                        <p className="text-lg text-slate-400 font-medium max-w-2xl mx-auto uppercase tracking-[0.3em]">Weekly market analysis and infrastructure updates.</p>
+                    <div className="space-y-5">
+                        <div className="flex justify-center">
+                            <div
+                                className="flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.25em]"
+                                style={{ background: `${cyanColor}18`, border: `1px solid ${cyanColor}35`, color: cyanColor }}
+                            >
+                                <Zap className="w-3.5 h-3.5" />
+                                Weekly Digest
+                            </div>
+                        </div>
+                        <h2 className="text-4xl md:text-6xl font-black tracking-tighter">
+                            Stay ahead with <span style={{ color: cyanColor }}>USDC Direct</span>.
+                        </h2>
+                        <p className="text-base text-slate-400 font-medium max-w-2xl mx-auto uppercase tracking-[0.25em]">
+                            Weekly market analysis and infrastructure updates.
+                        </p>
                     </div>
                     <div className="flex flex-col md:flex-row gap-4 justify-center">
                         <input
                             type="email"
-                            placeholder="Enter your email"
-                            className="px-8 py-5 bg-white/5 border border-white/10 text-white focus:outline-none focus:border-cyan-400 transition-all min-w-[350px]"
+                            placeholder="Enter your work email"
+                            className="px-8 py-5 bg-white/5 border text-white focus:outline-none transition-all min-w-[350px] rounded-full text-sm"
+                            style={{ borderColor: 'rgba(255,255,255,0.12)' }}
+                            onFocus={e => e.currentTarget.style.borderColor = cyanColor}
+                            onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'}
                         />
-                        <button className="px-12 py-5 bg-cyan-500 text-slate-900 font-black uppercase tracking-widest hover:bg-white transition-all">
+                        <motion.button
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="px-10 py-5 font-black uppercase tracking-widest rounded-full text-sm transition-all"
+                            style={{ background: cyanColor, color: brandNavy }}
+                        >
                             Subscribe
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
             </section>
@@ -169,32 +237,25 @@ const Insights = () => {
 
 /* ─────────────────────────────────────────────
    AUTO-SLIDE NEWS SECTION
-   - Normal page scroll
-   - When section enters viewport, cards animate RIGHT → LEFT one by one
-   - Shows 3 cards at a time
-   - Manual prev/next controls also available
 ───────────────────────────────────────────── */
 const AutoSlideNewsSection = ({ insights, categories }: { insights: any[], categories: string[] }) => {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
     const controls = useAnimation();
     const trackRef = useRef(null);
+    const [activeCategory, setActiveCategory] = useState("All");
+    const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-    // Card width: 33.33% of container - gap
-    // Total slide distance: (total - 3) * cardWidth+gap
-    // We animate x from 0 to -(n-3) * (cardWidth+gap)
     const CARD_WIDTH_PERCENT = 33.333;
     const TOTAL = insights.length;
-    const SLIDES = TOTAL - 3; // how many steps to slide
+    const SLIDES = TOTAL - 3;
 
     useEffect(() => {
         if (isInView) {
-            // Start animation: slide all cards right→left one by one
-            // Each step slides by one card width (approx 33.33% of container)
             controls.start({
                 x: [`0%`, `-${SLIDES * (CARD_WIDTH_PERCENT + 1)}%`],
                 transition: {
-                    duration: SLIDES * 1.4, // ~1.4s per card
+                    duration: SLIDES * 1.4,
                     ease: [0.25, 0.46, 0.45, 0.94],
                     delay: 0.5,
                 }
@@ -216,26 +277,55 @@ const AutoSlideNewsSection = ({ insights, categories }: { insights: any[], categ
     };
 
     return (
-        <section ref={sectionRef} className="py-24 bg-white overflow-hidden">
+        <section ref={sectionRef} className="py-28 overflow-hidden" style={{ background: '#f8fafd' }}>
+            {/* Background grid */}
+            <div
+                className="absolute left-0 right-0 pointer-events-none"
+                style={{
+                    backgroundImage: `linear-gradient(rgba(0,23,56,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,23,56,0.03) 1px, transparent 1px)`,
+                    backgroundSize: '60px 60px',
+                    height: '100%',
+                    top: 0,
+                }}
+            />
+
             {/* Header */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-12 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
-                <div className="space-y-3">
-                    <div className="flex items-center gap-4">
-                        <div className="h-[2px] w-12 bg-cyan-400" />
-                        <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Latest Updates</span>
+            <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-14 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 relative">
+                <div className="space-y-5">
+                    <div className="flex items-center gap-3">
+                        <div
+                            className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.2em]"
+                            style={{ background: `${cyanColor}12`, border: `1px solid ${cyanColor}35`, color: cyanColor }}
+                        >
+                            <Zap className="w-3.5 h-3.5" />
+                            Latest Updates
+                        </div>
                     </div>
-                    <h2 className="text-5xl lg:text-6xl font-black text-slate-900 leading-none">
-                        Latest <span className="text-cyan-400">News</span>
+                    <h2 className="text-5xl lg:text-6xl font-black leading-none tracking-tight" style={{ color: brandNavy }}>
+                        Latest{' '}
+                        <span className="relative inline-block" style={{ color: cyanColor }}>
+                            News
+                            <span
+                                className="absolute -bottom-1 left-0 w-full h-[3px] origin-left"
+                                style={{ background: `linear-gradient(90deg, ${cyanColor}, transparent)` }}
+                            />
+                        </span>
                     </h2>
                 </div>
 
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-5 flex-wrap">
                     {/* Category filters */}
-                    <div className="hidden lg:flex items-center gap-5 overflow-x-auto">
+                    <div className="hidden lg:flex items-center gap-2 flex-wrap">
                         {categories.map((cat, i) => (
                             <button
                                 key={i}
-                                className={`whitespace-nowrap text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:text-cyan-500 ${i === 0 ? 'text-cyan-500' : 'text-slate-400'}`}
+                                onClick={() => setActiveCategory(cat)}
+                                className="whitespace-nowrap text-[11px] font-black uppercase tracking-[0.15em] transition-all duration-300 px-4 py-2 rounded-full"
+                                style={{
+                                    background: activeCategory === cat ? `${CATEGORY_COLORS[cat] || cyanColor}18` : 'transparent',
+                                    color: activeCategory === cat ? (CATEGORY_COLORS[cat] || cyanColor) : '#94a3b8',
+                                    border: activeCategory === cat ? `1px solid ${CATEGORY_COLORS[cat] || cyanColor}35` : '1px solid transparent',
+                                }}
                             >
                                 {cat}
                             </button>
@@ -243,16 +333,28 @@ const AutoSlideNewsSection = ({ insights, categories }: { insights: any[], categ
                     </div>
 
                     {/* Manual controls */}
-                    <div className="flex items-center gap-2 ml-4">
+                    <div className="flex items-center gap-2">
                         <button
                             onClick={handlePrev}
-                            className="w-10 h-10 rounded-full border border-slate-200 hover:border-cyan-400 hover:text-cyan-500 flex items-center justify-center text-slate-500 transition-all"
+                            className="w-11 h-11 rounded-full flex items-center justify-center transition-all"
+                            style={{ border: '1px solid rgba(0,23,56,0.12)', color: '#64748b' }}
+                            onMouseEnter={e => {
+                                (e.currentTarget as HTMLButtonElement).style.borderColor = cyanColor;
+                                (e.currentTarget as HTMLButtonElement).style.color = cyanColor;
+                            }}
+                            onMouseLeave={e => {
+                                (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(0,23,56,0.12)';
+                                (e.currentTarget as HTMLButtonElement).style.color = '#64748b';
+                            }}
                         >
                             <ChevronLeft className="w-4 h-4" />
                         </button>
                         <button
                             onClick={handleNext}
-                            className="w-10 h-10 rounded-full border border-slate-200 hover:border-cyan-400 hover:bg-cyan-50 hover:text-cyan-500 flex items-center justify-center text-slate-500 transition-all"
+                            className="w-11 h-11 rounded-full flex items-center justify-center transition-all"
+                            style={{ background: brandNavy, color: 'white' }}
+                            onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.background = cyanColor}
+                            onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.background = brandNavy}
                         >
                             <ChevronRight className="w-4 h-4" />
                         </button>
@@ -260,7 +362,7 @@ const AutoSlideNewsSection = ({ insights, categories }: { insights: any[], categ
                 </div>
             </div>
 
-            {/* Cards Track — clipped to viewport width, cards slide inside */}
+            {/* Cards Track */}
             <div className="max-w-7xl mx-auto px-6 lg:px-10">
                 <div className="overflow-hidden">
                     <motion.div
@@ -271,17 +373,31 @@ const AutoSlideNewsSection = ({ insights, categories }: { insights: any[], categ
                         style={{ width: `${(TOTAL / 3) * 100}%` }}
                     >
                         {insights.map((insight, i) => (
-                            <SlideCard key={i} index={i} isInView={isInView} {...insight} />
+                            <SlideCard
+                                key={i}
+                                index={i}
+                                isInView={isInView}
+                                isHovered={hoveredCard === i}
+                                isSiblingsHovered={hoveredCard !== null && hoveredCard !== i}
+                                onHover={() => setHoveredCard(i)}
+                                onLeave={() => setHoveredCard(null)}
+                                {...insight}
+                            />
                         ))}
                     </motion.div>
                 </div>
 
-                {/* Progress dots */}
-                <div className="flex items-center justify-center gap-2 mt-10">
+                {/* Progress bar */}
+                <div className="mt-10 flex items-center justify-center gap-2">
                     {Array.from({ length: SLIDES + 1 }).map((_, i) => (
                         <div
                             key={i}
-                            className={`rounded-full transition-all duration-300 ${i === 0 ? 'w-6 h-1.5 bg-cyan-500' : 'w-1.5 h-1.5 bg-slate-200'}`}
+                            className="rounded-full transition-all duration-500"
+                            style={{
+                                width: i === 0 ? '24px' : '6px',
+                                height: '6px',
+                                background: i === 0 ? cyanColor : 'rgba(0,23,56,0.12)',
+                            }}
                         />
                     ))}
                 </div>
@@ -290,54 +406,130 @@ const AutoSlideNewsSection = ({ insights, categories }: { insights: any[], categ
     );
 };
 
-/* ─── Individual Slide Card ─── */
-const SlideCard = ({ index, title, description, category, date, author, image, color, isInView }: any) => {
+/* ── Individual Slide Card ── */
+const SlideCard = ({ index, title, description, category, date, author, image, isInView, isHovered, isSiblingsHovered, onHover, onLeave }: any) => {
+    const accent = CATEGORY_COLORS[category] || cyanColor;
+
     return (
-        <motion.div
+        <motion.article
             initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            animate={isInView
+                ? { opacity: isSiblingsHovered ? 0.72 : 1, y: 0, scale: isSiblingsHovered ? 0.97 : 1 }
+                : { opacity: 0, y: 40 }
+            }
             transition={{
                 duration: 0.6,
-                delay: Math.min(index, 2) * 0.15, // only first 3 stagger on entry
-                ease: [0.22, 1, 0.36, 1]
+                delay: isInView ? Math.min(index, 2) * 0.12 : 0,
+                ease: [0.22, 1, 0.36, 1],
+                scale: { duration: 0.3 },
+                opacity: { duration: 0.3 },
             }}
+            onMouseEnter={onHover}
+            onMouseLeave={onLeave}
             className="flex-1 min-w-0 group cursor-pointer"
         >
-            {/* Image */}
-            <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 mb-5 rounded-sm">
-                <img
-                    src={image}
-                    alt={title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale-[0.15] group-hover:grayscale-0"
-                />
-                <div className="absolute top-3 left-3">
-                    <div className={`px-3 py-1 text-[9px] font-black uppercase tracking-widest backdrop-blur-md ${color}`}>
+            <motion.div
+                animate={{ y: isHovered ? -8 : 0 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="bg-white overflow-hidden"
+                style={{
+                    borderRadius: '16px',
+                    boxShadow: isHovered
+                        ? `0 24px 60px rgba(0,23,56,0.14), 0 0 0 1px ${accent}30`
+                        : '0 4px 24px rgba(0,23,56,0.07), 0 0 0 1px rgba(0,23,56,0.06)',
+                    transition: 'box-shadow 0.35s ease',
+                    position: 'relative',
+                }}
+            >
+                {/* Image */}
+                <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
+                    <motion.img
+                        src={image}
+                        alt={title}
+                        className="w-full h-full object-cover"
+                        animate={{ scale: isHovered ? 1.07 : 1 }}
+                        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            background: `linear-gradient(to top, ${brandNavy}bb 0%, transparent 55%)`,
+                            opacity: isHovered ? 1 : 0.3,
+                            transition: 'opacity 0.4s ease',
+                        }}
+                    />
+                    {/* index number */}
+                    <div
+                        className="absolute top-3 right-4 text-4xl font-black select-none leading-none"
+                        style={{ color: 'rgba(255,255,255,0.12)' }}
+                    >
+                        {String(index + 1).padStart(2, '0')}
+                    </div>
+                    {/* Category badge */}
+                    <div
+                        className="absolute top-3 left-3 px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-full backdrop-blur-md"
+                        style={{ background: `${accent}22`, color: accent, border: `1px solid ${accent}44` }}
+                    >
                         {category}
                     </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-3 right-3 text-white/20 text-5xl font-black leading-none select-none">
-                    {String(index + 1).padStart(2, '0')}
-                </div>
-            </div>
 
-            {/* Content */}
-            <div className="space-y-3">
-                <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em]">
-                    <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-cyan-500" /> {date}</span>
-                    <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5 text-cyan-500" /> {author}</span>
+                    {/* Hover: read time overlay */}
+                    <AnimatePresence>
+                        {isHovered && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 8 }}
+                                transition={{ duration: 0.22 }}
+                                className="absolute bottom-3 left-4 text-xs font-semibold"
+                                style={{ color: 'rgba(255,255,255,0.85)' }}
+                            >
+                                5 min read
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
-                <h3 className="text-xl font-black text-slate-900 leading-snug group-hover:text-cyan-600 transition-colors duration-300 line-clamp-2">
-                    {title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
-                    {description}
-                </p>
-                <div className="flex items-center gap-2 pt-1 text-[10px] font-black uppercase tracking-widest text-slate-900 group-hover:text-cyan-500 transition-all">
-                    Read Article <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+
+                {/* Content */}
+                <div className="p-6 space-y-3">
+                    <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em]">
+                        <span className="flex items-center gap-1.5">
+                            <Calendar className="w-3.5 h-3.5" style={{ color: accent }} />
+                            {date}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                            <User className="w-3.5 h-3.5" style={{ color: accent }} />
+                            {author}
+                        </span>
+                    </div>
+
+                    <h3
+                        className="text-lg font-black leading-snug line-clamp-2 transition-colors duration-300"
+                        style={{ color: isHovered ? accent : brandNavy }}
+                    >
+                        {title}
+                    </h3>
+
+                    <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
+                        {description}
+                    </p>
+
+                    <div className="pt-2 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest transition-all duration-300"
+                        style={{ color: isHovered ? accent : brandNavy }}>
+                        Read Article
+                        <ArrowUpRight className="w-3.5 h-3.5" style={{ transform: isHovered ? 'translate(2px,-2px)' : 'translate(0,0)', transition: 'transform 0.25s ease' }} />
+                    </div>
                 </div>
-            </div>
-        </motion.div>
+
+                {/* Bottom accent line */}
+                <motion.div
+                    className="absolute bottom-0 left-0 h-[3px]"
+                    animate={{ width: isHovered ? '100%' : '0%' }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}
+                />
+            </motion.div>
+        </motion.article>
     );
 };
 

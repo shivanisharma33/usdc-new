@@ -1,155 +1,119 @@
 import { motion } from 'framer-motion';
-import { Cpu, Globe, ArrowUpRight } from 'lucide-react';
+import { Zap, Clock, Shield, CheckCircle2 } from 'lucide-react';
 
 const Arm200 = () => {
-
     return (
-        <section className="relative py-24 bg-slate-950 overflow-hidden text-white">
+        <section className="relative py-24 bg-white overflow-hidden">
             {/* Background Decorative Elements */}
-            <div className="absolute inset-0 pointer-events-none opacity-20">
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2" />
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
+            <div className="absolute inset-0 pointer-events-none opacity-40">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-100/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2" />
             </div>
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-                    {/* Left Side: Text Content */}
-                    <div className="space-y-10">
+                    {/* Left Side: Content */}
+                    <div className="space-y-8">
                         <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20"
+                            className="space-y-6"
                         >
-                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                            <span className="text-xs font-black text-cyan-400 uppercase tracking-[0.3em]">Institutional Milestone</span>
+                            <h2 className="text-5xl md:text-6xl font-black tracking-tight text-slate-900 leading-none text-left italic uppercase">
+                                ARMS 200 <span className="text-cyan-500">System</span>
+                            </h2>
+                            <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-medium max-w-xl">
+                                <p>
+                                    The ARMS 200 is USDC's proprietary modular data-center platform.
+                                    Each module delivers up to 600 kW of critical IT load and is designed for Tier III redundancy (concurrent maintainability).
+                                </p>
+                                <p>
+                                    The system's prefabricated architecture allows rapid on-site assembly and
+                                    integration with chilled-water or direct-to-chip cooling systems, making it the
+                                    ideal solution for AI-ready infrastructure.
+                                </p>
+                            </div>
                         </motion.div>
 
-                        <div className="space-y-6">
-
-                            <motion.h2
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="text-6xl md:text-8xl font-black tracking-tighter leading-none"
-                            >
-                                <span className="text-white">ARM</span> <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">200 MW.</span>
-                            </motion.h2>
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                        {/* Stats Boxes */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="text-xl text-slate-400 font-medium leading-relaxed max-w-xl"
+                                className="p-6 rounded-2xl bg-cyan-50 border border-cyan-100 flex flex-col gap-3"
                             >
-                                Reaching the next horizon of digital infrastructure. Initiating the development of 200MW+ Hyperscale projects designed for the world's most demanding AI and enterprise workloads.
-                            </motion.p>
+                                <div className="flex items-center gap-3 text-cyan-600">
+                                    <Zap className="w-5 h-5" />
+                                    <span className="font-bold uppercase tracking-wider text-sm">Power Capacity</span>
+                                </div>
+                                <div className="text-4xl font-black text-slate-900">40 MW</div>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.3 }}
+                                className="p-6 rounded-2xl bg-blue-50 border border-blue-100 flex flex-col gap-3"
+                            >
+                                <div className="flex items-center gap-3 text-blue-600">
+                                    <Clock className="w-5 h-5" />
+                                    <span className="font-bold uppercase tracking-wider text-sm">Deployment</span>
+                                </div>
+                                <div className="text-4xl font-black text-slate-900">≤ 12 Mo</div>
+                            </motion.div>
                         </div>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3 }}
-                            className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6"
-                        >
-                            <div className="space-y-4">
-                                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-cyan-400 border border-white/10">
-                                    <Cpu className="w-6 h-6" />
-                                </div>
-                                <h4 className="text-lg font-bold">Hyperscale Blueprint</h4>
-                                <p className="text-sm text-slate-500 leading-relaxed">Advanced liquid cooling and high-density rack configurations Optimized for 200MW+ output.</p>
-                            </div>
-                            <div className="space-y-4">
-                                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-blue-400 border border-white/10">
-                                    <Globe className="w-6 h-6" />
-                                </div>
-                                <h4 className="text-lg font-bold">Strategic Siting</h4>
-                                <p className="text-sm text-slate-500 leading-relaxed">Identifying under-utilized energy assets across global corridors to minimize carbon impact.</p>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4 }}
-                            className="pt-8"
-                        >
-                            <button className="group flex items-center gap-3 px-8 py-4 bg-white text-slate-950 font-black uppercase tracking-widest text-sm hover:bg-cyan-400 transition-all">
-                                Project Roadmap <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </button>
-                        </motion.div>
                     </div>
 
-                    {/* Right Side: Visual Element */}
+                    {/* Right Side: Visuals */}
                     <div className="relative">
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 1 }}
-                            className="relative z-10 aspect-square flex items-center justify-center"
+                            transition={{ duration: 0.8 }}
+                            className="relative z-10"
                         >
-                            {/* Central Glow */}
-                            <div className="absolute w-[80%] h-[80%] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse" />
+                            <img
+                                src="/arms.webp"
+                                alt="ARMS 200 System"
+                                className="w-full h-auto rounded-[2.5rem] shadow-2xl"
+                            />
 
-                            {/* Tech Ring Visual */}
-                            <div className="relative w-full h-full border-2 border-white/5 rounded-full flex items-center justify-center">
-                                <div className="w-[85%] h-[85%] border border-white/10 rounded-full border-dashed animate-spin-slow" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="text-center">
-                                        <motion.span
-                                            animate={{ opacity: [0.4, 1, 0.4] }}
-                                            transition={{ duration: 3, repeat: Infinity }}
-                                            className="block text-8xl md:text-9xl font-black text-white"
-                                        >
-                                            200
-                                        </motion.span>
-                                        <span className="text-2xl font-black text-cyan-400 uppercase tracking-[0.4em]">Megawatts</span>
+                            {/* Floating Certificate */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30, x: 20 }}
+                                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.5, duration: 0.6 }}
+                                className="absolute -bottom-12 -right-6 md:-right-12 w-2/3 md:w-[320px] bg-white p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 hidden sm:block"
+                            >
+                                <div className="text-center">
+                                    <div className="flex justify-center mb-3">
+                                        <Shield className="w-8 h-8 text-red-600" />
+                                    </div>
+                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">TIA-942 READY</h4>
+                                    <div className="text-sm font-black text-slate-900 uppercase italic mb-3">Rated-3 Certified</div>
+                                    <div className="flex justify-center gap-2">
+                                        {['Arch', 'Elec', 'Mech', 'Tel'].map((scope) => (
+                                            <div key={scope} className="px-2 py-1 bg-slate-50 rounded text-[8px] font-bold text-slate-500 uppercase">
+                                                {scope}
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
-                            </div>
-
-                            {/* Floating Data Nodes */}
-                            {[0, 72, 144, 216, 288].map((angle, i) => (
-                                <motion.div
-                                    key={i}
-                                    animate={{
-                                        y: [0, -15, 0],
-                                        opacity: [0.5, 1, 0.5]
-                                    }}
-                                    transition={{
-                                        duration: 4,
-                                        delay: i * 0.5,
-                                        repeat: Infinity
-                                    }}
-                                    className="absolute w-4 h-4 rounded-full bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.5)]"
-                                    style={{
-                                        top: `${50 + 45 * Math.sin(angle * Math.PI / 180)}%`,
-                                        left: `${50 + 45 * Math.cos(angle * Math.PI / 180)}%`,
-                                    }}
-                                />
-                            ))}
+                            </motion.div>
                         </motion.div>
-                    </div>
 
+                        {/* Background Decorative Element for Image */}
+                        <div className="absolute -top-10 -left-10 w-40 h-40 bg-cyan-100 rounded-full blur-3xl opacity-50" />
+                    </div>
                 </div>
             </div>
-
-            <style>{`
-                @keyframes spin-slow {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-                .animate-spin-slow {
-                    animation: spin-slow 20s linear infinite;
-                }
-            `}</style>
         </section>
     );
 };

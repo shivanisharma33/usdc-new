@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
 
 const ContactUs = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -75,22 +75,43 @@ const ContactUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+              className="grid grid-cols-1 gap-4"
             >
-              {[
-                { icon: Mail, label: 'Email Us', value: 'hello@usdc.com', color: 'bg-cyan-50 text-cyan-500' },
-                { icon: Phone, label: 'Call Us', value: '(555) 123-4567', color: 'bg-blue-50 text-blue-500' },
-                { icon: MapPin, label: 'Visit Us', value: 'Dulles, Virginia', color: 'bg-indigo-50 text-indigo-500' },
-                { icon: ArrowRight, label: 'Support', value: 'Help Center', color: 'bg-slate-50 text-slate-500' },
-              ].map((item, i) => (
-                <div key={i} className="group p-6 rounded-3xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
-                  <div className={`w-12 h-12 rounded-2xl ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <item.icon className="w-5 h-5" />
-                  </div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">{item.label}</p>
-                  <p className="text-base font-bold text-slate-900">{item.value}</p>
+              {/* Email */}
+              <div className="group p-5 rounded-3xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex items-center gap-4">
+                <div className="w-11 h-11 rounded-2xl bg-cyan-50 text-cyan-500 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Mail className="w-5 h-5" />
                 </div>
-              ))}
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-0.5">Email Us</p>
+                  <p className="text-sm font-bold text-slate-900">hello@usdc.com</p>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div className="group p-5 rounded-3xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex items-center gap-4">
+                <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-0.5">Call Us</p>
+                  <p className="text-sm font-bold text-slate-900">(555) 123-4567</p>
+                </div>
+              </div>
+
+              {/* Address */}
+              <div className="group p-5 rounded-3xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex items-start gap-4">
+                <div className="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-500 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform mt-0.5">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">USDC Headquarters</p>
+                  <p className="text-sm font-bold text-slate-900 leading-snug">
+                    218 NW 24th St 2nd FL<br />
+                    Miami, FL 33127
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </div>
 

@@ -68,7 +68,11 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin className="w-5 h-5 text-[#40D1FB] flex-shrink-0 mt-0.5" />
-                <span>United States, Multiple Locations</span>
+                <span>
+                  USDC Headquarters<br />
+                  218 NW 24th St 2nd FL<br />
+                  Miami, FL 33127
+                </span>
               </li>
             </ul>
           </div>
@@ -81,8 +85,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
           <p>&copy; 2026 USDC. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-[#40D1FB] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#40D1FB] transition-colors">Terms of Service</a>
+            <Link to="/privacy-policy" className="hover:text-[#40D1FB] transition-colors">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="hover:text-[#40D1FB] transition-colors">Terms of Service</Link>
             <a href="#" className="hover:text-[#40D1FB] transition-colors">Cookie Policy</a>
           </div>
         </div>
