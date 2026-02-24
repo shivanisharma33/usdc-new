@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Clock, Shield, CheckCircle2 } from 'lucide-react';
+import { Zap, Clock, Shield } from 'lucide-react';
 
 const Arm200 = () => {
     return (
