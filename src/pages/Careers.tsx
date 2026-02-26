@@ -38,35 +38,24 @@ const Careers = () => {
 
     const jobs = [
         {
-            title: "Infrastructure Engineer",
+            title: "Chiller Operator",
+            department: "Operations",
+            location: "Columbiana, AL 35051",
+            type: "Full-Time"
+        },
+        {
+            title: "Data Center MEP Engineer/MEP Manager",
             department: "Engineering",
-            location: "Northern Virginia / Remote",
+            location: "Columbiana, AL",
             type: "Full-Time"
         },
         {
-            title: "Energy Solutions Architect",
-            department: "Sustainability",
-            location: "Columbus, OH",
-            type: "Full-Time"
-        },
-        {
-            title: "Senior Facility Manager",
+            title: "Chiller Operator",
             department: "Operations",
-            location: "Helsinki, Finland",
+            location: "1070 Erie Ave, North Tonawanda, NY 14120",
             type: "Full-Time"
         },
-        {
-            title: "Data Center Operations Lead",
-            department: "Operations",
-            location: "Singapore",
-            type: "Full-Time"
-        },
-        {
-            title: "AI Infrastructure Specialist",
-            department: "Technology",
-            location: "Remote",
-            type: "Contract"
-        }
+       
     ];
 
     return (

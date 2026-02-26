@@ -3,6 +3,7 @@ import RedefiningSection from '../components/RedefiningSection';
 import WhatWeDo from '../components/WhatWeDo';
 import Opportunity from '../components/Opportunity';
 import Arm200 from '../components/Arm200';
+import DigiPowerXSection from '../components/DigiPowerXSection';
 import EarthSection from '../components/EarthSection';
 import LatestNews from '../components/LatestNews';
 import ContactUs from '../components/ContactUs';
@@ -15,6 +16,7 @@ const Home = () => {
       <WhatWeDo />
       <Opportunity />
       <Arm200 />
+      <DigiPowerXSection />
       <EarthSection />
       <LatestNews />
       <ContactUs />

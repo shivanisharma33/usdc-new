@@ -9,14 +9,17 @@ import Management from './pages/Management';
 import Locations from './pages/Locations';
 import Careers from './pages/Careers';
 import ContactPage from './pages/ContactPage';
+import PressRelease from './pages/PressRelease';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-white font-sans selection:bg-cyan-100 selection:text-cyan-700 uppercase-none">
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,6 +30,7 @@ function App() {
           <Route path="/locations" element={<Locations />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/press-release" element={<PressRelease />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>

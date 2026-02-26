@@ -15,52 +15,20 @@ const Management = () => {
 
     const team = [
         {
-            name: "Alex Sterling",
-            role: "Chief Executive Officer",
-            bio: "With over 20 years in digital infrastructure, Alex leads USDC's vision of integrating sustainable energy with high-performance computing.",
-            image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=2000",
-            linkedin: "#",
-            email: "alex@usdc.com"
+            name: "Alec Amar",
+            role: "President",
+            bio: "Mr. Amar is an entrepreneur and infrastructure executive with deep experience in energy, high-density data-center development, and advanced digital infrastructure. Under Mr. Amar's leadership, DigiPowerX has expanded into multiple U.S. markets with a growing portfolio of high-power data-center properties, including the development of a Tier III campus in Columbiana, Alabama; the modernization and repurposing of critical-power infrastructure in New York; and a national pipeline tied to power-station redevelopment, modular AI-ready facilities, and long-term energy-backed compute sites. Mr. Amar guided the creation of DigiPowerX's proprietary ARMS 200 modular Tier III data-center system, engineered specifically for ultra-dense GPU clusters such as Nvidia B200/B300 deployments.",
+            image: "/alec.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Alec%20Amar%20DigiPowerX",
+            email: "alec@digipowerx.com"
         },
         {
-            name: "Dr. Sarah Chen",
-            role: "Chief Technology Officer",
-            bio: "A pioneer in liquid cooling technologies, Dr. Chen oversees our internal R&D and ensures our facilities remain at the cutting edge of efficiency.",
-            image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=2000",
-            linkedin: "#",
-            email: "sarah@usdc.com"
-        },
-        {
-            name: "Marcus Vane",
-            role: "Chief Operating Officer",
-            bio: "Marcus specializes in global asset conversion, turning underutilized power sites into operational Tier III data centers in record time.",
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=2000",
-            linkedin: "#",
-            email: "marcus@usdc.com"
-        },
-        {
-            name: "Elena Rodriguez",
-            role: "Head of Sustainability",
-            bio: "Elena leads our Net-Zero initiatives, ensuring every USDC facility contributes positively to the local energy grid and environment.",
-            image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=2000",
-            linkedin: "#",
-            email: "elena@usdc.com"
-        },
-        {
-            name: "Julian Thorne",
-            role: "VP of Strategic Partnerships",
-            bio: "Julian manages relationships with hyperscale providers and global energy companies to secure the future of our digital footprint.",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=2000",
-            linkedin: "#",
-            email: "julian@usdc.com"
-        },
-        {
-            name: "Sophia Wu",
-            role: "Director of Infrastructure",
-            bio: "Sophia oversees the physical build-out of our global facilities, ensuring top-tier security and structural excellence at every site.",
-            image: "https://images.unsplash.com/photo-1598550874175-4d0fe4a2c943?auto=format&fit=crop&q=80&w=2000",
-            linkedin: "#",
-            email: "sophia@usdc.com"
+            name: "Michel Amar",
+            role: "Chief Executive Officer & Chairman",
+            bio: "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance. In 2019, Michel partnered with Brookstone, a novelty retailer, in developing exclusive, technologically advanced products for their consumer electronics market.",
+            image: "/michal.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Michel%20Amar%20DigiPowerX",
+            email: "michel@digipowerx.com"
         }
     ];
 
@@ -86,11 +54,9 @@ const Management = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
                     >
-
                         <h1 className="text-7xl md:text-9xl font-black text-white tracking-tighter leading-none mb-8">
                             STOCKED WITH <br /> <span className="text-cyan-400">EXPERTISE</span>
                         </h1>
-
                     </motion.div>
                 </div>
 
@@ -136,43 +102,34 @@ const Management = () => {
                 </div>
             </section>
 
-            {/* Management Grid */}
-            <section className="py-32 bg-slate-50/30">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="space-y-4 mb-20">
-                        <div className="flex items-center gap-4">
-                            <div className="h-[2px] w-12 bg-cyan-400" />
-                            <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Our Leadership</span>
-                        </div>
-                        <h2 className="text-5xl lg:text-7xl font-black text-slate-900 leading-tight">
-                            The Minds Behind <br />
-                            <span className="text-cyan-400">Sustainable Growth</span>
-                        </h2>
+            {/* ─── Leadership Section (Fixed Blur Design) ─── */}
+            <section className="py-32 bg-slate-50/50 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
+                    <div className="text-center mb-32">
+                        <span className="text-xs font-black text-cyan-600 uppercase tracking-[0.6em] mb-6 block">Our Leadership</span>
+                        <h2 className="text-5xl lg:text-7xl font-black text-slate-900">The Human <span className="text-cyan-500 italic">Engine</span></h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 max-w-5xl mx-auto">
                         {team.map((member, i) => (
-                            <TeamCard key={i} index={i} {...member} />
+                            <LeadershipCard key={i} index={i} {...member} />
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* Vision Quote Section */}
-            <section className="bg-slate-950 py-32 relative overflow-hidden text-center text-white">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="w-full h-full bg-[radial-gradient(circle_at_50%_50%,#40D1FB_1px,transparent_1px)] bg-[length:40px_40px]" />
-                </div>
-                <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-12">
-                    <p className="text-cyan-400 font-black tracking-[0.6em] uppercase text-xs">A unified dedication</p>
-                    <h3 className="text-4xl md:text-6xl font-bold leading-tight">
-                        "We don't just build buildings; we build the <span className="text-cyan-400">intelligence backbone</span> of the future."
+            <section className="bg-white py-32 relative text-center border-t border-slate-100">
+                <div className="max-w-4xl mx-auto px-6 space-y-12">
+                    <p className="text-cyan-600 font-black tracking-[0.6em] uppercase text-xs">A unified dedication</p>
+                    <h3 className="text-4xl md:text-5xl font-bold leading-tight text-slate-900">
+                        "We don't just build buildings; we build the <span className="text-cyan-500">intelligence backbone</span> of the future."
                     </h3>
                     <div className="flex justify-center pt-8">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-10 py-5 bg-white text-slate-950 font-black uppercase tracking-widest hover:bg-cyan-400 transition-all flex items-center gap-3"
+                            className="px-10 py-5 bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-cyan-500 transition-all flex items-center gap-3"
                         >
                             Investor Deck <ArrowUpRight className="w-5 h-5" />
                         </motion.button>
@@ -185,50 +142,76 @@ const Management = () => {
     );
 };
 
-// Team Card Component with sharp edges and premium animations
-const TeamCard = ({ index, name, role, bio, image, linkedin, email }: any) => {
+// ─── Refined Leadership Card with smaller image area to reduce blur ───
+const LeadershipCard = ({ index, name, role, bio, image, linkedin, email }: any) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: (index % 3) * 0.1 }}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
             viewport={{ once: true }}
-            className="group"
+            className="group relative bg-white p-6 border border-slate-200"
         >
-            <div className="relative aspect-[4/5] overflow-hidden mb-8 bg-slate-100">
-                <img
-                    src={image}
-                    alt={name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute bottom-6 left-6 flex items-center gap-4">
-                        <a href={linkedin} className="p-3 bg-white text-slate-950 hover:bg-cyan-400 transition-colors">
+            <div className="flex flex-col gap-8">
+                {/* Image area with restricted size and sharpening fixes */}
+                <div className="relative w-full aspect-square overflow-hidden bg-slate-900">
+                    <motion.img
+                        src={image}
+                        alt={name}
+                        loading="eager"
+                        className="w-full h-full object-cover object-top transition-all duration-700"
+                        style={{
+                            imageRendering: 'auto',
+                            WebkitBackfaceVisibility: 'hidden',
+                            backfaceVisibility: 'hidden',
+                            transform: 'translateZ(0)',
+                            filter: 'contrast(1.05) brightness(1.02)' // mask low-res blur with slight contrast
+                        }}
+                    />
+
+                    {/* Socials - Overlay Layout */}
+                    <div className="absolute bottom-0 right-0 flex gap-[2px]">
+                        <a href={linkedin} className="p-4 bg-white/90 backdrop-blur-sm text-slate-900 hover:bg-cyan-500 hover:text-white transition-colors">
                             <Linkedin className="w-5 h-5" />
                         </a>
-                        <a href={`mailto:${email}`} className="p-3 bg-white text-slate-950 hover:bg-cyan-400 transition-colors">
+                        <a href={`mailto:${email}`} className="p-4 bg-white/90 backdrop-blur-sm text-slate-900 hover:bg-cyan-500 hover:text-white transition-colors">
                             <Mail className="w-5 h-5" />
                         </a>
                     </div>
                 </div>
+
+                {/* Content Area */}
+                <div className="space-y-4">
+                    <div className="space-y-1">
+                        <h3 className="text-3xl font-black text-slate-900 tracking-tighter">
+                            {name}
+                        </h3>
+                        <p className="text-xs font-black text-cyan-500 uppercase tracking-[0.3em]">
+                            {role}
+                        </p>
+                    </div>
+
+                    <p className="text-slate-500 text-sm leading-relaxed font-medium line-clamp-3">
+                        {bio}
+                    </p>
+
+                    <div className="pt-4 flex items-center justify-between border-t border-slate-100">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                            Member since 2024
+                        </span>
+                        <motion.div
+                            whileHover={{ x: 5 }}
+                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-900 cursor-pointer"
+                        >
+                            Full Profile <ArrowUpRight className="w-3 h-3 text-cyan-500" />
+                        </motion.div>
+                    </div>
+                </div>
             </div>
 
-            <div className="space-y-4">
-                <div className="space-y-1">
-                    <h3 className="text-3xl font-black text-slate-900 group-hover:text-cyan-500 transition-colors">
-                        {name}
-                    </h3>
-                    <p className="text-sm font-black text-cyan-500 uppercase tracking-widest">
-                        {role}
-                    </p>
-                </div>
-                <p className="text-slate-500 font-medium leading-relaxed line-clamp-3">
-                    {bio}
-                </p>
-                <div className="pt-2 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-950 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500">
-                    Full Profile <ArrowUpRight className="w-4 h-4 text-cyan-500" />
-                </div>
-            </div>
+            {/* Accent lines */}
+            <div className="absolute -top-[1px] -right-[1px] w-8 h-8 border-t border-r border-cyan-500/30" />
+            <div className="absolute -bottom-[1px] -left-[1px] w-8 h-8 border-b border-l border-cyan-500/30" />
         </motion.div>
     );
 };

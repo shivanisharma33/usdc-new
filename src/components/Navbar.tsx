@@ -43,6 +43,7 @@ const navLinks: NavLink[] = [
         path: '/insights',
         subLinks: [
             { name: 'Latest News', path: '/insights', icon: Newspaper, desc: 'Press & updates' },
+            { name: 'Press Release', path: '/press-release', icon: Newspaper, desc: 'Official announcements' },
             { name: 'Insights', path: '/insights', icon: Lightbulb, desc: 'Industry intelligence' },
         ]
     },
