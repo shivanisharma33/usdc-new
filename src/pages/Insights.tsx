@@ -1,18 +1,10 @@
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Calendar, User, ChevronDown, Zap } from 'lucide-react';
+import { ArrowUpRight, Calendar, User, Zap } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const brandNavy = "#001738";
 const cyanColor = "#40D1FB";
-
-const CATEGORY_COLORS: Record<string, string> = {
-    "Technology": "#40D1FB",
-    "Sustainability": "#34d399",
-    "Industry News": "#818cf8",
-    "Case Studies": "#fb923c",
-    "All": "#40D1FB",
-};
 
 const Insights = () => {
     const heroRef = useRef(null);
@@ -99,44 +91,69 @@ const Insights = () => {
 
     return (
         <div className="bg-white">
-            {/* ── Parallax Hero ── */}
-            <section ref={heroRef} className="relative h-[60vh] flex items-center justify-center overflow-hidden text-white" style={{ background: brandNavy }}>
+            {/* ── CINEMATIC INSIGHTS HERO ── */}
+            <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden bg-slate-950">
+                {/* Immersive Background Overlay */}
                 <motion.div
                     style={{ y: heroY, opacity: heroOpacity }}
                     className="absolute inset-0 z-0"
                 >
-                    <div className="absolute inset-0 z-10" style={{ background: `linear-gradient(to bottom, ${brandNavy}99, ${brandNavy}cc)` }} />
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/60 to-white z-10" />
                     <img
                         src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072"
                         alt="News & Insights"
-                        className="w-full h-full object-cover opacity-30"
+                        className="w-full h-full object-cover grayscale opacity-40 scale-110 contrast-125"
                     />
                 </motion.div>
 
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-10">
+                {/* Technical HUD Overlay */}
+                <div className="absolute inset-0 pointer-events-none z-10">
+                    <div className="absolute top-1/2 left-10 -translate-y-1/2 w-[1px] h-64 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent" />
+                    <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[1px] h-64 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent" />
+                </div>
+
+                <div className="relative z-20 text-center px-6 max-w-7xl mx-auto space-y-12 pt-24">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="space-y-6"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none uppercase">
-                            News & <br />
-                            <span style={{ color: cyanColor }}>Insights</span>
+                        <div className="inline-flex items-center gap-3 px-6 py-2 bg-cyan-500 text-slate-950 rounded-full mb-8 font-black uppercase text-[10px] tracking-[0.4em] shadow-2xl shadow-cyan-500/40">
+                            <Zap className="w-4 h-4 fill-current" />
+                            Knowledge Base 4.0
+                        </div>
+
+                        <h1 className="text-8xl md:text-[14rem] font-black text-white tracking-tighter leading-none mb-8 uppercase select-none">
+                            INSIGHTS.
                         </h1>
-                        <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto tracking-widest uppercase font-bold">
-                            Architecture, sustainability, and industry intelligence.
-                        </p>
+
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-16 scale-110">
+                            <div className="text-center group cursor-pointer">
+                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-widest mb-1">Articles</p>
+                                <p className="text-4xl font-black text-white leading-none">012</p>
+                            </div>
+                            <div className="w-px h-10 bg-white/20 hidden md:block" />
+                            <div className="text-center group cursor-pointer">
+                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-widest mb-1">Global Reach</p>
+                                <p className="text-4xl font-black text-white leading-none">ACTIVE</p>
+                            </div>
+                            <div className="w-px h-10 bg-white/20 hidden md:block" />
+                            <div className="text-center group cursor-pointer">
+                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-widest mb-1">Tech Index</p>
+                                <p className="text-4xl font-black text-white leading-none">PRIME</p>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
 
+                {/* Bottom Scroll Indicator */}
                 <motion.div
-                    animate={{ y: [0, 10, 0] }}
+                    animate={{ y: [0, 8, 0] }}
                     transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2"
-                    style={{ color: 'rgba(255,255,255,0.3)' }}
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 flex flex-col items-center gap-4"
                 >
-                    <ChevronDown className="w-6 h-6" />
+                    <span className="text-[9px] font-black uppercase tracking-[0.6em] rotate-180 [writing-mode:vertical-lr]">Explore</span>
+                    <div className="w-[1px] h-20 bg-gradient-to-b from-cyan-500 to-transparent" />
                 </motion.div>
             </section>
 
@@ -150,8 +167,8 @@ const Insights = () => {
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all border ${activeCategory === cat
-                                        ? 'bg-slate-900 text-white border-slate-900 shadow-lg'
-                                        : 'bg-white text-slate-500 border-slate-200 hover:border-cyan-400 hover:text-cyan-500'
+                                    ? 'bg-slate-900 text-white border-slate-900 shadow-lg'
+                                    : 'bg-white text-slate-500 border-slate-200 hover:border-cyan-400 hover:text-cyan-500'
                                     }`}
                             >
                                 {cat}

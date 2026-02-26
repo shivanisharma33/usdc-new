@@ -5,19 +5,12 @@ import {
     FileText,
     Calendar,
     Newspaper,
-    ShieldAlert,
     Mail,
     ArrowUpRight,
-    Download,
-    BarChart3,
     Activity,
     Lock,
-    Globe
 } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
-
-const brandNavy = "#001738";
-const cyanColor = "#40D1FB";
 
 const Investors = () => {
     const heroRef = useRef(null);

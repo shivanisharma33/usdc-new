@@ -1,10 +1,7 @@
-import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Calendar, Newspaper, Download, Share2, Zap, Clock, ChevronRight, User, Search } from 'lucide-react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowUpRight, Calendar, Newspaper, Download, Zap, Clock, Search } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
-
-const brandNavy = "#001738";
-const cyanColor = "#40D1FB";
 
 const PressRelease = () => {
     const heroRef = useRef(null);
