@@ -187,7 +187,7 @@ const NewsCard = ({
     onLeave,
     brandNavy
 }: {
-    news: any;
+    news: { id: string, title: string, category: string, date: string, readTime: string, image: string, description: string, accent: string, tag: string };
     index: number;
     isHovered: boolean;
     isSiblingsHovered: boolean;

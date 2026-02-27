@@ -57,7 +57,7 @@ const ContactUs = () => {
                 transition={{ delay: 0.1 }}
                 className="text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight"
               >
-                Let's build <br />
+                Let&apos;s build <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#40D1FB] to-blue-600">something great.</span>
               </motion.h2>
 
@@ -68,7 +68,7 @@ const ContactUs = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-slate-500 font-medium leading-relaxed max-w-md"
               >
-                Whether you're interested in asset conversion, partnerships, or our technology, our team is ready to assist you.
+                Whether you&apos;re interested in asset conversion, partnerships, or our technology, our team is ready to assist you.
               </motion.p>
             </div>
 
@@ -200,7 +200,7 @@ const ContactUs = () => {
                     </div>
                     <div className="space-y-2">
                       <h3 className="text-3xl font-black text-slate-900">Message Received!</h3>
-                      <p className="text-slate-500 font-medium">Thank you for reaching out. We'll be in touch soon.</p>
+                      <p className="text-slate-500 font-medium">Thank you for reaching out. We&apos;ll be in touch soon.</p>
                     </div>
                     <button
                       onClick={() => setSent(false)}

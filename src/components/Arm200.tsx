@@ -29,11 +29,11 @@ const Arm200 = () => {
                             </h2>
                             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-medium max-w-xl">
                                 <p>
-                                    The ARMS 200 is USDC's proprietary modular data-center platform.
+                                    The ARMS 200 is USDC&apos;s proprietary modular data-center platform.
                                     Each module delivers up to 600 kW of critical IT load and is designed for Tier III redundancy (concurrent maintainability).
                                 </p>
                                 <p>
-                                    The system's prefabricated architecture allows rapid on-site assembly and
+                                    The system&apos;s prefabricated architecture allows rapid on-site assembly and
                                     integration with chilled-water or direct-to-chip cooling systems, making it the
                                     ideal solution for AI-ready infrastructure.
                                 </p>

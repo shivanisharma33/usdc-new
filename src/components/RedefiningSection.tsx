@@ -28,7 +28,7 @@ const RedefiningSection = () => {
 
                         <div className="space-y-6">
                             <p className="text-lg lg:text-xl text-gray-600 leading-relaxed font-medium">
-                                At US Data Centers (USDC), we're redefining data center infrastructure to deliver
+                                At US Data Centers (USDC), we&apos;re redefining data center infrastructure to deliver
                                 <span className="italic text-gray-900"> unmatched performance, efficiency, and sustainability </span>
                                 for data-intensive organizations.
                             </p>

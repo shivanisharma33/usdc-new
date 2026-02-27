@@ -94,7 +94,7 @@ const AboutUs = () => {
             </motion.h1>
 
             <motion.p variants={item} className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed">
-              USDC is transforming energy infrastructure by converting under-utilized assets into world-class Tier-3 HPC data centers. We're powering the future of AI, research, and high-performance computing.
+              USDC is transforming energy infrastructure by converting under-utilized assets into world-class Tier-3 HPC data centers. We&apos;re powering the future of AI, research, and high-performance computing.
             </motion.p>
 
             <motion.div variants={item} className="flex gap-4 pt-4">
@@ -124,7 +124,7 @@ const AboutUs = () => {
                 <Target className="w-4 h-4 text-[#40D1FB]" />
                 <span className="text-sm font-semibold text-[#40D1FB]">Our Mission</span>
               </div>
-              <h2 className="text-3xl font-extrabold text-slate-900">Building Tomorrow's Infrastructure Today</h2>
+              <h2 className="text-3xl font-extrabold text-slate-900">Building Tomorrow&apos;s Infrastructure Today</h2>
               <p className="text-lg text-slate-600 leading-relaxed">
                 Our mission is to identify underutilized energy assets and transform them into state-of-the-art Tier-3 HPC data centers that power the next generation of AI, research, and high-performance computing innovation at a fraction of traditional build costs.
               </p>
@@ -244,7 +244,7 @@ const AboutUs = () => {
             <motion.div variants={item} className="text-center space-y-4">
               <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">Why Choose USDC</h2>
               <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-                We're not just building data centers—we're building the future
+                We&apos;re not just building data centers—we&apos;re building the future
               </p>
             </motion.div>
 
@@ -321,7 +321,7 @@ const AboutUs = () => {
               Ready to Transform Your Infrastructure?
             </motion.h2>
             <motion.p variants={item} className="text-xl text-slate-300 max-w-xl mx-auto">
-              Join industry leaders who are powering the future with USDC. Let's build something extraordinary together.
+              Join industry leaders who are powering the future with USDC. Let&apos;s build something extraordinary together.
             </motion.p>
             <motion.div variants={item} className="flex gap-4 justify-center">
               <button className="px-8 py-3 bg-[#40D1FB] text-slate-900 font-bold rounded-lg hover:bg-cyan-400 transition-all hover:scale-105">

@@ -102,7 +102,7 @@ const TermsOfService = () => {
                                 <div className="p-8 rounded-3xl border border-slate-100 bg-white shadow-sm hover:shadow-xl transition-shadow">
                                     <AlertCircle className="w-8 h-8 text-cyan-500 mb-4" />
                                     <h4 className="text-lg font-bold text-slate-950 mb-3">User Conduct</h4>
-                                    <p className="text-sm text-slate-500 leading-relaxed">Any misuse of our infrastructure or interference with other users' access will result in immediate termination.</p>
+                                    <p className="text-sm text-slate-500 leading-relaxed">Any misuse of our infrastructure or interference with other users&apos; access will result in immediate termination.</p>
                                 </div>
                             </div>
 
