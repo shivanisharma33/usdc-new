@@ -16,7 +16,8 @@ import {
 } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
-const STOCK_API_URL = 'http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com/api/live-stock';
+// Use an internal API route so Vercel-hosted site can access upstream HTTP endpoints
+const STOCK_API_URL = '/api/live-stock';
 
 type LiveStockResponse = {
     symbol: string;
