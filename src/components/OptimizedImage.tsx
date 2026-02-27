@@ -24,6 +24,9 @@ export default function OptimizedImage({
       width={width}
       height={height}
       sizes={sizes}
+      // When using remote image hosts, disable Next.js built-in optimization
+      // to avoid edge-case failures on some deployments or remote servers.
+      unoptimized={src.startsWith('http')}
       {...props}
     />
   );

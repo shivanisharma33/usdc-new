@@ -34,7 +34,10 @@ export const metadata: Metadata = {
     siteName: 'USDC',
   },
   icons: {
+    // Provide multiple icon formats to support broad browser compatibility.
     icon: '/favicon.svg',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
   },
 };
 

@@ -51,16 +51,7 @@ const navLinks: NavLink[] = [
         ]
     },
     { name: 'Management Team', path: '/management' },
-    {
-        name: 'Location',
-        path: '/locations',
-        subLinks: [
-            { name: 'Northern Virginia', path: '/locations#virginia', region: 'USA East' },
-            { name: 'Columbus, Ohio', path: '/locations#ohio', region: 'USA Central' },
-            { name: 'Helsinki', path: '/locations#helsinki', region: 'Europe' },
-            { name: 'Singapore', path: '/locations#singapore', region: 'Asia Pacific' },
-        ]
-    },
+    { name: 'Location', path: '/locations' },
     { name: 'Career', path: '/careers' },
 ];
 
@@ -106,15 +97,15 @@ const Navbar = () => {
                     {navLinks.map((link) => (
                         <div
                             key={link.name}
-                            className="relative"
+                            className="relative group"
                             onMouseEnter={() => link.subLinks && setActiveDropdown(link.name)}
                             onMouseLeave={() => link.subLinks && setActiveDropdown(null)}
                         >
                             {/* Nav Link Button */}
-                            <Link href={link.path} className="no-underline">
+                            <Link href={link.path} className="no-underline group">
                                 <div className={`flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13.5px] font-semibold tracking-wide transition-all duration-200 select-none ${isActive(link.path) || activeDropdown === link.name
                                     ? 'text-[#40D1FB] bg-[#40D1FB]/8'
-                                    : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
+                                    : 'text-slate-700 group-hover:text-[#40D1FB] hover:text-[#40D1FB] group-hover:bg-[#40D1FB]/8 hover:bg-[#40D1FB]/8'
                                     }`}>
                                     {link.name}
                                     {link.subLinks && (
@@ -267,7 +258,7 @@ const Navbar = () => {
                                     >
                                         <Link
                                             href={link.path}
-                                            className="no-underline flex-1"
+                                            className="no-underline flex-1 group"
                                             onClick={(e) => link.subLinks && e.preventDefault()}
                                         >
                                             <span className={`font-semibold text-[15px] ${isActive(link.path) ? 'text-[#40D1FB]' : 'text-slate-800'}`}>
