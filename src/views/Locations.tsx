@@ -266,41 +266,36 @@ const Locations = () => {
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 bg-slate-100 border border-slate-100">
                         {locations.map((loc, i) => (
-                            <div key={i} id={loc.id} className="bg-white p-16 group cursor-pointer relative overflow-hidden flex flex-col justify-between min-h-[600px]">
-                                <div className="relative z-10 space-y-12">
-                                    <div className="flex justify-between items-start">
-                                        <div className="space-y-2">
-                                            <div className="flex items-center gap-3">
-                                                <div className={`w-2 h-2 rounded-full ${loc.status === 'Operational' ? 'bg-cyan-500 shadow-[0_0_8px_#40D1FB]' : 'bg-orange-400 shadow-[0_0_8px_#fb923c]'}`} />
-                                                <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em]">{loc.status}</span>
+                            <div key={i} id={loc.id} className="bg-white p-8 group cursor-pointer relative overflow-hidden flex flex-col justify-between min-h-[420px]">
+                                <div>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className={`w-2 h-2 rounded-full ${loc.status === 'Operational' ? 'bg-cyan-500 shadow-[0_0_8px_#40D1FB]' : 'bg-orange-400 shadow-[0_0_8px_#fb923c]'}`} />
+                                        <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.35em]">{loc.status}</span>
+                                    </div>
+
+                                    <div className="relative overflow-hidden rounded-2xl h-48 mb-4">
+                                        <OptimizedImage src={loc.image} alt={loc.city} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                                        <div className="absolute top-3 right-3">
+                                            <div className="w-12 h-12 bg-slate-50 flex items-center justify-center border border-slate-100 rounded-lg transition-colors group-hover:bg-cyan-500 group-hover:text-slate-950">
+                                                <ArrowUpRight className="w-5 h-5" />
                                             </div>
-                                            <h3 className="text-5xl font-black text-slate-950 uppercase tracking-tighter leading-none">{loc.city}</h3>
-                                            <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{loc.address}</p>
-                                        </div>
-                                        <div className="w-16 h-16 bg-slate-50 flex items-center justify-center border border-slate-100 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors">
-                                            <ArrowUpRight className="w-6 h-6" />
                                         </div>
                                     </div>
 
-                                    <div className="relative aspect-video overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-1000 shadow-2xl">
-                                        <OptimizedImage src={loc.image} alt={loc.city} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
-                                    </div>
+                                    <h3 className="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-tighter leading-tight">{loc.city}</h3>
+                                    <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">{loc.address}</p>
 
-                                    <div className="space-y-6">
-                                        <p className="text-slate-500 font-medium leading-relaxed max-w-lg">
-                                            {loc.description}
-                                        </p>
-                                        <div className="grid grid-cols-2 gap-12 border-t border-slate-100 pt-8">
-                                            <div>
-                                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Infrastructure Load</p>
-                                                <p className="text-lg font-black text-slate-950 uppercase">{loc.capacity}</p>
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Facility Standard</p>
-                                                <p className="text-lg font-black text-slate-950 uppercase">{loc.tier}</p>
-                                            </div>
-                                        </div>
+                                    <p className="text-slate-500 font-medium leading-relaxed max-w-lg">{loc.description}</p>
+                                </div>
+
+                                <div className="mt-6 grid grid-cols-2 gap-6 border-t border-slate-100 pt-6">
+                                    <div>
+                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Infrastructure Load</p>
+                                        <p className="text-lg font-black text-slate-900 uppercase">{loc.capacity}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Facility Standard</p>
+                                        <p className="text-lg font-black text-slate-900 uppercase">{loc.tier}</p>
                                     </div>
                                 </div>
                             </div>

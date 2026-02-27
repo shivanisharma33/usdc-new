@@ -119,7 +119,7 @@ const Careers = () => {
             </div>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="mt-1 bg-cyan-500 p-1 text-slate-950">
+                <div className="mt-1 bg-cyan-500 p-1 text-white">
                   <Target className="h-4 w-4" />
                 </div>
                 <div>
@@ -133,7 +133,7 @@ const Careers = () => {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="mt-1 bg-cyan-500 p-1 text-slate-950">
+                <div className="mt-1 bg-cyan-500 p-1 text-white">
                   <ShieldCheck className="h-4 w-4" />
                 </div>
                 <div>

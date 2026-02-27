@@ -110,7 +110,7 @@ const Management = () => {
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center mb-32">
                         <span className="text-xs font-black text-cyan-600 uppercase tracking-[0.6em] mb-6 block">Our Leadership</span>
-                        <h2 className="text-5xl lg:text-7xl font-black text-slate-900">The Human <span className="text-cyan-500 italic">Engine</span></h2>
+                        <h2 className="text-5xl lg:text-7xl font-black text-slate-900">The Human <span className="text-cyan-500">Engine</span></h2>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 max-w-5xl mx-auto">
@@ -129,13 +129,16 @@ const Management = () => {
                         &quot;We don&apos;t just build buildings; we build the <span className="text-cyan-500">intelligence backbone</span> of the future.&quot;
                     </h3>
                     <div className="flex justify-center pt-8">
-                        <motion.button
+                        <motion.a
+                            href="https://static1.squarespace.com/static/6765fcde25dea733d4a4c593/t/6785eb72626f767ed5792eea/1736829812905/USDC+Deck_PS+1.6.25.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-10 py-5 bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-cyan-500 transition-all flex items-center gap-3"
+                            className="px-10 py-5 bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-cyan-500 transition-all flex items-center gap-3 no-underline"
                         >
                             Investor Deck <ArrowUpRight className="w-5 h-5" />
-                        </motion.button>
+                        </motion.a>
                     </div>
                 </div>
             </section>

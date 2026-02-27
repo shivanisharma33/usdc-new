@@ -243,7 +243,7 @@ const Investors = () => {
                                 </div>
                                 <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all">
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Previous Close</p>
-                                    <p className="text-sm font-black text-slate-900 uppercase">{formatUsd(stockData?.previousClose)}</p>
+                                    <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.previousClose)}</p>
                                 </div>
                             </div>
                         </div>

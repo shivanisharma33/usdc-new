@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   icons: {
     // Provide multiple icon formats to support broad browser compatibility.
-    icon: '/favicon.svg',
+    icon: '/favicon.png',
     shortcut: '/favicon.png',
     apple: '/favicon.png',
   },

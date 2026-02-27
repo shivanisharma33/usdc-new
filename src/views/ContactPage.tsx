@@ -19,9 +19,10 @@ const ContactPage = () => {
     ];
 
     const offices = [
-        { city: "Northern Virginia", address: "21000 Atlantic Blvd, Dulles, VA", type: "East Coast HQ" },
-        { city: "Columbus", address: "700 Ackerman Rd, Columbus, OH", type: "Operational Hub" },
-        { city: "Helsinki", address: "Kaivokatu 8, 00100 Helsinki", type: "European Node" }
+        { city: "Buffalo, New York", address: "1001 E Delavan Ave", type: "Operational" },
+        { city: "North Tonawanda, NY", address: "1070 Erie Ave", type: "Operational" },
+        { city: "Columbiana, Alabama", address: "Alabama Tech Corridor", type: "Expanding" },
+        { city: "Hildebran, NC", address: "199 Cline Pk Ct", type: "Planned" }
     ];
 
     const handleSubmit = async (e: React.FormEvent) => {
