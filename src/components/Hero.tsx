@@ -13,7 +13,7 @@ const Hero = () => {
                     className="w-full h-full object-cover scale-105"
                 >
                     <source
-                        src="./Untitled design (2) (1).mp4"
+                        src="/Untitled design (2) (1).mp4"
                         type="video/mp4"
                     />
                 </video>

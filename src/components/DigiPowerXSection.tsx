@@ -1,3 +1,6 @@
+'use client';
+
+import OptimizedImage from './OptimizedImage';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Zap, Shield, Globe } from 'lucide-react';
 
@@ -20,7 +23,7 @@ const DigiPowerXSection = () => {
                         className="relative"
                     >
                         <div className="relative aspect-square rounded-[3rem] overflow-hidden group shadow-2xl">
-                            <img
+                            <OptimizedImage
                                 src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070"
                                 alt="Renewable Energy Integration"
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"

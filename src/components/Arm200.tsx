@@ -1,3 +1,6 @@
+'use client';
+
+import OptimizedImage from './OptimizedImage';
 import { motion } from 'framer-motion';
 import { Zap, Clock, Shield } from 'lucide-react';
 
@@ -79,7 +82,7 @@ const Arm200 = () => {
                             className="relative z-10"
                         >
                             <div className="max-w-[480px] mx-auto">
-                                <img
+                                <OptimizedImage
                                     src="/arms.webp"
                                     alt="ARMS 200 System"
                                     className="w-full h-auto rounded-[2.5rem] shadow-2xl"

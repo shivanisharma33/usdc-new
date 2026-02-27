@@ -1,3 +1,6 @@
+'use client';
+
+import OptimizedImage from './OptimizedImage';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { TrendingUp, Target } from 'lucide-react';
@@ -102,6 +105,16 @@ const AboutUs = () => {
                 Get in Touch
               </button>
             </motion.div>
+            {/* Added image from attachments: place file at public/usdc/usdc-containers.jpg */}
+            <motion.div variants={item} className="mt-12">
+              <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
+                <OptimizedImage
+                  src="/usdc/usdc-containers.jpg"
+                  alt="USDC modular containers"
+                  className="w-full h-64 md:h-96 object-cover"
+                />
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -185,7 +198,7 @@ const AboutUs = () => {
                     className="group bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-[#40D1FB]/30 transition-all"
                   >
                     <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-slate-50 to-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-sm border border-slate-100">
-                      <img
+                      <OptimizedImage
                         src={value.image}
                         alt={value.title}
                         className="w-10 h-10 object-contain"

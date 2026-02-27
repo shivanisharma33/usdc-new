@@ -1,6 +1,9 @@
+'use client';
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, ArrowUpRight, Tag, Zap } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 
 const LatestNews = () => {
     const brandNavy = "#001738";
@@ -222,13 +225,19 @@ const NewsCard = ({
             >
                 {/* Image */}
                 <div className="relative h-52 overflow-hidden">
-                    <motion.img
-                        src={news.image}
-                        alt={news.title}
-                        className="w-full h-full object-cover"
+                    <motion.div
                         animate={{ scale: isHovered ? 1.07 : 1 }}
                         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                    />
+                        className="w-full h-full"
+                    >
+                        <OptimizedImage
+                            src={news.image}
+                            alt={news.title}
+                            width={1200}
+                            height={700}
+                            className="w-full h-full object-cover"
+                        />
+                    </motion.div>
 
                     {/* Gradient overlay */}
                     <div

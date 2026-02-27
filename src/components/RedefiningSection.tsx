@@ -1,3 +1,4 @@
+import OptimizedImage from './OptimizedImage';
 import { Shield, Zap, RefreshCw, Layers } from 'lucide-react';
 
 const RedefiningSection = () => {
@@ -63,7 +64,7 @@ const RedefiningSection = () => {
                         <div className="absolute -inset-4 bg-cyan-400/10 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition duration-700" />
 
                         <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-xl">
-                            <img
+                            <OptimizedImage
                                 src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070"
                                 alt="Technology Circuit Board"
                                 className="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"

@@ -1,8 +1,11 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, BookOpen, BarChart3, Layout, Newspaper, Lightbulb, Satellite, ArrowUpRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Logo from './Logo';
 
 interface SubLink {
@@ -66,7 +69,7 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
-    const location = useLocation();
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -78,9 +81,9 @@ const Navbar = () => {
         setIsOpen(false);
         setActiveDropdown(null);
         setMobileSubmenu(null);
-    }, [location]);
+    }, [pathname]);
 
-    const isActive = (path: string) => location.pathname === path;
+    const isActive = (path: string) => pathname === path;
 
     return (
         <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled ? 'px-3 md:px-6 py-2' : 'px-4 md:px-8 py-4'}`}>
@@ -94,7 +97,7 @@ const Navbar = () => {
                     }`}
             >
                 {/* Logo */}
-                <Link to="/" className="flex-shrink-0 relative z-10">
+                <Link href="/" className="flex-shrink-0 relative z-10">
                     <Logo />
                 </Link>
 
@@ -108,7 +111,7 @@ const Navbar = () => {
                             onMouseLeave={() => link.subLinks && setActiveDropdown(null)}
                         >
                             {/* Nav Link Button */}
-                            <Link to={link.path} className="no-underline">
+                            <Link href={link.path} className="no-underline">
                                 <div className={`flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13.5px] font-semibold tracking-wide transition-all duration-200 select-none ${isActive(link.path) || activeDropdown === link.name
                                     ? 'text-[#40D1FB] bg-[#40D1FB]/8'
                                     : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
@@ -177,7 +180,7 @@ const Navbar = () => {
                                                                 {content}
                                                             </a>
                                                         ) : (
-                                                            <Link key={sIdx} to={sub.path} className="no-underline block">
+                                                            <Link key={sIdx} href={sub.path} className="no-underline block">
                                                                 {content}
                                                             </Link>
                                                         );
@@ -186,7 +189,7 @@ const Navbar = () => {
 
                                                 {/* Dropdown Footer */}
                                                 <div className="px-4 py-2.5 border-t border-slate-50 bg-slate-50/50">
-                                                    <Link to={link.path} className="no-underline">
+                                                    <Link href={link.path} className="no-underline">
                                                         <p className="text-[11px] font-bold text-slate-400 hover:text-[#40D1FB] transition-colors flex items-center gap-1">
                                                             View all {link.name} <ArrowUpRight className="w-3 h-3" />
                                                         </p>
@@ -204,7 +207,7 @@ const Navbar = () => {
                 {/* Right Actions */}
                 <div className="flex items-center gap-3">
                     {/* Desktop CTA */}
-                    <Link to="/contact" className="hidden md:block no-underline">
+                    <Link href="/contact" className="hidden md:block no-underline">
                         <motion.button
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
@@ -263,7 +266,7 @@ const Navbar = () => {
                                         }
                                     >
                                         <Link
-                                            to={link.path}
+                                            href={link.path}
                                             className="no-underline flex-1"
                                             onClick={(e) => link.subLinks && e.preventDefault()}
                                         >
@@ -311,7 +314,7 @@ const Navbar = () => {
                                                                     {content}
                                                                 </a>
                                                             ) : (
-                                                                <Link key={sIdx} to={sub.path} onClick={() => setIsOpen(false)} className="no-underline block">
+                                                                <Link key={sIdx} href={sub.path} onClick={() => setIsOpen(false)} className="no-underline block">
                                                                     {content}
                                                                 </Link>
                                                             );
@@ -326,7 +329,7 @@ const Navbar = () => {
 
                             {/* Mobile CTA */}
                             <div className="mt-3 pt-3 border-t border-slate-100">
-                                <Link to="/contact" className="no-underline block" onClick={() => setIsOpen(false)}>
+                                <Link href="/contact" className="no-underline block" onClick={() => setIsOpen(false)}>
                                     <button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#40D1FB] to-[#0EA5E9] text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-[#40D1FB]/20 transition-all active:scale-95">
                                         <MessageSquare className="w-4 h-4" />
                                         <span>Contact Us</span>

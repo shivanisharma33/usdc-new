@@ -1,20 +1,19 @@
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import Logo from './Logo';
 
 const Footer = () => {
   return (
     <footer className="bg-slate-900 text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Company Info */}
           <div className="space-y-4">
-            <Link to="/" className="hover:opacity-80 transition-opacity flex items-center">
+            <Link href="/" className="hover:opacity-80 transition-opacity flex items-center">
               <Logo />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Powering the future of data with state-of-the-art data center infrastructure and solutions for the digital economy.
+              Powering the future of data with state-of-the-art data center infrastructure and
+              solutions for the digital economy.
             </p>
             <div className="flex gap-4 pt-4">
               <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#40D1FB] transition-colors">
@@ -29,20 +28,24 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="/" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Home</a></li>
-              <li><a href="/about-us" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">About Us</a></li>
-              <li><a href="/investors" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Investors</a></li>
+              <li>
+                <Link href="/" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Home</Link>
+              </li>
+              <li>
+                <Link href="/about-us" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">About Us</Link>
+              </li>
+              <li>
+                <Link href="/investors" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Investors</Link>
+              </li>
               <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Data Centers</a></li>
               <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Solutions</a></li>
               <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Blog</a></li>
             </ul>
           </div>
 
-          {/* Services */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Services</h4>
             <ul className="space-y-2">
@@ -54,7 +57,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Get in Touch</h4>
             <ul className="space-y-3">
@@ -69,8 +71,10 @@ const Footer = () => {
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin className="w-5 h-5 text-[#40D1FB] flex-shrink-0 mt-0.5" />
                 <span>
-                  USDC Headquarters<br />
-                  218 NW 24th St 2nd FL<br />
+                  USDC Headquarters
+                  <br />
+                  218 NW 24th St 2nd FL
+                  <br />
                   Miami, FL 33127
                 </span>
               </li>
@@ -78,15 +82,13 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="border-t border-slate-700 mb-8" />
 
-        {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
           <p>&copy; 2026 USDC. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <Link to="/privacy-policy" className="hover:text-[#40D1FB] transition-colors">Privacy Policy</Link>
-            <Link to="/terms-of-service" className="hover:text-[#40D1FB] transition-colors">Terms of Service</Link>
+            <Link href="/privacy-policy" className="hover:text-[#40D1FB] transition-colors">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="hover:text-[#40D1FB] transition-colors">Terms of Service</Link>
             <a href="#" className="hover:text-[#40D1FB] transition-colors">Cookie Policy</a>
           </div>
         </div>

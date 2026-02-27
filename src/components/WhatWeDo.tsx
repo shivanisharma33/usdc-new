@@ -1,3 +1,5 @@
+import OptimizedImage from './OptimizedImage';
+
 // Globe import removed as it was unused
 
 const WhatWeDo = () => {
@@ -43,7 +45,7 @@ const WhatWeDo = () => {
                     {/* Image Side */}
                     <div className="flex-1 w-full max-w-2xl relative">
                         <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl group">
-                            <img
+                            <OptimizedImage
                                 src="https://images.pexels.com/photos/1181341/pexels-photo-1181341.jpeg"
                                 alt="Data Center Facility"
                                 className="w-full h-full object-cover grayscale-[0.2] transition-transform duration-[2s] group-hover:scale-110"
