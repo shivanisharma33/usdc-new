@@ -337,7 +337,7 @@ const Investors = () => {
                     <div className="text-center space-y-4 mb-20">
                         <h2 className="text-5xl md:text-7xl font-black text-slate-900 uppercase tracking-tighter">Investor Resources</h2>
                         <p className="text-slate-500 font-medium max-w-2xl mx-auto">
-                            Explore comprehensive resources and stay informed about DigiPowerX&apos;s growth journey and operational metrics.
+                            Explore comprehensive resources and stay informed about DigiPowerX's growth journey and operational metrics.
                         </p>
                     </div>
 

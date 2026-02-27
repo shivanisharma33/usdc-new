@@ -126,7 +126,7 @@ const Management = () => {
                 <div className="max-w-4xl mx-auto px-6 space-y-12">
                     <p className="text-cyan-600 font-black tracking-[0.6em] uppercase text-xs">A unified dedication</p>
                     <h3 className="text-4xl md:text-5xl font-bold leading-tight text-slate-900">
-                        &ldquo;We don&apos;t just build buildings; we build the <span className="text-cyan-500">intelligence backbone</span> of the future.&rdquo;
+                        "We don't just build buildings; we build the <span className="text-cyan-500">intelligence backbone</span> of the future."
                     </h3>
                     <div className="flex justify-center pt-8">
                         <motion.button
@@ -146,17 +146,7 @@ const Management = () => {
 };
 
 // ─── Refined Leadership Card with smaller image area to reduce blur ───
-type LeadershipProps = {
-    index: number;
-    name: string;
-    role: string;
-    bio: string;
-    image: string;
-    linkedin?: string;
-    email?: string;
-};
-
-const LeadershipCard = ({ index, name, role, bio, image, linkedin, email }: LeadershipProps) => {
+const LeadershipCard = ({ index, name, role, bio, image, linkedin, email }: any) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}

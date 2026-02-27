@@ -71,10 +71,10 @@ const TermsOfService = () => {
                         <div className="space-y-12 text-slate-700 leading-relaxed font-medium">
                             <div>
                                 <p className="text-xl text-slate-900 font-bold mb-6">
-                                    Welcome to USDC.com (the &ldquo;Site&rdquo;). USDC, Inc. (&ldquo;USDC,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) provides this Site for informational purposes and access to certain services.
+                                    Welcome to USDC.com (the “Site”). USDC, Inc. (“USDC,” “we,” “our,” or “us”) provides this Site for informational purposes and access to certain services.
                                 </p>
                                 <p>
-                                    By using the Site, you (&ldquo;User,&rdquo; &ldquo;you,&rdquo; or &ldquo;your&rdquo;) agree to be bound by these Terms of Use (&ldquo;Terms&rdquo;). If you do not agree, you must not use the Site.
+                                    By using the Site, you (“User,” “you,” or “your”) agree to be bound by these Terms of Use (“Terms”). If you do not agree, you must not use the Site.
                                 </p>
                             </div>
 
@@ -89,7 +89,7 @@ const TermsOfService = () => {
                                 <ul className="list-disc pl-6 space-y-2 mb-6 text-slate-600">
                                     <li>Attempt to gain unauthorized access to the Site or related systems.</li>
                                     <li>Use the Site to transmit harmful code, spam, or malicious content.</li>
-                                    <li>Interfere with or disrupt the Site&apos;s operation or security.</li>
+                                    <li>Interfere with or disrupt the Site’s operation or security.</li>
                                 </ul>
                             </div>
 
@@ -102,7 +102,7 @@ const TermsOfService = () => {
                                 <div className="p-8 rounded-3xl border border-slate-100 bg-white shadow-sm hover:shadow-xl transition-shadow">
                                     <AlertCircle className="w-8 h-8 text-cyan-500 mb-4" />
                                     <h4 className="text-lg font-bold text-slate-950 mb-3">User Conduct</h4>
-                                    <p className="text-sm text-slate-500 leading-relaxed">Any misuse of our infrastructure or interference with other users&apos; access will result in immediate termination.</p>
+                                    <p className="text-sm text-slate-500 leading-relaxed">Any misuse of our infrastructure or interference with other users' access will result in immediate termination.</p>
                                 </div>
                             </div>
 
@@ -156,7 +156,7 @@ const TermsOfService = () => {
                                     Disclaimer of Warranties
                                 </h2>
                                 <p>
-                                    The Site and all content are provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without any warranties. USDC does not guarantee the Site will be uninterrupted, error-free, or secure.
+                                    The Site and all content are provided “as is” and “as available” without any warranties. USDC does not guarantee the Site will be uninterrupted, error-free, or secure.
                                 </p>
                             </div>
 

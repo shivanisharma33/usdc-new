@@ -229,17 +229,7 @@ const Insights = () => {
 };
 
 /* ── Simple News Card ── */
-type NewsCardProps = {
-    title: string;
-    description: string;
-    category: string;
-    date: string;
-    author: string;
-    image: string;
-    index: number;
-};
-
-const NewsCard = ({ title, description, category, date, author, image, index }: NewsCardProps) => {
+const NewsCard = ({ title, description, category, date, author, image, index }: any) => {
     return (
         <motion.div
             layout
