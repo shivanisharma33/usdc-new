@@ -18,7 +18,10 @@ const USDCSection = () => {
             <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider">ARMS 200 Platform</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">ARMS 200 — Rapid, Modular Data Center Pods</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">
+            <span className="text-[#00d3f2]">ARMS 200 -</span>
+            <span className="ml-2 text-slate-900">Rapid, Modular Data Center Pods</span>
+          </h2>
           <p className="mt-3 text-lg text-slate-600 max-w-xl">The ARMS 200 is a modular, containerized data center platform engineered for AI and HPC. Each ARMS 200 pod delivers dense GPU compute, fast site commissioning, and native renewable-energy integration for lower carbon intensity.</p>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">

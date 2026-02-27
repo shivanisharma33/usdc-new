@@ -92,7 +92,7 @@ const ContactUs = () => {
 
               {/* Phone */}
               <div className="group p-5 rounded-3xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex items-center gap-4">
-                <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-11 h-11 rounded-2xl bg-cyan-50 text-cyan-500 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
@@ -103,7 +103,7 @@ const ContactUs = () => {
 
               {/* Address */}
               <div className="group p-5 rounded-3xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex items-start gap-4">
-                <div className="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-500 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform mt-0.5">
+                <div className="w-11 h-11 rounded-2xl bg-cyan-50 text-cyan-500 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform mt-0.5">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>

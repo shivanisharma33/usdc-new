@@ -4,7 +4,7 @@ import OptimizedImage from './OptimizedImage';
 import { motion } from 'framer-motion';
 
 const Opportunity = () => {
-    const titleBlue = '#0b4a8a';
+    const titleBlue = '#00d3f2';
 
     return (
         <section className="relative py-24 bg-white">

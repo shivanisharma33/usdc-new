@@ -150,7 +150,7 @@ const Navbar = () => {
                                                             <div className="flex items-center justify-between gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-all duration-150 group/item cursor-pointer">
                                                                 <div className="flex items-center gap-3">
                                                                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center flex-shrink-0 group-hover/item:from-[#40D1FB]/10 group-hover/item:to-[#40D1FB]/5 transition-all duration-200">
-                                                                        <Icon className="w-4 h-4 text-slate-400 group-hover/item:text-[#40D1FB] transition-colors" />
+                                                                        <Icon className="w-4 h-4 text-[#40D1FB] transition-colors" />
                                                                     </div>
                                                                     <div>
                                                                         {sub.region && (
@@ -162,7 +162,7 @@ const Navbar = () => {
                                                                         )}
                                                                     </div>
                                                                 </div>
-                                                                <ArrowUpRight className="w-3.5 h-3.5 text-slate-300 group-hover/item:text-[#40D1FB] opacity-0 group-hover/item:opacity-100 transition-all duration-200 flex-shrink-0 group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5" />
+                                                                <ArrowUpRight className="w-3.5 h-3.5 text-[#40D1FB] opacity-0 group-hover/item:opacity-100 transition-all duration-200 flex-shrink-0 group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5" />
                                                             </div>
                                                         );
 
@@ -290,7 +290,7 @@ const Navbar = () => {
                                                             const content = (
                                                                 <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-all group/msub">
                                                                     <div className="w-7 h-7 rounded-lg bg-slate-50 group-hover/msub:bg-[#40D1FB]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                                                                        <Icon className="w-3.5 h-3.5 text-slate-400 group-hover/msub:text-[#40D1FB] transition-colors" />
+                                                                        <Icon className="w-3.5 h-3.5 text-[#40D1FB] transition-colors" />
                                                                     </div>
                                                                     <div>
                                                                         {sub.region && (
