@@ -22,7 +22,7 @@ const EmailAlerts = ({ isModal = false }: { isModal?: boolean }) => {
     };
 
     return (
-        <section className={`${isModal ? 'py-4' : 'py-32 bg-white min-h-[90vh] flex items-center'} relative overflow-hidden`}>
+        <section className={`${isModal ? 'py-4' : 'py-32 bg-white min-h-[90vh] flex items-center'} relative overflow-visible`}>
             {/* Background Aesthetic Layers */}
             {!isModal && (
                 <div className="absolute inset-0 pointer-events-none">
@@ -103,11 +103,45 @@ const EmailAlerts = ({ isModal = false }: { isModal?: boolean }) => {
                                     <div className="w-12 h-1.5 bg-cyan-500 rounded-full" />
                                 </div>
 
-                                <form className="space-y-8">
+                                <form className="space-y-8" onSubmit={async (e) => {
+                                    e.preventDefault();
+                                    const form = e.currentTarget as HTMLFormElement;
+                                    const fd = new FormData(form);
+                                    const payload = {
+                                        firstName: (fd.get('firstName') as string) || '',
+                                        lastName: (fd.get('lastName') as string) || '',
+                                        email: (fd.get('email') as string) || '',
+                                        company: (fd.get('company') as string) || '',
+                                        pressReleases: fd.get('pr') === 'on',
+                                        secFilings: fd.get('sec') === 'on',
+                                        stockDetailEndOfDay: fd.get('stock') === 'on'
+                                    };
+
+                                    try {
+                                        const res = await fetch('/api/email-alert', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify(payload)
+                                        });
+
+                                        if (!res.ok) {
+                                            console.error('Submission failed', await res.text());
+                                            alert('Submission failed. Please try again.');
+                                            return;
+                                        }
+
+                                        alert('Thank you — your subscription request was received.');
+                                        form.reset();
+                                    } catch (err) {
+                                        console.error(err);
+                                        alert('Network error. Please try again later.');
+                                    }
+                                }}>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
                                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">First Name</label>
                                             <input
+                                                name="firstName"
                                                 type="text"
                                                 placeholder="John"
                                                 className="w-full px-7 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-cyan-500/5 focus:border-cyan-500 focus:bg-white transition-all text-slate-900 font-bold placeholder:text-slate-300"
@@ -116,6 +150,7 @@ const EmailAlerts = ({ isModal = false }: { isModal?: boolean }) => {
                                         <div className="space-y-2">
                                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Last Name</label>
                                             <input
+                                                name="lastName"
                                                 type="text"
                                                 placeholder="Smith"
                                                 className="w-full px-7 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-cyan-500/5 focus:border-cyan-500 focus:bg-white transition-all text-slate-900 font-bold placeholder:text-slate-300"
@@ -124,6 +159,7 @@ const EmailAlerts = ({ isModal = false }: { isModal?: boolean }) => {
                                         <div className="space-y-2 md:col-span-2">
                                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Work Email <span className="text-cyan-500">*</span></label>
                                             <input
+                                                name="email"
                                                 type="email"
                                                 required
                                                 placeholder="name@company.com"
@@ -133,6 +169,7 @@ const EmailAlerts = ({ isModal = false }: { isModal?: boolean }) => {
                                         <div className="space-y-2 md:col-span-2">
                                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Organization</label>
                                             <input
+                                                name="company"
                                                 type="text"
                                                 placeholder="Investment Firm / Private"
                                                 className="w-full px-7 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-cyan-500/5 focus:border-cyan-500 focus:bg-white transition-all text-slate-900 font-bold placeholder:text-slate-300"
@@ -151,7 +188,7 @@ const EmailAlerts = ({ isModal = false }: { isModal?: boolean }) => {
                                             ].map((option) => (
                                                 <label key={option.id} className="flex items-center gap-4 cursor-pointer group/opt p-4 bg-slate-50/50 hover:bg-white rounded-2xl border border-transparent hover:border-cyan-500/20 transition-all">
                                                     <div className="relative">
-                                                        <input type="checkbox" className="peer sr-only" defaultChecked={option.id === 'pr'} />
+                                                        <input name={option.id === 'pr' ? 'pr' : option.id === 'sec' ? 'sec' : 'stock'} type="checkbox" className="peer sr-only" defaultChecked={option.id === 'pr'} />
                                                         <div className="w-5 h-5 border-2 border-slate-200 rounded-lg group-hover/opt:border-cyan-500 peer-checked:bg-cyan-500 peer-checked:border-cyan-500 transition-all flex items-center justify-center">
                                                             <div className="w-2 h-2 bg-white rounded-sm opacity-0 peer-checked:opacity-100 transition-opacity" />
                                                         </div>
