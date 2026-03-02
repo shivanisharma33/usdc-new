@@ -191,7 +191,7 @@ const JobDescription = ({ job }: JobDescriptionProps) => {
                 <Zap className="w-10 h-10 text-cyan-500 mb-6" />
                 <h3 className="text-lg font-black text-slate-900 uppercase mb-4 tracking-tight">Why It Matters</h3>
                 <p className="text-slate-600 text-sm leading-relaxed font-semibold italic">
-                  "{job.whyItMatters}"
+                  &quot;{job.whyItMatters}&quot;
                 </p>
               </motion.div>
             )}
