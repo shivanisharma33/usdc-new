@@ -13,11 +13,10 @@ import {
     ArrowUpRight,
     Activity,
     Lock,
-    X,
 } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 import StockChart from '../components/StockChart';
-import EmailAlerts from '../components/EmailAlerts';
+
 
 // Use an internal API route so Vercel-hosted site can access upstream HTTP endpoints
 const STOCK_API_URL = '/api/live-stock';

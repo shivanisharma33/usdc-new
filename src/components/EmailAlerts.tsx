@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { Mail, User, Building, ArrowRight, ShieldCheck, Zap, Activity, BarChart3, BellRing, FileJson } from 'lucide-react';
+import { ArrowRight, ShieldCheck, BarChart3, BellRing, FileJson } from 'lucide-react';
 import Link from 'next/link';
 
 const EmailAlerts = ({ isModal = false }: { isModal?: boolean }) => {
