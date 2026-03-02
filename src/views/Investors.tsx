@@ -13,8 +13,11 @@ import {
     ArrowUpRight,
     Activity,
     Lock,
+    X,
 } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
+import StockChart from '../components/StockChart';
+import EmailAlerts from '../components/EmailAlerts';
 
 // Use an internal API route so Vercel-hosted site can access upstream HTTP endpoints
 const STOCK_API_URL = '/api/live-stock';
@@ -215,115 +218,80 @@ const Investors = () => {
             {/* ── Real-World Stock Performance (DGXX) ── */}
             <section className="py-24 bg-slate-50 border-y border-slate-100">
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                        <div className="space-y-8">
-                            <div className="space-y-2">
-                                <span className="text-xs font-black text-cyan-500 uppercase tracking-[0.4em]">
-                                    NASDAQ: {stockData?.symbol ?? 'DGXX'}
-                                </span>
-                                <h2 className="text-5xl font-black text-slate-900 uppercase tracking-tighter">Stock Performance</h2>
-                            </div>
-                            <p className="text-slate-500 font-medium leading-relaxed">
-                                DigiPowerX Inc. (DGXX) operates at the intersection of energy and computing. Following our 2025 strategic pivot, we continue to deliver transparency and value through institutional-grade infrastructure deployments.
-                            </p>
+                    {/* Centered Text Content */}
+                    <div className="max-w-3xl mx-auto text-center space-y-8 mb-20">
+                        <div className="space-y-4">
+                            <span className="text-xs font-black text-cyan-500 uppercase tracking-[0.4em]">
+                                NASDAQ: {stockData?.symbol ?? 'DGXX'}
+                            </span>
+                            <h2 className="text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none">Stock Performance</h2>
+                        </div>
+                        <p className="text-slate-500 font-medium leading-relaxed text-lg">
+                            DigiPowerX Inc. (DGXX) operates at the intersection of energy and computing. Following our 2025 strategic pivot, we continue to deliver transparency and value through institutional-grade infrastructure deployments.
+                        </p>
 
-                            {/* Financial Data Grid */}
-                            <div className="grid grid-cols-2 gap-4 lg:gap-8 pt-4">
-                                <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all">
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Day High</p>
-                                    <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.high)}</p>
-                                </div>
-                                <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all">
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Day Low</p>
-                                    <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.low)}</p>
-                                </div>
-                                <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all">
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Open</p>
-                                    <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.open)}</p>
-                                </div>
-                                <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all">
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Previous Close</p>
-                                    <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.previousClose)}</p>
-                                </div>
+                        {/* Financial Data Grid - Centered */}
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                            <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all text-center">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Day High</p>
+                                <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.high)}</p>
+                            </div>
+                            <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all text-center">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Day Low</p>
+                                <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.low)}</p>
+                            </div>
+                            <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all text-center">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Open</p>
+                                <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.open)}</p>
+                            </div>
+                            <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all text-center">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Prev Close</p>
+                                <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.previousClose)}</p>
                             </div>
                         </div>
+                    </div>
 
-                        {/* Real Value Graph Card */}
-                        <div className="bg-slate-900 p-10 rounded-[3rem] shadow-2xl relative overflow-hidden group border border-white/5">
-                            <div className="absolute top-0 right-0 p-8 opacity-20 pointer-events-none">
-                                <Activity className="w-32 h-32 text-cyan-500" />
+                    {/* Full-Width Graph Card below centered text */}
+                    <div className="bg-sky-50 p-10 md:p-16 shadow-2xl relative overflow-hidden group border border-sky-100 w-full">
+
+
+                        <div className="flex flex-col md:flex-row justify-between items-center mb-16 relative z-10 gap-8">
+                            <div className="space-y-2 text-center md:text-left">
+                                <h4 className="text-6xl font-black text-slate-900 tracking-tighter">
+                                    {isStockLoading ? 'Loading…' : formatUsd(stockData?.price)}
+                                </h4>
+                                <span className={`text-sm font-bold flex items-center justify-center md:justify-start gap-1 ${isPositiveChange ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                    <TrendingUp className="w-4 h-4" /> {isStockLoading ? 'Updating live feed…' : changeLabel}
+                                </span>
                             </div>
-
-                            <div className="flex justify-between items-start mb-12 relative z-10">
-                                <div className="space-y-1">
-                                    <h4 className="text-4xl font-black text-white tracking-tighter">
-                                        {isStockLoading ? 'Loading…' : formatUsd(stockData?.price)}
-                                    </h4>
-                                    <span className={`text-xs font-bold flex items-center gap-1 ${isPositiveChange ? 'text-emerald-400' : 'text-rose-400'}`}>
-                                        <TrendingUp className="w-3.5 h-3.5" /> {isStockLoading ? 'Updating live feed…' : changeLabel}
-                                    </span>
-                                </div>
-                                <div className="flex bg-white/5 p-1 rounded-xl border border-white/10">
-                                    {['1M', '3M', '6M', '1Y', '5Y'].map(t => (
-                                        <button key={t} className={`px-4 py-1.5 text-[9px] font-black rounded-lg transition-all ${t === '1Y' ? 'bg-cyan-500 text-slate-950' : 'text-slate-400 hover:text-white'}`}>
-                                            {t}
-                                        </button>
-                                    ))}
-                                </div>
+                            <div className="flex bg-slate-900/5 p-1.5 rounded-2xl border border-slate-900/10 backdrop-blur-sm">
+                                {['1M', '3M', '6M'].map(t => (
+                                    <button key={t} className={`px-6 py-2.5 text-[10px] font-black rounded-xl transition-all ${t === '6M' ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/30' : 'text-slate-400 hover:text-slate-900'}`}>
+                                        {t}
+                                    </button>
+                                ))}
                             </div>
-                            {stockError && (
-                                <p className="text-[10px] font-black text-rose-400 uppercase tracking-widest mb-6 relative z-10">
-                                    Live API unavailable ({stockError})
-                                </p>
-                            )}
+                        </div>
+                        {stockError && (
+                            <p className="text-[12px] font-black text-rose-500 uppercase tracking-widest mb-10 text-center relative z-10">
+                                Live API unavailable ({stockError})
+                            </p>
+                        )}
 
-                            {/* Realistic SVG Ticker Path */}
-                            <div className="h-64 w-full relative mb-4">
-                                <svg viewBox="0 0 400 150" className="w-full h-full overflow-visible drop-shadow-[0_0_15px_rgba(64,209,251,0.3)]">
-                                    <defs>
-                                        <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="0%" stopColor="#40D1FB" stopOpacity="0.4" />
-                                            <stop offset="100%" stopColor="#40D1FB" stopOpacity="0" />
-                                        </linearGradient>
-                                    </defs>
-                                    <motion.path
-                                        initial={{ pathLength: 0 }}
-                                        animate={{ pathLength: 1 }}
-                                        transition={{ duration: 2.5, ease: "easeInOut" }}
-                                        d="M0,135 L40,130 L80,140 L120,110 L160,120 L200,80 L240,90 L280,40 L320,60 L360,30 L400,45"
-                                        fill="none"
-                                        stroke="#40D1FB"
-                                        strokeWidth="4"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <motion.path
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ delay: 1, duration: 1.5 }}
-                                        d="M0,135 L40,130 L80,140 L120,110 L160,120 L200,80 L240,90 L280,40 L320,60 L360,30 L400,45 V150 H0 Z"
-                                        fill="url(#chartGradient)"
-                                    />
+                        {/* Enhanced Stock Chart Component - making it larger for full viewport feel */}
+                        <div className="h-[400px] w-full relative mb-12">
+                            <StockChart
+                                currentPrice={stockData?.price ?? 2.77}
+                                changePercent={stockData?.changePercent ?? 0}
+                            />
+                        </div>
 
-                                    {/* HUD Grid Lines */}
-                                    <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
-                                    <line x1="0" y1="70" x2="400" y2="70" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
-                                    <line x1="0" y1="120" x2="400" y2="120" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
-                                </svg>
-
-                                {/* Hover Interaction Indicator */}
-                                <motion.div
-                                    animate={{ x: [380, 400, 380], opacity: [0.5, 1, 0.5] }}
-                                    transition={{ duration: 3, repeat: Infinity }}
-                                    className="absolute right-0 top-[45px] -translate-y-1/2 flex items-center gap-2"
-                                >
-                                    <div className="w-3 h-3 rounded-full bg-cyan-500 shadow-[0_0_10px_#40D1FB]" />
-                                    <div className="bg-cyan-500/10 backdrop-blur-md px-2 py-1 rounded text-[8px] font-black text-cyan-400 border border-cyan-500/20">LIVE</div>
-                                </motion.div>
-                            </div>
-
-                            <div className="flex justify-between items-center text-[9px] font-black text-slate-500 uppercase tracking-widest mt-8 border-t border-white/5 pt-6">
+                        <div className="flex flex-wrap justify-center md:justify-between items-center gap-6 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-12 border-t border-slate-200 pt-10">
+                            <div className="flex gap-12">
                                 <span>Vol: {formatVolume(stockData?.volume)}</span>
+                                <span>MCAP: $148.2M</span>
+                            </div>
+                            <div className="flex gap-12">
                                 <span>Source: {stockData?.source ? stockData.source.replace(/_/g, ' ').toUpperCase() : '--'}</span>
                                 <span>Updated: {formatLastUpdated(stockData?.lastUpdated)}</span>
                             </div>
@@ -331,6 +299,33 @@ const Investors = () => {
                     </div>
                 </div>
             </section>
+
+            {/* ── Email Alert CTA Card ── */}
+            <section className="py-24 bg-white relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="bg-sky-50 p-12 md:p-16 rounded-[3rem] shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12 border border-sky-100 group">
+                        {/* Decorative background circle */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 group-hover:bg-sky-500/10 transition-colors duration-700" />
+
+                        <div className="space-y-4 max-w-2xl text-center md:text-left relative z-10">
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter leading-none">
+                                Sign up for <span className="text-sky-500">Email Alerts</span>
+                            </h2>
+                            <p className="text-slate-500 font-medium text-lg leading-relaxed">
+                                Receive updates in real-time about company activities and stay up to date with business developments.
+                            </p>
+                        </div>
+
+                        <Link
+                            href="/email-alerts"
+                            className="px-12 py-6 bg-slate-900 text-white font-black uppercase tracking-[0.3em] text-xs hover:bg-sky-500 hover:shadow-2xl hover:shadow-sky-500/40 transition-all rounded-2xl md:rounded-[2rem] active:scale-95 relative z-10 flex items-center gap-4 group text-center"
+                        >
+                            Sign Up <div className="w-8 h-[1px] bg-white/30 group-hover:w-12 transition-all" />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
 
             {/* ── Resources Grid (Same as DigiPowerX) ── */}
             <section className="py-32 bg-white">

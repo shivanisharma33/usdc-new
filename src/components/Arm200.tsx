@@ -85,7 +85,7 @@ const Arm200 = () => {
                                 <OptimizedImage
                                     src="/arms.webp"
                                     alt="ARMS 200 System"
-                                    className="w-full h-auto rounded-[2.5rem] shadow-2xl"
+                                    className="w-full h-auto shadow-2xl"
                                 />
                             </div>
 

@@ -20,7 +20,7 @@ const WhatWeDo = () => {
                                 <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Our Mission</span>
                             </div>
                             <h2 className="text-5xl lg:text-7xl font-bold leading-tight" style={{ color: brandNavy }}>
-                                What We <span className="text-gray-400">Do</span>
+                                What We <span style={{ color: '#00d3f2' }}>Do</span>
                             </h2>
                         </div>
 
@@ -67,7 +67,7 @@ const WhatWeDo = () => {
 
                         {/* Geometric Accents */}
 
-                        <div className="absolute -top-6 -left-6 w-32 h-32 bg-blue-100 rounded-full mix-blend-multiply opacity-70 animate-blob animation-delay-2000" />
+
                     </div>
 
                 </div>
