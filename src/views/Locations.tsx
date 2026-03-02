@@ -49,7 +49,7 @@ const Locations = () => {
             capacity: "19MW",
             tier: "Tier III Compliant",
             type: "Sustainable HPC",
-            image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=2070",
+            image: "/Buffalo.jpg.jpeg",
             coords: { x: 82, y: 35 },
             description: "Strategically located to leverage regional power assets and direct sustainable energy integration."
         },
@@ -61,7 +61,7 @@ const Locations = () => {
             capacity: "Active Site",
             tier: "Tier III Standard",
             type: "Enterprise Data Hub",
-            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070",
+            image: "/Tonawanda.png",
             coords: { x: 80, y: 33 },
             description: "High-density facility optimized for cryptocurrency mining transitioning to GPU cloud compute."
         },
@@ -73,7 +73,7 @@ const Locations = () => {
             capacity: "ARMS 200 Ready",
             tier: "Tier III Certified",
             type: "GPU Integration Site",
-            image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=2070",
+            image: "/Alabama.png",
             coords: { x: 70, y: 75 },
             description: "Our flagship ARMS 200 deployment site, specializing in high-density GPU clustering for AI workloads."
         },
@@ -85,7 +85,7 @@ const Locations = () => {
             capacity: "Upcoming",
             tier: "Tier III Designed",
             type: "Expansion Facility",
-            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
+            image: "/north.png",
             coords: { x: 78, y: 60 },
             description: "Next-generation data center campus planned to support the growing demand for cloud infrastructure in the Southeast."
         }

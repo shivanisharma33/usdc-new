@@ -151,11 +151,11 @@ const Careers = () => {
           <div className="relative order-1 lg:order-2">
             <div className="relative aspect-[4/5] overflow-hidden bg-slate-200">
               <OptimizedImage
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2070"
-                alt="Collaborative culture"
-                className="h-full w-full object-cover grayscale"
+                src="/careers-team.png"
+                alt="USDC Team ARMS 200"
+                className="h-full w-full object-cover grayscale-0"
               />
-              <div className="absolute inset-0 bg-cyan-500/10 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-cyan-500/5 mix-blend-multiply" />
               <div className="group absolute bottom-0 left-0 z-10 cursor-default p-8 text-white">
                 <p className="text-[8rem] leading-none font-black opacity-20">2k25</p>
                 <p className="mt-[-2rem] text-xs font-black tracking-[0.5em] uppercase">Architecting Growth</p>
