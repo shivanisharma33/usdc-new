@@ -197,40 +197,100 @@ const Investors = () => {
                 <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
             </section>
 
+            {/* ── Stock Information Card Section ── */}
+            <section className="py-32 bg-white relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <h2 className="text-5xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">Stock Information</h2>
+                        <p className="text-slate-500 font-medium text-lg max-w-2xl mx-auto">Track USDC's real-time stock performance and key financial metrics</p>
+                    </div>
+
+                    {/* Stock Info Card */}
+                    <div className="max-w-2xl mx-auto">
+                        <div className="bg-white border border-slate-200 rounded-3xl p-8 md:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.08)]">
+                            {/* Header with Symbol and Timestamp */}
+                            <div className="flex items-start justify-between mb-8 pb-8 border-b border-slate-100">
+                                <div>
+                                    <h3 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-2">Nasdaq</h3>
+                                    <p className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">{stockData?.symbol ?? 'DGXX'}</p>
+                                </div>
+                                <p className="text-xs md:text-sm font-bold text-slate-400 text-right">{formatLastUpdated(stockData?.lastUpdated)}</p>
+                            </div>
+
+                            {/* Price Section */}
+                            <div className="mb-8">
+                                <p className="text-6xl md:text-7xl font-black text-slate-900 tracking-tighter mb-4">
+                                    {isStockLoading ? '--' : formatUsd(stockData?.price)}
+                                </p>
+                                <div className="flex items-center gap-3">
+                                    <div className={`px-4 py-2 rounded-full text-sm font-black tracking-wide flex items-center gap-2 ${isPositiveChange ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                                        <span className={`w-2 h-2 rounded-full ${isPositiveChange ? 'bg-emerald-500' : 'bg-rose-500'}`}></span>
+                                        {isStockLoading ? 'Loading...' : `${changePrefix}${stockData?.change.toFixed(2)} (${changePrefix}${stockData?.changePercent.toFixed(2)}%)`}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Key Metrics Grid */}
+                            <div className="grid grid-cols-2 gap-6 pt-8 border-t border-slate-100">
+                                <div className="space-y-2">
+                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Change</p>
+                                    <p className={`text-2xl font-black ${isPositiveChange ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                        {isStockLoading ? '--' : `${changePrefix}${stockData?.change.toFixed(2)}`}
+                                    </p>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Change %</p>
+                                    <p className={`text-2xl font-black ${isPositiveChange ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                        {isStockLoading ? '--' : `${changePrefix}${stockData?.changePercent.toFixed(2)}%`}
+                                    </p>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Volume</p>
+                                    <p className="text-2xl font-black text-slate-900">
+                                        {isStockLoading ? '--' : `${(Number(stockData?.volume) / 1000000).toFixed(3)}M`}
+                                    </p>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Open</p>
+                                    <p className="text-2xl font-black text-slate-900">
+                                        {isStockLoading ? '--' : formatUsd(stockData?.open)}
+                                    </p>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Today's High</p>
+                                    <p className="text-2xl font-black text-slate-900">
+                                        {isStockLoading ? '--' : formatUsd(stockData?.high)}
+                                    </p>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Today's Low</p>
+                                    <p className="text-2xl font-black text-slate-900">
+                                        {isStockLoading ? '--' : formatUsd(stockData?.low)}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Source and Status */}
+                            {stockError && (
+                                <div className="mt-6 pt-6 border-t border-slate-100 text-center">
+                                    <p className="text-xs font-bold text-rose-600 uppercase tracking-widest">
+                                        Live API unavailable ({stockError})
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ── Real-World Stock Performance (DGXX) ── */}
             <section className="py-24 bg-slate-50 border-y border-slate-100">
                 <div className="max-w-7xl mx-auto px-6">
-                    {/* Centered Text Content */}
-                    <div className="max-w-3xl mx-auto text-center space-y-8 mb-20">
-                        <div className="space-y-4">
-                            <span className="text-xs font-black text-cyan-500 uppercase tracking-[0.4em]">
-                                NASDAQ: {stockData?.symbol ?? 'DGXX'}
-                            </span>
-                            <h2 className="text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none">Stock Performance</h2>
-                        </div>
-                        <p className="text-slate-500 font-medium leading-relaxed text-lg">
-                            DigiPowerX Inc. (DGXX) operates at the intersection of energy and computing. Following our 2025 strategic pivot, we continue to deliver transparency and value through institutional-grade infrastructure deployments.
-                        </p>
-
-                        {/* Financial Data Grid - Centered */}
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                            <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all text-center">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Day High</p>
-                                <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.high)}</p>
-                            </div>
-                            <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all text-center">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Day Low</p>
-                                <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.low)}</p>
-                            </div>
-                            <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all text-center">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Open</p>
-                                <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.open)}</p>
-                            </div>
-                            <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl group hover:border-cyan-500/30 transition-all text-center">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Prev Close</p>
-                                <p className="text-2xl font-black text-slate-900">{formatUsd(stockData?.previousClose)}</p>
-                            </div>
-                        </div>
+                    {/* Stock Performance Heading */}
+                    <div className="text-center mb-16">
+                        <h2 className="text-5xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">
+                            Stock <span className="text-cyan-600">Performance</span>
+                        </h2>
                     </div>
 
                     {/* Full-Width Graph Card below centered text */}
@@ -390,47 +450,7 @@ const Investors = () => {
             </section>
 
             {/* ── Corporate Identity ── */}
-            <section className="py-32 bg-white">
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-                    <div className="space-y-10">
-                        <div className="space-y-6">
-                            <h3 className="text-5xl font-black text-slate-900 leading-none uppercase tracking-tighter">INVESTOR <span className="text-cyan-500">CONTACT</span></h3>
-                            <p className="text-slate-500 font-medium text-lg leading-relaxed max-w-md">
-                                DigiPowerX is an innovative energy infrastructure company that develops cutting-edge data centers to drive the expansion of sustainable energy assets.
-                            </p>
-                        </div>
-
-                        <div className="space-y-8">
-                            <div className="group cursor-pointer">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Investor Relations</p>
-                                <a href="mailto:ir@digipowerx.com" className="text-2xl font-black text-slate-900 group-hover:text-cyan-500 transition-colors lowercase flex items-center gap-3">
-                                    ir@digipowerx.com <ArrowUpRight className="w-5 h-5 text-cyan-500" />
-                                </a>
-                            </div>
-                            <div className="group cursor-pointer">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Shareholder Services</p>
-                                <p className="text-2xl font-black text-slate-900">1-800-USDC-IRX</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="relative">
-                        <div className="aspect-video bg-slate-900 rounded-[2rem] overflow-hidden group shadow-2xl relative">
-                            <OptimizedImage
-                                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070"
-                                alt="Global headquarters facility"
-                                width={1600}
-                                height={900}
-                                className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <span className="px-6 py-3 bg-white/10 backdrop-blur-xl border border-white/20 text-white font-black uppercase text-[10px] tracking-widest">Global Headquarters</span>
-                            </div>
-                        </div>
-                        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-cyan-500 -z-10 rounded-full blur-3xl opacity-20" />
-                    </div>
-                </div>
-            </section>
+       
 
             <ContactUs />
         </div>

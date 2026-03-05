@@ -44,11 +44,13 @@ const WhatWeDo = () => {
 
                     {/* Image Side */}
                     <div className="flex-1 w-full max-w-2xl relative">
-                        <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl group">
+                        <div className="relative w-full h-auto overflow-hidden rounded-[2rem] shadow-2xl group">
                             <OptimizedImage
-                                src="https://images.pexels.com/photos/1181341/pexels-photo-1181341.jpeg"
+                                src="/image%20(11).jpg"
                                 alt="Data Center Facility"
-                                className="w-full h-full object-cover grayscale-[0.2] transition-transform duration-[2s] group-hover:scale-110"
+                                width={1200}
+                                height={1500}
+                                className="w-full h-auto object-contain grayscale-[0.2] transition-transform duration-[2s] group-hover:scale-105"
                             />
 
 
