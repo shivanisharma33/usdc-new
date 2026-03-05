@@ -1,15 +1,16 @@
 'use client';
 
 import OptimizedImage from '../components/OptimizedImage';
+import InteractiveMap from '../components/InteractiveMap';
 import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { Globe, Zap, ArrowUpRight, Activity, ShieldCheck, Box, Server, Lock } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const Locations = () => {
     const pathname = usePathname();
-    const [activeLocation, setActiveLocation] = useState<string | null>(null);
+    const [, setActiveLocation] = useState<string | null>(null);
 
     // Scroll to section based on hash
     useEffect(() => {
@@ -51,6 +52,8 @@ const Locations = () => {
             type: "Sustainable HPC",
             image: "/Buffalo.jpg.jpeg",
             coords: { x: 82, y: 35 },
+            lat: 42.9019,
+            lng: -78.7957,
             description: "Strategically located to leverage regional power assets and direct sustainable energy integration."
         },
         {
@@ -63,6 +66,8 @@ const Locations = () => {
             type: "Enterprise Data Hub",
             image: "/Tonawanda.png",
             coords: { x: 80, y: 33 },
+            lat: 43.0247,
+            lng: -78.8674,
             description: "High-density facility optimized for cryptocurrency mining transitioning to GPU cloud compute."
         },
         {
@@ -75,6 +80,8 @@ const Locations = () => {
             type: "GPU Integration Site",
             image: "/Alabama.png",
             coords: { x: 70, y: 75 },
+            lat: 33.8739,
+            lng: -85.1539,
             description: "Our flagship ARMS 200 deployment site, specializing in high-density GPU clustering for AI workloads."
         },
         {
@@ -86,6 +93,8 @@ const Locations = () => {
             tier: "Tier III Designed",
             type: "Expansion Facility",
             image: "/north.png",
+            lat: 35.5731,
+            lng: -81.3151,
             coords: { x: 78, y: 60 },
             description: "Next-generation data center campus planned to support the growing demand for cloud infrastructure in the Southeast."
         }
@@ -152,84 +161,18 @@ const Locations = () => {
                         </p>
                     </div>
 
-                    <div className="relative aspect-[16/9] w-full bg-white rounded-[4rem] border border-slate-200 shadow-[0_60px_120px_rgba(0,0,0,0.08)] overflow-hidden group">
-                        {/* THE REAL MAP IMAGE */}
-                        <OptimizedImage
-                            src="/world-map.png"
-                            alt="USDC Global Footprint"
-                            className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-[2s] group-hover:scale-[1.05]"
+                    <div className="relative w-full">
+                        <InteractiveMap 
+                            locations={locations.map(loc => ({
+                                id: loc.id,
+                                city: loc.city,
+                                lat: loc.lat,
+                                lng: loc.lng,
+                                status: loc.status,
+                                capacity: loc.capacity
+                            }))}
+                            onLocationSelect={(locationId) => setActiveLocation(locationId)}
                         />
-
-                        {/* Technical Overlay */}
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[length:50px_50px] opacity-40 pointer-events-none" />
-
-                        {/* HUD Elements */}
-                        <div className="absolute top-12 left-12 z-30 flex gap-12 bg-white/80 backdrop-blur-2xl p-6 border border-slate-200/50 rounded-2xl shadow-xl">
-                            <div className="space-y-1">
-                                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Operating Zones</p>
-                                <p className="text-xl font-black text-slate-900 uppercase">05 Regionals</p>
-                            </div>
-                            <div className="space-y-1 border-l border-slate-200 pl-8">
-                                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Network Speed</p>
-                                <p className="text-xl font-black text-cyan-600 uppercase tracking-tighter">TBPS / SEC</p>
-                            </div>
-                        </div>
-
-                        {/* DATA HUB PINS */}
-                        <div className="absolute inset-0 z-30">
-                            {/* LONDONTECH HUB Pin (Pinned as per user reference image) */}
-                            <motion.div
-                                style={{ left: `48.5%`, top: `35%` }}
-                                className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
-                                onMouseEnter={() => setActiveLocation('strategic-hub')}
-                                onMouseLeave={() => setActiveLocation(null)}
-                            >
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <motion.div
-                                        animate={{ scale: [1, 4], opacity: [0.6, 0] }}
-                                        transition={{ duration: 2.5, repeat: Infinity }}
-                                        className="absolute w-12 h-12 rounded-full bg-rose-500/30"
-                                    />
-                                </div>
-                                <div className="relative w-6 h-6 rounded-full border-[3px] border-white shadow-2xl bg-rose-600 transition-all duration-300 group-hover:scale-150">
-                                    <div className="absolute inset-1 rounded-full bg-white opacity-80 animate-pulse" />
-                                </div>
-                                <AnimatePresence>
-                                    {(activeLocation === 'strategic-hub') && (
-                                        <motion.div
-                                            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                                            animate={{ opacity: 1, scale: 1, y: -90 }}
-                                            exit={{ opacity: 0, scale: 0.9, y: 10 }}
-                                            className="absolute left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-2xl border border-slate-200 p-6 rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.15)] pointer-events-none z-50 min-w-[280px]"
-                                        >
-                                            <div className="flex items-center gap-3 mb-3">
-                                                <div className="w-2.5 h-2.5 rounded-full bg-rose-600 shadow-[0_0_100px_rgba(225,29,72,0.8)]" />
-                                                <p className="text-[10px] font-black text-rose-500 uppercase tracking-widest">European Strategic Hub</p>
-                                            </div>
-                                            <h5 className="text-2xl font-black text-slate-900 uppercase tracking-tighter mb-1 leading-none">London Unit 01</h5>
-                                            <p className="text-[10px] font-bold text-slate-400 mb-5 uppercase tracking-widest">United Kingdom Operation</p>
-                                            <div className="bg-slate-50 p-3 rounded-2xl border border-slate-100/50 flex justify-between items-center text-[10px] font-black text-slate-900 uppercase">
-                                                <span>TIER III+</span>
-                                                <span className="text-slate-200">|</span>
-                                                <span className="text-cyan-600 tracking-widest leading-none">Status: Active</span>
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
-
-                            {/* North American Operations Group */}
-                            <motion.div
-                                style={{ left: `20%`, top: `38%` }}
-                                className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
-                            >
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <motion.div animate={{ scale: [1, 2.5], opacity: [0.3, 0] }} transition={{ duration: 3.5, repeat: Infinity }} className="absolute w-20 h-20 rounded-full bg-cyan-500/20" />
-                                </div>
-                                <div className="relative w-6 h-6 rounded-full border-[3px] border-white shadow-xl bg-cyan-600" />
-                                <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.2em] whitespace-nowrap shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity">US Data Corridor</div>
-                            </motion.div>
-                        </div>
                     </div>
                 </div>
             </section>

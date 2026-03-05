@@ -190,23 +190,6 @@ const Investors = () => {
                         <h1 className="text-7xl md:text-[12rem] font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase select-none">
                             VALUE <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-black">PORTAL.</span>
                         </h1>
-
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-12 mt-20 scale-105">
-                            <div className="text-center group cursor-pointer">
-                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.3em] mb-1">Market Cap</p>
-                                <p className="text-5xl font-black text-white leading-none">$4.2B</p>
-                            </div>
-                            <div className="w-px h-12 bg-white/10 hidden md:block" />
-                            <div className="text-center group cursor-pointer">
-                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.3em] mb-1">Growth Index</p>
-                                <p className="text-5xl font-black text-white leading-none">+28%</p>
-                            </div>
-                            <div className="w-px h-12 bg-white/10 hidden md:block" />
-                            <div className="text-center group cursor-pointer">
-                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.3em] mb-1">Energy Yield</p>
-                                <p className="text-5xl font-black text-white leading-none">250MW</p>
-                            </div>
-                        </div>
                     </motion.div>
                 </div>
 

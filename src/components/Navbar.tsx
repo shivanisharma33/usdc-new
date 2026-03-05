@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, BookOpen, BarChart3, Layout, Newspaper, Lightbulb, Satellite, ArrowUpRight } from 'lucide-react';
+import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, BookOpen, BarChart3, Layout, Newspaper, Lightbulb, Satellite, ArrowUpRight, Zap } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -44,11 +44,6 @@ const navLinks: NavLink[] = [
     {
         name: 'News & insight',
         path: '/insights',
-        subLinks: [
-            { name: 'Latest News', path: '/insights', icon: Newspaper, desc: 'Press & updates' },
-            { name: 'Press Release', path: '/press-release', icon: Newspaper, desc: 'Official announcements' },
-            { name: 'Insights', path: '/insights', icon: Lightbulb, desc: 'Industry intelligence' },
-        ]
     },
     { name: 'Management Team', path: '/management' },
     { name: 'Location', path: '/locations' },
@@ -198,6 +193,19 @@ const Navbar = () => {
                 {/* Right Actions */}
                 <div className="flex items-center gap-3">
                     {/* Desktop CTA */}
+                    {/* DigiPowerX External Link */}
+                    <a href="https://www.digipowerx.com/" target="_blank" rel="noopener noreferrer" className="hidden md:block no-underline">
+                        <motion.button
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-xl font-bold text-[13px] tracking-wide shadow-lg shadow-slate-900/10 hover:shadow-cyan-500/20 transition-all duration-300 border border-slate-800 hover:border-cyan-500/50"
+                        >
+                            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+                            <span>DigiPowerX</span>
+                        </motion.button>
+                    </a>
+
+                    {/* Desktop CTA */}
                     <Link href="/contact" className="hidden md:block no-underline">
                         <motion.button
                             whileHover={{ scale: 1.03 }}
@@ -319,7 +327,13 @@ const Navbar = () => {
                             ))}
 
                             {/* Mobile CTA */}
-                            <div className="mt-3 pt-3 border-t border-slate-100">
+                            <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
+                                <a href="https://www.digipowerx.com/" target="_blank" rel="noopener noreferrer" className="no-underline block" onClick={() => setIsOpen(false)}>
+                                    <button className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-slate-900/10 transition-all active:scale-95 border border-slate-800">
+                                        <Zap className="w-4 h-4 text-cyan-400" />
+                                        <span>DigiPowerX</span>
+                                    </button>
+                                </a>
                                 <Link href="/contact" className="no-underline block" onClick={() => setIsOpen(false)}>
                                     <button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#40D1FB] to-[#0EA5E9] text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-[#40D1FB]/20 transition-all active:scale-95">
                                         <MessageSquare className="w-4 h-4" />

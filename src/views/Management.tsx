@@ -3,7 +3,7 @@
 import OptimizedImage from '../components/OptimizedImage';
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Linkedin, Mail, ArrowUpRight, ChevronDown, Globe, Award, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Globe, Award, ShieldCheck, Zap } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const Management = () => {
@@ -18,6 +18,14 @@ const Management = () => {
 
     const team = [
         {
+            name: "Michel Amar",
+            role: "Chief Executive Officer ",
+            bio: "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance. In 2019, Michel partnered with Brookstone, a novelty retailer, in developing exclusive, technologically advanced products for their consumer electronics market.",
+            image: "/michal.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Michel%20Amar%20DigiPowerX",
+            email: "michel@digipowerx.com"
+        },
+        {
             name: "Alec Amar",
             role: "President",
             bio: "Mr. Amar is an entrepreneur and infrastructure executive with deep experience in energy, high-density data-center development, and advanced digital infrastructure. Under Mr. Amar's leadership, DigiPowerX has expanded into multiple U.S. markets with a growing portfolio of high-power data-center properties, including the development of a Tier III campus in Columbiana, Alabama; the modernization and repurposing of critical-power infrastructure in New York; and a national pipeline tied to power-station redevelopment, modular AI-ready facilities, and long-term energy-backed compute sites. Mr. Amar guided the creation of DigiPowerX's proprietary ARMS 200 modular Tier III data-center system, engineered specifically for ultra-dense GPU clusters such as Nvidia B200/B300 deployments.",
@@ -26,12 +34,68 @@ const Management = () => {
             email: "alec@digipowerx.com"
         },
         {
-            name: "Michel Amar",
-            role: "Chief Executive Officer & Chairman",
-            bio: "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance. In 2019, Michel partnered with Brookstone, a novelty retailer, in developing exclusive, technologically advanced products for their consumer electronics market.",
-            image: "/michal.webp",
-            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Michel%20Amar%20DigiPowerX",
-            email: "michel@digipowerx.com"
+            name: "Jagan Jeyapal",
+            role: "Chief Technology Officer",
+            bio: "Jagan Jeyapal brings deep technical expertise to DigiPowerX's infrastructure and innovation initiatives. As CTO, he drives the technological vision for AI-ready data centers and ensures the company stays at the forefront of high-performance computing infrastructure.",
+            image: "/cto.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Jagan%20Jeyapal%20DigiPowerX",
+            email: "jagan@digipowerx.com"
+        },
+        {
+            name: "Paul Ciullo",
+            role: "Chief Financial Officer",
+            bio: "Paul Ciullo oversees DigiPowerX's financial strategy and capital management. With extensive expertise in financial analysis and strategic planning, Paul ensures disciplined capital allocation and sustainable growth.",
+            image: "/Paul.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Paul%20Ciullo%20DigiPowerX",
+            email: "paul@digipowerx.com"
+        },
+        {
+            name: "Daniel Rotunno",
+            role: "VP of Operations",
+            bio: "Daniel Rotunno leads DigiPowerX's operational execution and infrastructure development. His expertise in operations management ensures the company's facilities meet the highest standards of Tier III performance.",
+            image: "/danial.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Daniel%20Rotunno%20DigiPowerX",
+            email: "daniel@digipowerx.com"
+        },
+        {
+            name: "Luke Marchiori",
+            role: "Chief Renewable Energy Officer",
+            bio: "Luke Marchiori drives DigiPowerX's commitment to sustainable energy solutions. As CREO, he spearheads the integration of renewable energy with the company's data center portfolio, advancing the mission of clean power infrastructure.",
+            image: "/luke.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Luke%20Marchiori%20DigiPowerX",
+            email: "luke@digipowerx.com"
+        },
+        {
+            name: "Eddie Cloud",
+            role: "Infrastructure and Development Lead",
+            bio: "Eddie Cloud oversees the development and deployment of DigiPowerX's infrastructure projects. His focus on execution and innovation ensures timely delivery of world-class data center facilities.",
+            image: "/eddie.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Eddie%20Cloud%20DigiPowerX",
+            email: "eddie@digipowerx.com"
+        },
+        {
+            name: "David Harley",
+            role: "Director of Manufacturing, Operations & Systems Integration",
+            bio: "David Harley brings extensive expertise in manufacturing and systems integration. He ensures DigiPowerX's facilities are built to the highest standards with seamless operational integration.",
+            image: "/david.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=David%20Harley%20DigiPowerX",
+            email: "david@digipowerx.com"
+        },
+        {
+            name: "Jim McCabe",
+            role: "Advisor",
+            bio: "Jim McCabe provides strategic advisory support to DigiPowerX leadership. His extensive industry experience and network contribute valuable insights to the company's strategic initiatives.",
+            image: "https://www.lasolascapital.com/wp-content/uploads/2021/01/jim.jpg",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Jim%20McCabe%20DigiPowerX",
+            email: "jim@digipowerx.com"
+        },
+        {
+            name: "Hans Vestberg",
+            role: "Senior Advisor",
+            bio: "Hans Vestberg brings world-class strategic leadership to DigiPowerX. His experience in scaling technology infrastructure companies provides invaluable guidance as DigiPowerX expands its national footprint.",
+            image: "/hans.webp",
+            linkedin: "https://www.linkedin.com/search/results/all/?keywords=Hans%20Vestberg%20DigiPowerX",
+            email: "hans@digipowerx.com"
         }
     ];
 
@@ -113,7 +177,7 @@ const Management = () => {
                         <h2 className="text-5xl lg:text-7xl font-black text-slate-900">The Human <span className="text-cyan-500">Engine</span></h2>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-7xl mx-auto">
                         {team.map((member, i) => (
                             <LeadershipCard key={i} index={i} {...member} />
                         ))}
@@ -155,11 +219,9 @@ interface LeadershipCardProps {
     role: string;
     bio: string;
     image: string;
-    linkedin: string;
-    email: string;
 }
 
-const LeadershipCard = ({ index, name, role, bio, image, linkedin, email }: LeadershipCardProps) => {
+const LeadershipCard = ({ index, name, role, bio, image }: LeadershipCardProps) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -187,15 +249,6 @@ const LeadershipCard = ({ index, name, role, bio, image, linkedin, email }: Lead
                         }}
                     />
 
-                    {/* Socials - Overlay Layout */}
-                    <div className="absolute bottom-0 right-0 flex gap-[2px]">
-                        <a href={linkedin} className="p-4 bg-white/90 backdrop-blur-sm text-slate-900 hover:bg-cyan-500 hover:text-white transition-colors">
-                            <Linkedin className="w-5 h-5" />
-                        </a>
-                        <a href={`mailto:${email}`} className="p-4 bg-white/90 backdrop-blur-sm text-slate-900 hover:bg-cyan-500 hover:text-white transition-colors">
-                            <Mail className="w-5 h-5" />
-                        </a>
-                    </div>
                 </div>
 
                 {/* Content Area */}
@@ -213,10 +266,7 @@ const LeadershipCard = ({ index, name, role, bio, image, linkedin, email }: Lead
                         {bio}
                     </p>
 
-                    <div className="pt-4 flex items-center justify-between border-t border-slate-100">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                            Member since 2024
-                        </span>
+                    <div className="pt-4 flex items-center justify-end border-t border-slate-100">
                         <motion.div
                             whileHover={{ x: 5 }}
                             className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-900 cursor-pointer"
