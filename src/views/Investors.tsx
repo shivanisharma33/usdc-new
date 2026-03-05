@@ -202,7 +202,7 @@ const Investors = () => {
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
                         <h2 className="text-5xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">Stock Information</h2>
-                        <p className="text-slate-500 font-medium text-lg max-w-2xl mx-auto">Track USDC's real-time stock performance and key financial metrics</p>
+                        <p className="text-slate-500 font-medium text-lg max-w-2xl mx-auto">Track USDC&apos;s real-time stock performance and key financial metrics</p>
                     </div>
 
                     {/* Stock Info Card */}
@@ -257,13 +257,13 @@ const Investors = () => {
                                     </p>
                                 </div>
                                 <div className="space-y-2">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Today's High</p>
+                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Today&apos;s High</p>
                                     <p className="text-2xl font-black text-slate-900">
                                         {isStockLoading ? '--' : formatUsd(stockData?.high)}
                                     </p>
                                 </div>
                                 <div className="space-y-2">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Today's Low</p>
+                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Today&apos;s Low</p>
                                     <p className="text-2xl font-black text-slate-900">
                                         {isStockLoading ? '--' : formatUsd(stockData?.low)}
                                     </p>
