@@ -109,8 +109,8 @@ const Insights = () => {
                     />
                 </motion.div>
 
-                {/* Technical HUD Overlay */}
-                <div className="absolute inset-0 pointer-events-none z-10">
+                {/* Technical HUD Overlay - Hidden on mobile for cleaner view */}
+                <div className="absolute inset-0 pointer-events-none z-10 hidden md:block">
                     <div className="absolute top-1/2 left-10 -translate-y-1/2 w-[1px] h-64 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent" />
                     <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[1px] h-64 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent" />
                 </div>
@@ -121,43 +121,20 @@ const Insights = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <div className="inline-flex items-center gap-3 px-6 py-2 bg-cyan-500 text-slate-950 rounded-full mb-8 font-black uppercase text-[10px] tracking-[0.4em] shadow-2xl shadow-cyan-500/40">
+                        <div className="inline-flex items-center gap-3 px-6 py-2 bg-cyan-500 text-slate-950 rounded-full mb-6 md:mb-8 font-black uppercase text-[10px] tracking-[0.4em] shadow-2xl shadow-cyan-500/40">
                             <Zap className="w-4 h-4 fill-current" />
                             Knowledge Base 4.0
                         </div>
 
-                        <h1 className="text-8xl md:text-[14rem] font-black text-white tracking-tighter leading-none mb-8 uppercase select-none">
+                        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[14rem] font-black text-white tracking-tighter leading-none mb-6 md:mb-8 uppercase select-none">
                             INSIGHTS.
                         </h1>
 
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-16 scale-110">
-                            <div className="text-center group cursor-pointer">
-                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-widest mb-1">Articles</p>
-                                <p className="text-4xl font-black text-white leading-none">012</p>
-                            </div>
-                            <div className="w-px h-10 bg-white/20 hidden md:block" />
-                            <div className="text-center group cursor-pointer">
-                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-widest mb-1">Global Reach</p>
-                                <p className="text-4xl font-black text-white leading-none">ACTIVE</p>
-                            </div>
-                            <div className="w-px h-10 bg-white/20 hidden md:block" />
-                            <div className="text-center group cursor-pointer">
-                                <p className="text-[10px] font-black text-cyan-500 uppercase tracking-widest mb-1">Tech Index</p>
-                                <p className="text-4xl font-black text-white leading-none">PRIME</p>
-                            </div>
-                        </div>
+                       
                     </motion.div>
                 </div>
 
-                {/* Bottom Scroll Indicator */}
-                <motion.div
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 flex flex-col items-center gap-4"
-                >
-                    <span className="text-[9px] font-black uppercase tracking-[0.6em] rotate-180 [writing-mode:vertical-lr]">Explore</span>
-                    <div className="w-[1px] h-20 bg-gradient-to-b from-cyan-500 to-transparent" />
-                </motion.div>
+              
             </section>
 
             {/* ── News Grid Section ── */}
@@ -247,7 +224,7 @@ const NewsCard = ({ title, description, category, date, author, image, index }: 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="group bg-white border border-slate-200 flex flex-col h-full hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500"
+            className="group bg-white border border-slate-200 flex flex-col h-full hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 rounded-2xl md:rounded-3xl overflow-hidden"
         >
             {/* Image container */}
             <div className="relative aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">

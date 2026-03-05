@@ -84,7 +84,7 @@ const LatestNews = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.7, delay: 0.1 }}
-                            className="text-5xl lg:text-7xl font-black leading-[1.05] tracking-tight"
+                            className="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.05] tracking-tight"
                             style={{ color: brandNavy }}
                         >
                             Latest{' '}

@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, BookOpen, BarChart3, Layout, Newspaper, Lightbulb, Satellite, ArrowUpRight, Zap } from 'lucide-react';
+import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, BookOpen, BarChart3, Layout, Newspaper, Lightbulb, Satellite, ArrowUpRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './Logo';
+import Image from 'next/image';
 
 interface SubLink {
     name: string;
@@ -196,16 +197,21 @@ const Navbar = () => {
 
                 {/* Right Actions */}
                 <div className="flex items-center gap-3">
-                    {/* Desktop CTA */}
-                    {/* DigiPowerX External Link */}
+                    {/* DigiPowerX External Link - Icon Only */}
                     <a href="https://www.digipowerx.com/" target="_blank" rel="noopener noreferrer" className="hidden md:block no-underline">
                         <motion.button
-                            whileHover={{ scale: 1.03 }}
+                            whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.97 }}
-                            className="flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-xl font-bold text-[13px] tracking-wide shadow-lg shadow-slate-900/10 hover:shadow-cyan-500/20 transition-all duration-300 border border-slate-800 hover:border-cyan-500/50"
+                            className="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-900 hover:bg-slate-800 transition-all duration-300 border border-slate-800 hover:border-cyan-500/50 shadow-lg shadow-slate-900/10 overflow-hidden"
+                            title=""
                         >
-                            <Zap className="w-3.5 h-3.5 text-cyan-400" />
-                            <span>DigiPowerX</span>
+                            <Image
+                                src="/DigiLogo Icon Black.png"
+                                alt=""
+                                width={28}
+                                height={28}
+                                className="object-contain brightness-0 invert"
+                            />
                         </motion.button>
                     </a>
 
@@ -330,12 +336,17 @@ const Navbar = () => {
                                 </motion.div>
                             ))}
 
-                            {/* Mobile CTA */}
+                            {/* Mobile CTA - DigiPowerX Icon */}
                             <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
                                 <a href="https://www.digipowerx.com/" target="_blank" rel="noopener noreferrer" className="no-underline block" onClick={() => setIsOpen(false)}>
-                                    <button className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-slate-900/10 transition-all active:scale-95 border border-slate-800">
-                                        <Zap className="w-4 h-4 text-cyan-400" />
-                                        <span>DigiPowerX</span>
+                                    <button className="w-full flex items-center justify-center bg-slate-900 text-white py-3.5 rounded-xl shadow-lg shadow-slate-900/10 transition-all active:scale-95 border border-slate-800">
+                                        <Image
+                                            src="/DigiLogo Icon Black.png"
+                                            alt="DigiPowerX"
+                                            width={24}
+                                            height={24}
+                                            className="object-contain brightness-0 invert"
+                                        />
                                     </button>
                                 </a>
                                 <Link href="/contact" className="no-underline block" onClick={() => setIsOpen(false)}>

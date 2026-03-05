@@ -92,7 +92,7 @@ const StockChart = ({ currentPrice, changePercent }: StockChartProps) => {
         <div
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            className="h-72 w-full relative group/chart bg-white p-6 overflow-hidden border border-slate-100 shadow-xl cursor-crosshair select-none"
+            className="h-full w-full relative group/chart bg-white p-4 md:p-6 overflow-hidden border border-slate-100 shadow-xl cursor-crosshair select-none rounded-2xl md:rounded-3xl"
         >
             <svg viewBox="0 0 400 150" className="w-full h-full overflow-visible">
                 <defs>

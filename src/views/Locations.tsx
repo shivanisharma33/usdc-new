@@ -162,7 +162,7 @@ const Locations = () => {
                     </div>
 
                     <div className="relative w-full">
-                        <InteractiveMap 
+                        <InteractiveMap
                             locations={locations.map(loc => ({
                                 id: loc.id,
                                 city: loc.city,

@@ -72,7 +72,7 @@ const Careers = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="mb-8 text-7xl font-black leading-none tracking-tighter text-white uppercase md:text-9xl">
+            <h1 className="mb-8 text-5xl sm:text-7xl md:text-9xl font-black leading-none tracking-tighter text-white uppercase">
               Build the <br /> <span className="text-cyan-400">Future</span>
             </h1>
           </motion.div>
@@ -149,16 +149,16 @@ const Careers = () => {
             </div>
           </div>
           <div className="relative order-1 lg:order-2">
-            <div className="relative aspect-[4/5] overflow-hidden bg-slate-200">
+            <div className="relative overflow-hidden bg-slate-50 rounded-3xl">
               <OptimizedImage
                 src="/careers-team.png"
                 alt="USDC Team ARMS 200"
-                className="h-full w-full object-cover grayscale-0"
+                className="w-full h-auto grayscale-0 block"
               />
-              <div className="absolute inset-0 bg-cyan-500/5 mix-blend-multiply" />
-              <div className="group absolute bottom-0 left-0 z-10 cursor-default p-8 text-white">
-                <p className="text-[8rem] leading-none font-black opacity-20">2k25</p>
-                <p className="mt-[-2rem] text-xs font-black tracking-[0.5em] uppercase">Architecting Growth</p>
+              <div className="absolute inset-0 bg-cyan-500/5 mix-blend-multiply pointer-events-none" />
+              <div className="group absolute bottom-0 left-0 z-10 cursor-default p-4 md:p-8 text-white">
+                <p className="text-5xl md:text-[8rem] leading-none font-black opacity-20">2k25</p>
+                <p className="mt-[-1rem] md:mt-[-2rem] text-[10px] md:text-xs font-black tracking-[0.5em] uppercase">Architecting Growth</p>
               </div>
             </div>
           </div>

@@ -11,24 +11,24 @@ const API_BASE = 'https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/press-re
 const PAGE_SIZE = 5;
 
 type PressReleaseRecord = {
-  id: number;
-  documentId: string;
-  title: string;
-  date: string;
-  content?: string;
-  pdf_file?: {
-    url?: string;
-  } | null;
+    id: number;
+    documentId: string;
+    title: string;
+    date: string;
+    content?: string;
+    pdf_file?: {
+        url?: string;
+    } | null;
 };
 
 type PressReleaseApiResponse = {
-  data: PressReleaseRecord[];
-  meta: {
-    pagination: {
-      pageCount: number;
-      total: number;
+    data: PressReleaseRecord[];
+    meta: {
+        pagination: {
+            pageCount: number;
+            total: number;
+        };
     };
-  };
 };
 
 const formatDate = (dateStr: string) => {
@@ -154,7 +154,8 @@ const PressRelease = () => {
                     />
                 </motion.div>
 
-                <div className="absolute inset-0 pointer-events-none z-10">
+                {/* Technical HUD Overlay - Hidden on mobile for cleaner view */}
+                <div className="absolute inset-0 pointer-events-none z-10 hidden md:block">
                     <div className="absolute top-1/2 left-10 -translate-y-1/2 w-[1px] h-64 bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent" />
                     <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[1px] h-64 bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] border border-white/5 opacity-20" />
@@ -170,10 +171,10 @@ const PressRelease = () => {
                             <Zap className="w-4 h-4 fill-current" />
                             Live Transmission
                         </div>
-                        <h1 className="text-8xl md:text-[14rem] font-black text-white tracking-tighter leading-none mb-8 uppercase select-none">
+                        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[14rem] font-black text-white tracking-tighter leading-none mb-8 uppercase select-none">
                             PRESS <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">ROOM.</span>
                         </h1>
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-16 scale-110">
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mt-10 md:mt-16 scale-100 md:scale-110">
                             <div className="text-center group cursor-pointer">
                                 <p className="text-[10px] font-black text-cyan-500 uppercase tracking-widest mb-1 group-hover:text-white transition-colors">Total Archives</p>
                                 <p className="text-4xl font-black text-white leading-none">
@@ -221,7 +222,7 @@ const PressRelease = () => {
                                 <motion.div
                                     whileHover={{ y: -6 }}
                                     onClick={() => handlePressReleaseClick(heroRelease)}
-                                    className="lg:col-span-8 bg-slate-950 rounded-[3rem] p-12 lg:p-16 relative overflow-hidden group cursor-pointer"
+                                    className="lg:col-span-8 bg-slate-950 rounded-3xl md:rounded-[3rem] p-8 md:p-12 lg:p-16 relative overflow-hidden group cursor-pointer"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900" />
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-br from-cyan-950/30 via-slate-950 to-blue-950/20" />
@@ -238,7 +239,7 @@ const PressRelease = () => {
                                             <span className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">{formatDate(heroRelease.date)}</span>
                                         </div>
                                         <div className="space-y-6">
-                                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter leading-tight line-clamp-3">
+                                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter leading-tight line-clamp-3">
                                                 {heroRelease.title}
                                             </h2>
                                             <p className="text-slate-400 text-base font-medium max-w-xl group-hover:text-slate-300 transition-colors line-clamp-2">
@@ -259,7 +260,7 @@ const PressRelease = () => {
                                     <motion.div
                                         whileHover={{ x: 6 }}
                                         onClick={() => handlePressReleaseClick(sideReleases[0])}
-                                        className="bg-slate-100 rounded-[3rem] p-10 space-y-6 group cursor-pointer"
+                                        className="bg-slate-100 rounded-3xl md:rounded-[3rem] p-8 md:p-10 space-y-6 group cursor-pointer"
                                     >
                                         <div className="flex justify-between items-start">
                                             <div className="w-12 h-12 bg-slate-950 flex items-center justify-center text-white rounded-2xl group-hover:bg-cyan-500 transition-colors">
@@ -281,7 +282,7 @@ const PressRelease = () => {
                                     <motion.div
                                         whileHover={{ x: 6 }}
                                         onClick={() => handlePressReleaseClick(sideReleases[1])}
-                                        className="bg-cyan-500 rounded-[3rem] p-10 space-y-6 group cursor-pointer shadow-2xl shadow-cyan-500/20"
+                                        className="bg-cyan-500 rounded-3xl md:rounded-[3rem] p-8 md:p-10 space-y-6 group cursor-pointer shadow-2xl shadow-cyan-500/20"
                                     >
                                         <div className="flex justify-between items-start">
                                             <div className="w-12 h-12 bg-slate-950 flex items-center justify-center text-white rounded-2xl group-hover:bg-white group-hover:text-slate-950 transition-colors">
@@ -312,16 +313,16 @@ const PressRelease = () => {
                     <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
                         <div className="space-y-4">
                             <span className="text-xs font-black text-cyan-500 uppercase tracking-[0.6em]">Document Repository</span>
-                            <h2 className="text-6xl md:text-8xl font-black text-slate-900 uppercase tracking-tighter leading-none">Archive.</h2>
+                            <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-slate-900 uppercase tracking-tighter leading-none">Archive.</h2>
                         </div>
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-4 w-full md:w-auto">
                             <Search className="w-5 h-5 text-slate-300" />
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => handleSearch(e.target.value)}
                                 placeholder="Filter by keyword..."
-                                className="bg-transparent border-b border-slate-200 py-2 text-sm font-bold uppercase tracking-widest focus:outline-none focus:border-cyan-500 transition-all w-64"
+                                className="bg-transparent border-b border-slate-200 py-2 text-sm font-bold uppercase tracking-widest focus:outline-none focus:border-cyan-500 transition-all w-full md:w-64"
                             />
                         </div>
                     </div>
@@ -345,7 +346,7 @@ const PressRelease = () => {
                                         transition={{ delay: i * 0.05 }}
                                         viewport={{ once: true }}
                                         onClick={() => handlePressReleaseClick(pr)}
-                                        className="bg-white rounded-[2rem] px-8 py-6 border border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-6 group cursor-pointer hover:shadow-xl hover:shadow-cyan-500/5 hover:border-slate-200 transition-all"
+                                        className="bg-white rounded-2xl md:rounded-[2rem] px-6 py-6 border border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-6 group cursor-pointer hover:shadow-xl hover:shadow-cyan-500/5 hover:border-slate-200 transition-all"
                                     >
                                         <div className="flex items-start gap-6 flex-1 min-w-0">
                                             {/* Date badge */}
@@ -416,11 +417,10 @@ const PressRelease = () => {
                                                 <button
                                                     key={item}
                                                     onClick={() => setArchivePage(item)}
-                                                    className={`w-12 h-12 rounded-2xl font-black text-sm transition-all ${
-                                                        archivePage === item
-                                                            ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/30'
-                                                            : 'bg-white border border-slate-200 text-slate-900 hover:bg-slate-100'
-                                                    }`}
+                                                    className={`w-12 h-12 rounded-2xl font-black text-sm transition-all ${archivePage === item
+                                                        ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/30'
+                                                        : 'bg-white border border-slate-200 text-slate-900 hover:bg-slate-100'
+                                                        }`}
                                                 >
                                                     {item}
                                                 </button>
@@ -455,7 +455,7 @@ const PressRelease = () => {
                                 For institutional inquiries, high-resolution brand assets, or executive commentary.
                             </p>
                             <div className="space-y-4">
-                                <a href="mailto:IR@digihostpower.com" className="text-3xl font-black text-white hover:text-cyan-500 transition-colors flex items-center gap-4 group">
+                                <a href="mailto:IR@digihostpower.com" className="text-2xl font-black text-white hover:text-cyan-500 transition-colors flex items-center gap-4 group">
                                     IR@digihostpower.com
                                     <ArrowUpRight className="w-6 h-6 text-cyan-500 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
                                 </a>

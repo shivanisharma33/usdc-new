@@ -42,7 +42,7 @@ const ContactPage = () => {
             <section className="min-h-screen relative flex flex-col lg:flex-row overflow-hidden">
 
                 {/* Left Side: Institutional Information */}
-                <div className="w-full lg:w-[45%] bg-slate-950 p-8 md:p-16 lg:p-24 flex flex-col justify-between text-white relative pt-32 lg:pt-32">
+                <div className="w-full lg:w-[45%] bg-slate-950 p-6 sm:p-10 md:p-16 lg:p-24 flex flex-col justify-between text-white relative pt-24 sm:pt-28 lg:pt-32">
                     <div className="absolute inset-0 opacity-10 pointer-events-none">
                         <div className="w-full h-full bg-[radial-gradient(circle_at_20%_30%,#40D1FB_1px,transparent_1px)] bg-[length:30px_30px]" />
                     </div>
@@ -57,10 +57,10 @@ const ContactPage = () => {
                                 <span className="w-1.5 h-1.5 bg-cyan-400 animate-pulse" />
                                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-300">Global Communication</span>
                             </div>
-                            <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.85] mb-8">
+                            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.85] mb-6 md:mb-8">
                                 Get In <br /> <span className="text-cyan-400">Touch.</span>
                             </h1>
-                            <p className="text-xl text-slate-400 font-medium leading-relaxed max-w-sm">
+                            <p className="text-base md:text-xl text-slate-400 font-medium leading-relaxed max-w-sm">
                                 Architecting the future requires constant dialogue. Reach out to our specialized departments for institutional inquiries.
                             </p>
                         </motion.div>
@@ -104,21 +104,21 @@ const ContactPage = () => {
                 </div>
 
                 {/* Right Side: Form Interface */}
-                <div className="w-full lg:w-[55%] bg-slate-50/50 p-8 md:p-16 lg:p-24 flex items-center pt-16 lg:pt-32">
+                <div className="w-full lg:w-[55%] bg-slate-50/50 p-6 sm:p-10 md:p-16 lg:p-24 flex items-center pt-10 sm:pt-14 lg:pt-32">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="w-full max-w-3xl mx-auto"
                     >
-                        <div className="bg-white rounded-[40px] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] border border-slate-200/50 p-8 md:p-12">
+                        <div className="bg-white rounded-3xl md:rounded-[40px] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] border border-slate-200/50 p-6 sm:p-8 md:p-12">
                             <AnimatePresence mode="wait">
                                 {!sent ? (
                                     <motion.form
                                         key="form"
                                         ref={formRef}
                                         onSubmit={handleSubmit}
-                                        className="space-y-10"
+                                        className="space-y-6 md:space-y-10"
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
@@ -146,13 +146,13 @@ const ContactPage = () => {
 
                                         <div className="space-y-4">
                                             <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Select Department</label>
-                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                            <div className="grid grid-cols-2 gap-3">
                                                 {departments.map((dept, i) => (
                                                     <button
                                                         key={i}
                                                         type="button"
                                                         onClick={() => setSelectedDept(dept.name)}
-                                                        className={`px-4 py-4 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all text-center leading-tight border ${selectedDept === dept.name
+                                                        className={`px-3 py-3 md:px-4 md:py-4 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all text-center leading-tight border ${selectedDept === dept.name
                                                             ? 'bg-slate-950 text-white border-slate-950 shadow-lg shadow-slate-200'
                                                             : 'bg-slate-50 text-slate-500 border-slate-100 hover:border-cyan-200 hover:text-cyan-600'
                                                             }`}
@@ -178,7 +178,7 @@ const ContactPage = () => {
                                                 whileHover={{ scale: 1.01 }}
                                                 whileTap={{ scale: 0.99 }}
                                                 disabled={submitting}
-                                                className={`w-full py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-sm flex items-center justify-center gap-4 transition-all duration-300 shadow-xl ${submitting
+                                                className={`w-full py-4 md:py-6 rounded-2xl font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-xs md:text-sm flex items-center justify-center gap-4 transition-all duration-300 shadow-xl ${submitting
                                                     ? 'bg-slate-100 text-slate-400'
                                                     : 'bg-slate-950 text-white hover:bg-slate-900 shadow-slate-200/50'
                                                     }`}

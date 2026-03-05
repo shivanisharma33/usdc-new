@@ -170,8 +170,8 @@ const Investors = () => {
                     />
                 </motion.div>
 
-                {/* Technical HUD Overlays */}
-                <div className="absolute inset-0 pointer-events-none z-10">
+                {/* Technical HUD Overlays - Hidden on mobile for cleaner view */}
+                <div className="absolute inset-0 pointer-events-none z-10 hidden md:block">
                     <div className="absolute top-1/2 left-8 -translate-y-1/2 w-[1px] h-96 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent" />
                     <div className="absolute top-1/2 right-8 -translate-y-1/2 w-[1px] h-96 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent" />
                 </div>
@@ -182,12 +182,12 @@ const Investors = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <div className="inline-flex items-center gap-3 px-6 py-2 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-full mb-8 font-black uppercase text-[10px] tracking-[0.4em]">
+                        <div className="inline-flex items-center gap-3 px-6 py-2 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-full mb-6 md:mb-8 font-black uppercase text-[10px] tracking-[0.4em]">
                             <Activity className="w-4 h-4 text-cyan-400" />
                             Value Terminal 2.0
                         </div>
 
-                        <h1 className="text-7xl md:text-[12rem] font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase select-none">
+                        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[12rem] font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase select-none">
                             VALUE <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-black">PORTAL.</span>
                         </h1>
                     </motion.div>
@@ -287,22 +287,22 @@ const Investors = () => {
             <section className="py-24 bg-slate-50 border-y border-slate-100">
                 <div className="max-w-7xl mx-auto px-6">
                     {/* Stock Performance Heading */}
-                    <div className="text-center mb-16">
-                        <h2 className="text-5xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">
+                    <div className="text-center mb-16 px-4">
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">
                             Stock <span className="text-cyan-600">Performance</span>
                         </h2>
                     </div>
 
                     {/* Full-Width Graph Card below centered text */}
-                    <div className="bg-sky-50 p-10 md:p-16 shadow-2xl relative overflow-hidden group border border-sky-100 w-full">
+                    <div className="bg-sky-50 p-6 md:p-16 shadow-2xl relative overflow-hidden group border border-sky-100 w-full rounded-3xl md:rounded-none">
 
 
                         <div className="flex flex-col md:flex-row justify-between items-center mb-16 relative z-10 gap-8">
                             <div className="space-y-2 text-center md:text-left">
-                                <h4 className="text-6xl font-black text-slate-900 tracking-tighter">
+                                <h4 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter">
                                     {isStockLoading ? 'Loading…' : formatUsd(stockData?.price)}
                                 </h4>
-                                <span className={`text-sm font-bold flex items-center justify-center md:justify-start gap-1 ${isPositiveChange ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                <span className={`text-xs md:text-sm font-bold flex items-center justify-center md:justify-start gap-1 ${isPositiveChange ? 'text-emerald-600' : 'text-rose-600'}`}>
                                     <TrendingUp className="w-4 h-4" /> {isStockLoading ? 'Updating live feed…' : changeLabel}
                                 </span>
                             </div>
@@ -321,7 +321,7 @@ const Investors = () => {
                         )}
 
                         {/* Enhanced Stock Chart Component - making it larger for full viewport feel */}
-                        <div className="h-[400px] w-full relative mb-12">
+                        <div className="h-[250px] sm:h-[350px] md:h-[400px] w-full relative mb-12">
                             <StockChart
                                 currentPrice={stockData?.price ?? 2.77}
                                 changePercent={stockData?.changePercent ?? 0}
@@ -450,7 +450,7 @@ const Investors = () => {
             </section>
 
             {/* ── Corporate Identity ── */}
-       
+
 
             <ContactUs />
         </div>

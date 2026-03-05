@@ -102,7 +102,7 @@ const Management = () => {
     return (
         <div className="bg-white">
             {/* Parallax Hero Section */}
-            <section ref={heroRef} className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-slate-950">
+            <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden bg-slate-950">
                 <motion.div
                     style={{ y: heroY, opacity: heroOpacity }}
                     className="absolute inset-0 z-0"
@@ -111,7 +111,7 @@ const Management = () => {
                     <OptimizedImage
                         src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070"
                         alt="Management"
-                        className="w-full h-full object-cover opacity-30 grayscale contrast-125 scale-105"
+                        className="w-full h-full object-cover opacity-30 grayscale contrast-125 scale-110"
                     />
                 </motion.div>
 
@@ -121,8 +121,8 @@ const Management = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
                     >
-                        <h1 className="text-7xl md:text-9xl font-black text-white tracking-tighter leading-none mb-8">
-                            STOCKED WITH <br /> <span className="text-cyan-400">EXPERTISE</span>
+                        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-none mb-8 uppercase select-none">
+                            STOCKED WITH <br /> <span className="text-cyan-400">EXPERTISE.</span>
                         </h1>
                     </motion.div>
                 </div>

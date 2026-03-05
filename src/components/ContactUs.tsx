@@ -55,7 +55,7 @@ const ContactUs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight"
               >
                 Let&apos;s build <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#40D1FB] to-blue-600">something great.</span>
@@ -123,7 +123,7 @@ const ContactUs = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-[40px] shadow-[0_32px_96px_-16px_rgba(0,0,0,0.12)] border border-slate-100 p-10 md:p-16 relative overflow-hidden"
+              className="bg-white rounded-3xl md:rounded-[40px] shadow-[0_32px_96px_-16px_rgba(0,0,0,0.12)] border border-slate-100 p-6 sm:p-8 md:p-16 relative overflow-hidden"
             >
               <AnimatePresence mode="wait">
                 {!sent ? (
@@ -143,7 +143,7 @@ const ContactUs = () => {
                           name="name"
                           required
                           placeholder="John Doe"
-                          className="w-full bg-slate-50 border-none px-8 py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-lg font-bold placeholder:text-slate-300"
+                          className="w-full bg-slate-50 border-none px-5 py-4 md:px-8 md:py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-base md:text-lg font-bold placeholder:text-slate-300"
                         />
                       </div>
                       <div className="space-y-2 group">
@@ -153,7 +153,7 @@ const ContactUs = () => {
                           type="email"
                           required
                           placeholder="john@company.com"
-                          className="w-full bg-slate-50 border-none px-8 py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-lg font-bold placeholder:text-slate-300"
+                          className="w-full bg-slate-50 border-none px-5 py-4 md:px-8 md:py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-base md:text-lg font-bold placeholder:text-slate-300"
                         />
                       </div>
                     </div>
@@ -165,7 +165,7 @@ const ContactUs = () => {
                         rows={5}
                         required
                         placeholder="Tell us about your project or inquiry..."
-                        className="w-full bg-slate-50 border-none px-8 py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-lg font-bold placeholder:text-slate-300 resize-none"
+                        className="w-full bg-slate-50 border-none px-5 py-4 md:px-8 md:py-6 rounded-2xl focus:ring-2 focus:ring-[#40D1FB]/20 transition-all outline-none text-slate-900 text-base md:text-lg font-bold placeholder:text-slate-300 resize-none"
                       />
                     </div>
 
@@ -173,7 +173,7 @@ const ContactUs = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       disabled={submitting}
-                      className={`w-full py-7 rounded-2xl font-black uppercase tracking-widest text-base flex items-center justify-center gap-3 transition-all duration-300 shadow-2xl shadow-[#40D1FB]/20 ${submitting
+                      className={`w-full py-5 md:py-7 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all duration-300 shadow-2xl shadow-[#40D1FB]/20 ${submitting
                         ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
                         : 'bg-slate-950 text-white hover:bg-slate-900'
                         }`}
