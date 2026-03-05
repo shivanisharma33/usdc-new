@@ -313,29 +313,14 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 md:py-28 bg-white">
-        <div className="max-w-4xl mx-auto px-6 lg:px-12">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={container} className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-12 md:p-16 text-center space-y-8">
-            <motion.h2 variants={item} className="text-4xl md:text-5xl font-extrabold text-white">
-              Ready to Transform Your Infrastructure?
-            </motion.h2>
-            <motion.p variants={item} className="text-xl text-slate-300 max-w-xl mx-auto">
-              Join industry leaders who are powering the future with USDC. Let&apos;s build something extraordinary together.
-            </motion.p>
-            <motion.div variants={item} className="flex gap-4 justify-center">
-              <button className="px-8 py-3 bg-[#40D1FB] text-slate-900 font-bold rounded-lg hover:bg-cyan-400 transition-all hover:scale-105">
-                Schedule Consultation
-              </button>
-              <button className="px-8 py-3 bg-white/10 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/20 transition-all">
-                View PDF Overview
-              </button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+     
     </div>
   );
 };
 
 export default AboutUs;
+
+
+
+
+
