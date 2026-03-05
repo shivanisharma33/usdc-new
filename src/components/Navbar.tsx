@@ -195,6 +195,7 @@ const Navbar = () => {
                     ))}
                 </div>
 
+
                 {/* Right Actions */}
                 <div className="flex items-center gap-3">
                     {/* DigiPowerX External Link - Icon Only */}

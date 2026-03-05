@@ -99,7 +99,7 @@ const DigiPowerXSection = () => {
                                 href="https://www.digipowerx.com/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-4 px-12 py-6 bg-slate-950 text-white font-black uppercase tracking-[0.2em] rounded-full hover:bg-cyan-500 hover:text-slate-950 transition-all shadow-2xl hover:shadow-cyan-500/40 group"
+                                className="inline-flex items-center gap-4 px-12 py-6 bg-slate-950 text-white font-black uppercase tracking-[0.2em] rounded-full hover:bg-cyan-500 hover:text-slate-950 transition-all shadow-2xl hover:shadow-cyan-500/40 group text-center"
                             >
                                 Visit Website <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                             </a>

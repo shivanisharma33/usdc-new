@@ -106,9 +106,9 @@ const AboutUs = () => {
               >
                 Download Overview
               </a>
-              <button className="px-8 py-3 bg-white border-2 border-slate-200 text-slate-900 font-semibold rounded-lg hover:border-[#40D1FB] transition-all">
+              <a href="/contact" className="px-8 py-3 bg-white border-2 border-slate-200 text-slate-900 font-semibold rounded-lg hover:border-[#40D1FB] transition-all inline-block">
                 Get in Touch
-              </button>
+              </a>
             </motion.div>
           </motion.div>
         </div>
@@ -313,7 +313,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-     
+
     </div>
   );
 };

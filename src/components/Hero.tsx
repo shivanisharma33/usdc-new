@@ -1,4 +1,5 @@
 import { MoveRight } from 'lucide-react';
+import Link from 'next/link';
 
 const Hero = () => {
     return (
@@ -49,10 +50,10 @@ const Hero = () => {
 
                     {/* Button */}
                     <div className="pt-6 flex gap-4 items-center flex-wrap">
-                        <button className="group relative flex items-center gap-3 bg-[#40D1FB] text-black px-7 py-3 font-bold text-base overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#40D1FB]/50 hover:scale-105">
+                        <Link href="/locations" className="group relative flex items-center gap-3 bg-[#40D1FB] text-black px-7 py-3 font-bold text-base overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#40D1FB]/50 hover:scale-105">
                             <span>Explore Data Centers</span>
                             <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                        </button>
+                        </Link>
                         <a
                             href="https://static1.squarespace.com/static/6765fcde25dea733d4a4c593/t/6785eb72626f767ed5792eea/1736829812905/USDC+Deck_PS+1.6.25.pdf"
                             target="_blank"

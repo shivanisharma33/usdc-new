@@ -101,19 +101,19 @@ const Investors = () => {
             title: "Stock Information",
             desc: "Real-time quote and performance chart for DigiPowerX stock.",
             icon: TrendingUp,
-            link: "#"
+            link: "https://finance.yahoo.com/quote/USDC/"
         },
         {
             title: "SEC Filings",
             desc: "Access financial statements, reports, and compliance documents.",
             icon: FileText,
-            link: "#"
+            link: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&company=digipowerx&CIK=&type=&dateb=&owner=include&count=40&search_text="
         },
         {
             title: "Events & Presentations",
             desc: "View upcoming events, webcasts, and investor presentations.",
             icon: Calendar,
-            link: "#"
+            link: "/investors"
         },
         {
             title: "Press Releases",
@@ -131,7 +131,7 @@ const Investors = () => {
             title: "Contact IR",
             desc: "Get in touch with our investor relations team.",
             icon: Mail,
-            link: "#"
+            link: "/contact"
         }
     ];
 

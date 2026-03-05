@@ -96,6 +96,7 @@ const RedefiningSection = () => {
                 </div>
             </div>
 
+
             <style>{`
         @keyframes scan {
           from { transform: translateY(-100%); }

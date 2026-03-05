@@ -42,6 +42,7 @@ const WhatWeDo = () => {
 
                     </div>
 
+
                     {/* Image Side */}
                     <div className="flex-1 w-full max-w-2xl relative">
                         <div className="relative w-full h-auto overflow-hidden rounded-[2rem] shadow-2xl group">
