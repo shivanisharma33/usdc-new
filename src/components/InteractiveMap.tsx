@@ -6,6 +6,7 @@ type ThemeMode = 'light' | 'dark';
 
 interface LocationMarker {
     id: string;
+    title?: string;
     city: string;
     lat: number;
     lng: number;
@@ -26,7 +27,7 @@ const MapContent = ({ locations, onLocationSelect, themeMode }: MapContentProps)
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
-        const isDarkTheme = themeMode === 'dark';
+        const isDarkTheme = false; // Force light theme mapping to match user screenshot
 
         // Load Leaflet CSS
         const link = document.createElement('link');
@@ -37,95 +38,75 @@ const MapContent = ({ locations, onLocationSelect, themeMode }: MapContentProps)
         // Dynamically import Leaflet
         import('leaflet').then((L) => {
             const map = L.map('map', {
-                preferCanvas: true
-            }).setView([39.8283, -98.5795], 4);
+                preferCanvas: true,
+                zoomControl: true
+            }).setView([38.8283, -85.5795], 5);
 
-            // Use theme-aware CartoDB tiles.
+            // Use colored OpenStreetMap tiles
             L.tileLayer(
-                isDarkTheme
-                    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-                    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 {
-                    attribution:
-                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                    subdomains: 'abcd',
-                    maxZoom: 20
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19
                 }).addTo(map);
-
-            const popupBackground = isDarkTheme ? 'rgba(15, 23, 42, 0.98)' : 'rgba(255, 255, 255, 0.98)';
-            const popupBorder = isDarkTheme ? '#334155' : '#e2e8f0';
-            const popupHeading = isDarkTheme ? '#f8fafc' : '#0f172a';
-            const popupMuted = isDarkTheme ? '#94a3b8' : '#64748b';
-            const popupCardBackground = isDarkTheme ? 'rgba(30, 41, 59, 0.8)' : 'rgba(241, 245, 249, 0.8)';
-            const markerCenter = isDarkTheme ? '#0f172a' : 'white';
-            const markerBorder = isDarkTheme ? '#0f172a' : 'white';
 
             // Add markers for each location
             locations.forEach((location) => {
                 const isOperational = location.status === 'Operational';
                 const statusColor = isOperational ? '#40D1FB' : '#fb923c';
+                const innerColor = '#1e3a8a';
 
-                // Create custom HTML icon with pulse effect
+                // Create custom HTML icon with building shape
                 const iconHTML = `
-                    <div style="
-                        width: 40px;
-                        height: 40px;
-                        background: ${statusColor};
-                        border: 3px solid ${markerBorder};
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        box-shadow: 0 0 0 2px ${statusColor}, 0 4px 12px rgba(0,0,0,0.25);
-                        cursor: pointer;
-                    ">
+                    <div style="position: relative; width: 44px; height: 44px;">
                         <div style="
-                            width: 10px;
-                            height: 10px;
-                            background: ${markerCenter};
+                            width: 44px;
+                            height: 44px;
+                            background: white;
                             border-radius: 50%;
-                            opacity: 0.9;
-                        "></div>
+                            border: 3px solid ${statusColor};
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+                        ">
+                            <div style="width: 30px; height: 30px; background: ${innerColor}; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 3V21H19V3H5ZM9 7H11V9H9V7ZM9 11H11V13H9V11ZM9 15H11V17H9V15ZM13 7H15V9H13V7ZM13 11H15V13H13V11ZM13 15H15V17H13V15Z" fill="white"/>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 `;
 
                 const customIcon = L.divIcon({
                     html: iconHTML,
-                    iconSize: [40, 40],
-                    iconAnchor: [20, 20],
-                    popupAnchor: [0, -20],
+                    iconSize: [44, 44],
+                    iconAnchor: [22, 22],
+                    popupAnchor: [0, -22],
                     className: 'us-data-center-marker'
                 });
 
                 const marker = L.marker([location.lat, location.lng], { icon: customIcon }).addTo(map);
 
                 const popupContent = `
-                    <div style="min-width: 220px; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;">
-                        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
-                            <div style="width: 8px; height: 8px; border-radius: 50%; background-color: ${statusColor}; box-shadow: 0 0 10px ${statusColor};"></div>
-                            <span style="font-size: 9px; font-weight: 900; color: ${popupMuted}; text-transform: uppercase; letter-spacing: 0.4em;">${location.status}</span>
-                        </div>
-                        <h4 style="margin: 0; font-size: 16px; font-weight: 900; color: ${popupHeading}; text-transform: uppercase; margin-bottom: 8px; line-height: 1.2;">${location.city}</h4>
-                        <div style="background-color: ${popupCardBackground}; padding: 10px; border-radius: 12px; border: 1px solid ${popupBorder}; margin-bottom: 8px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 9px; font-weight: 900; color: ${popupHeading}; text-transform: uppercase;">
-                                <div>
-                                    <div style="color: ${popupMuted}; font-size: 7px; margin-bottom: 2px;">Capacity</div>
-                                    ${location.capacity}
-                                </div>
-                                <div>
-                                    <div style="color: ${popupMuted}; font-size: 7px; margin-bottom: 2px;">Status</div>
-                                    <span style="color: ${statusColor};">${location.status}</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center;">
+                        <h4 style="margin: 0; font-size: 15px; font-weight: 700; color: #0f172a; line-height: 1.3; text-align: center;">${location.title || location.city}</h4>
                     </div>
                 `;
 
                 marker.bindPopup(popupContent, {
                     className: 'custom-location-popup',
                     maxWidth: 300,
-                    closeButton: true
+                    closeButton: false
                 });
+
+                // Auto-open North Carolina development site as in the screenshot
+                if (location.id === 'carolina') {
+                    setTimeout(() => {
+                        marker.openPopup();
+                    }, 500);
+                }
 
                 marker.on('click', () => {
                     if (onLocationSelect) {
@@ -139,39 +120,46 @@ const MapContent = ({ locations, onLocationSelect, themeMode }: MapContentProps)
             style.setAttribute('data-map-styles', 'true');
             style.textContent = `
                 .us-data-center-marker {
-                    animation: markerPulse 3s ease-in-out infinite;
+                    transition: transform 0.2s ease;
                 }
-                
-                @keyframes markerPulse {
-                    0%, 100% {
-                        filter: drop-shadow(0 0 0 rgba(64, 209, 251, 0.3)) drop-shadow(0 4px 12px rgba(0,0,0,0.25));
-                    }
-                    50% {
-                        filter: drop-shadow(0 0 8px rgba(64, 209, 251, 0.5)) drop-shadow(0 4px 12px rgba(0,0,0,0.25));
-                    }
+                .us-data-center-marker:hover {
+                    transform: scale(1.1);
+                    z-index: 1000 !important;
                 }
                 
                 .custom-location-popup .leaflet-popup-content-wrapper {
-                    background: ${popupBackground} !important;
-                    backdrop-filter: blur(16px) !important;
-                    border: 1px solid ${popupBorder} !important;
-                    border-radius: 16px !important;
+                    background: white !important;
+                    border: 1px solid #e2e8f0 !important;
+                    border-radius: 12px !important;
                     padding: 16px !important;
-                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+                    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15) !important;
                 }
                 
                 .custom-location-popup .leaflet-popup-content {
                     margin: 0 !important;
-                    color: ${popupHeading};
+                    color: #0f172a;
                 }
                 
                 .custom-location-popup .leaflet-popup-tip {
-                    background: ${popupBackground} !important;
-                    border-color: ${popupBorder} !important;
+                    background: white !important;
+                    border-color: #e2e8f0 !important;
                 }
                 
                 .leaflet-container {
                     font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+                    background: #e5e7eb !important;
+                }
+                
+                /* Hide Leaflet default zoom controls slightly */
+                .leaflet-control-zoom {
+                    border: 1px solid #e2e8f0 !important;
+                    border-radius: 8px !important;
+                    overflow: hidden !important;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+                }
+                .leaflet-control-zoom a {
+                    color: #0f172a !important;
+                    background-color: white !important;
                 }
             `;
             document.head.appendChild(style);
@@ -193,14 +181,14 @@ const MapContent = ({ locations, onLocationSelect, themeMode }: MapContentProps)
         : 'linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)';
 
     return (
-        <div className="relative w-full rounded-[4rem] overflow-hidden border border-slate-200 dark:border-slate-700 shadow-[0_60px_120px_rgba(0,0,0,0.08)]" style={{ height: '600px' }}>
+        <div className="relative w-full overflow-hidden border border-slate-200 dark:border-slate-700 shadow-[0_60px_120px_rgba(0,0,0,0.08)]" style={{ height: '600px' }}>
             <div id="map" className="w-full h-full z-10" />
             {/* Technical Overlay */}
             <div
                 className="absolute inset-0 pointer-events-none bg-[length:50px_50px] opacity-20"
                 style={{ zIndex: 5, backgroundImage: technicalOverlayPattern }}
             />
-            
+
             {/* Attribution - Leaflet requirement */}
             <div className="absolute bottom-4 right-4 text-[10px] text-slate-500 dark:text-slate-400 pointer-events-none z-20">
                 <span>© OpenStreetMap contributors</span>
@@ -234,7 +222,7 @@ const InteractiveMap = ({ locations, onLocationSelect }: InteractiveMapProps) =>
 
     if (!mounted) {
         return (
-            <div className="relative w-full rounded-[4rem] overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 animate-pulse" style={{ height: '600px' }} />
+            <div className="relative w-full overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 animate-pulse" style={{ height: '600px' }} />
         );
     }
 

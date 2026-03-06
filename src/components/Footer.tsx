@@ -1,95 +1,129 @@
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
+"use client";
+
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram, ArrowRight, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './Logo';
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          <div className="space-y-4">
-            <Link href="/" className="hover:opacity-80 transition-opacity flex items-center">
+    <footer className="bg-[#020617] text-slate-300 relative border-t border-[#1e293b] overflow-hidden">
+      {/* Premium Background Glows */}
+      <div className="absolute top-0 left-1/4 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#40D1FB]/50 to-transparent" />
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#40D1FB]/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#0EA5E9]/10 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-20 pb-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          {/* Column 1: Brand & Socials (takes 4 cols on lg) */}
+          <div className="lg:col-span-4 space-y-6">
+            <Link href="/" className="hover:opacity-80 transition-opacity flex items-center mb-6">
               <Logo />
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Powering the future of data with state-of-the-art data center infrastructure and
-              solutions for the digital economy.
+            <p className="text-slate-400 text-[15px] leading-relaxed max-w-sm">
+              Powering the future of data with state-of-the-art infrastructure and solutions designed for the demands of the digital economy.
             </p>
-            <div className="flex gap-4 pt-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#40D1FB] transition-colors">
-                <Linkedin className="w-5 h-5" />
+            <div className="flex gap-3 pt-2">
+              <a href="https://www.linkedin.com/company/us-data-center/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/50 flex items-center justify-center hover:bg-[#40D1FB]/10 hover:border-[#40D1FB]/30 transition-all duration-300 hover:-translate-y-1">
+                <Linkedin className="w-[18px] h-[18px] text-slate-400 group-hover:text-[#40D1FB] transition-colors" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#40D1FB] transition-colors">
-                <Twitter className="w-5 h-5" />
+              <a href="https://x.com/USDataCenters" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/50 flex items-center justify-center hover:bg-[#40D1FB]/10 hover:border-[#40D1FB]/30 transition-all duration-300 hover:-translate-y-1">
+                <Twitter className="w-[18px] h-[18px] text-slate-400 group-hover:text-[#40D1FB] transition-colors" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#40D1FB] transition-colors">
-                <Facebook className="w-5 h-5" />
+              <a href="https://www.facebook.com/profile.php?id=61574593116858" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/50 flex items-center justify-center hover:bg-[#40D1FB]/10 hover:border-[#40D1FB]/30 transition-all duration-300 hover:-translate-y-1">
+                <Facebook className="w-[18px] h-[18px] text-slate-400 group-hover:text-[#40D1FB] transition-colors" />
+              </a>
+              <a href="https://www.instagram.com/usdatacenter?igsh=NTN0M282cWtxZWtp" target="_blank" rel="noopener noreferrer" className="group w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/50 flex items-center justify-center hover:bg-[#40D1FB]/10 hover:border-[#40D1FB]/30 transition-all duration-300 hover:-translate-y-1">
+                <Instagram className="w-[18px] h-[18px] text-slate-400 group-hover:text-[#40D1FB] transition-colors" />
               </a>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Home</Link>
-              </li>
-              <li>
-                <Link href="/about-us" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">About Us</Link>
-              </li>
-              <li>
-                <Link href="/investors" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Investors</Link>
-              </li>
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Data Centers</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Solutions</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Blog</a></li>
+          {/* Column 2: Quick Links (takes 2 cols on lg) */}
+          <div className="lg:col-span-2 space-y-6">
+            <h4 className="text-lg font-semibold text-white tracking-wide">Company</h4>
+            <ul className="space-y-4">
+              {[
+                { label: 'Home', path: '/' },
+                { label: 'About Us', path: '/about-us' },
+                { label: 'Investors', path: '/investors' },
+                { label: 'Data Centers', path: '/locations' },
+              ].map((link, idx) => (
+                <li key={idx}>
+                  <Link href={link.path} className="group flex items-center text-slate-400 hover:text-[#40D1FB] transition-colors text-[15px]">
+                    <span className="relative overflow-hidden">
+                      <span className="block transition-transform duration-300 group-hover:-translate-y-full">{link.label}</span>
+                      <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-[#40D1FB]">{link.label}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Services</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Infrastructure</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Cloud Computing</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Consulting</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Support</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-[#40D1FB] transition-colors text-sm">Careers</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Get in Touch</h4>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-gray-400 text-sm">
-                <Mail className="w-5 h-5 text-[#40D1FB]" />
-                <a href="mailto:info@usdc.com" className="hover:text-[#40D1FB] transition-colors">info@usdc.com</a>
+          {/* Column 3: Contact Info (takes 3 cols on lg) */}
+          <div className="lg:col-span-3 space-y-6">
+            <h4 className="text-lg font-semibold text-white tracking-wide">Contact Us</h4>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-4 text-[15px] group">
+                <div className="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#40D1FB]/10 transition-colors">
+                  <Mail className="w-[18px] h-[18px] text-[#40D1FB]" />
+                </div>
+                <div className="pt-2">
+                  <a href="mailto:info@usdc.com" className="text-slate-300 hover:text-[#40D1FB] transition-colors">info@usdc.com</a>
+                </div>
               </li>
-              <li className="flex items-center gap-3 text-gray-400 text-sm">
-                <Phone className="w-5 h-5 text-[#40D1FB]" />
-                <a href="tel:+15551234567" className="hover:text-[#40D1FB] transition-colors">(555) 123-4567</a>
+              <li className="flex items-start gap-4 text-[15px] group">
+                <div className="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#40D1FB]/10 transition-colors">
+                  <Phone className="w-[18px] h-[18px] text-[#40D1FB]" />
+                </div>
+                <div className="pt-2">
+                  <a href="tel:+15551234567" className="text-slate-300 hover:text-[#40D1FB] transition-colors">(555) 123-4567</a>
+                </div>
               </li>
-              <li className="flex items-start gap-3 text-gray-400 text-sm">
-                <MapPin className="w-5 h-5 text-[#40D1FB] flex-shrink-0 mt-0.5" />
-                <span>
-                  USDC Headquarters
-                  <br />
-                  218 NW 24th St 2nd FL
-                  <br />
+              <li className="flex items-start gap-4 text-[15px] group">
+                <div className="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#40D1FB]/10 transition-colors mt-1">
+                  <MapPin className="w-[18px] h-[18px] text-[#40D1FB]" />
+                </div>
+                <div className="text-slate-300 leading-relaxed">
+                  USDC Headquarters<br />
+                  218 NW 24th St 2nd FL<br />
                   Miami, FL 33127
-                </span>
+                </div>
               </li>
             </ul>
+          </div>
+
+          {/* Column 4: Newsletter Signup (takes 3 cols on lg) */}
+          <div className="lg:col-span-3 space-y-6">
+            <h4 className="text-lg font-semibold text-white tracking-wide">Stay Updated</h4>
+            <p className="text-slate-400 text-[14px]">
+              Subscribe to our newsletter for the latest insights and data center news.
+            </p>
+            <form className="mt-4" onSubmit={(e) => e.preventDefault()}>
+              <div className="relative">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full bg-slate-800/50 border border-slate-700/50 rounded-xl py-3.5 pl-4 pr-12 text-sm text-white focus:outline-none focus:border-[#40D1FB]/50 focus:ring-1 focus:ring-[#40D1FB]/50 transition-all placeholder:text-slate-500"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-1.5 top-1.5 bottom-1.5 w-10 flex items-center justify-center bg-[#40D1FB] hover:bg-[#0EA5E9] text-white rounded-lg transition-colors"
+                >
+                  <ArrowUpRight className="w-5 h-5" />
+                </button>
+              </div>
+            </form>
           </div>
         </div>
 
-        <div className="border-t border-slate-700 mb-8" />
-
-        <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
-          <p>&copy; 2026 USDC. All rights reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
+        {/* Footer Bottom */}
+        <div className="pt-8 border-t border-slate-800/60 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-[13px]">
+          <p>&copy; {new Date().getFullYear()} USDC. All rights reserved.</p>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
             <Link href="/privacy-policy" className="hover:text-[#40D1FB] transition-colors">Privacy Policy</Link>
             <Link href="/terms-of-service" className="hover:text-[#40D1FB] transition-colors">Terms of Service</Link>
-            <a href="#" className="hover:text-[#40D1FB] transition-colors">Cookie Policy</a>
+            <Link href="/cookies" className="hover:text-[#40D1FB] transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>

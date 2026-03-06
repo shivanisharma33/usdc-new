@@ -2,7 +2,7 @@
 
 import OptimizedImage from '../components/OptimizedImage';
 import InteractiveMap from '../components/InteractiveMap';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { Globe, Zap, ArrowUpRight, Activity, ShieldCheck, Box, Server, Lock } from 'lucide-react';
@@ -11,6 +11,10 @@ import ContactUs from '../components/ContactUs';
 const Locations = () => {
     const pathname = usePathname();
     const [, setActiveLocation] = useState<string | null>(null);
+
+    const handleLocationSelect = useCallback((locationId: string) => {
+        setActiveLocation(locationId);
+    }, []);
 
     // Scroll to section based on hash
     useEffect(() => {
@@ -86,10 +90,11 @@ const Locations = () => {
         },
         {
             id: "carolina",
-            city: "Hildebran, NC",
+            title: "North Carolina Development Site",
+            city: "North Carolina",
             address: "199 Cline Pk Ct",
-            status: "Planned",
-            capacity: "Upcoming",
+            status: "Development",
+            capacity: "200 MW",
             tier: "Tier III Designed",
             type: "Expansion Facility",
             image: "/north.png",
@@ -99,6 +104,16 @@ const Locations = () => {
             description: "Next-generation data center campus planned to support the growing demand for cloud infrastructure in the Southeast."
         }
     ];
+
+    const mapLocations = useMemo(() => locations.map(loc => ({
+        id: loc.id,
+        title: loc.title,
+        city: loc.city,
+        lat: loc.lat,
+        lng: loc.lng,
+        status: loc.status,
+        capacity: loc.capacity
+    })), []);
 
     return (
         <div className="bg-white">
@@ -141,38 +156,88 @@ const Locations = () => {
                 </div>
             </section>
 
-            {/* ── PREMIUM INTERACTIVE GLOBAL MAP (HIGH-RES IMAGE) ── */}
-            <section className="py-32 bg-white relative overflow-hidden">
-                {/* Clean Background Elements */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(64,209,251,0.1),transparent_70%)] opacity-30" />
-                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-
+            {/* ── INTERACTIVE DATA CENTER MAP ── */}
+            <section className="py-20 bg-white relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="flex flex-col items-center mb-24 text-center">
-                        <div className="inline-flex items-center gap-3 px-4 py-2 bg-slate-50 border border-slate-200 text-slate-900 rounded-full mb-6 font-black uppercase text-[9px] tracking-[0.4em]">
-                            <Globe className="w-3 h-3 text-cyan-600" />
-                            Global Infrastructure Network
-                        </div>
-                        <h2 className="text-6xl md:text-8xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-6">
-                            GLOBAL <span className="text-cyan-600">REACH.</span>
-                        </h2>
-                        <p className="text-slate-500 text-sm font-bold uppercase tracking-widest max-w-xl leading-relaxed">
-                            A highly-distributed compute ecosystem built for the next generation of AI and High Performance Computing.
-                        </p>
-                    </div>
-
-                    <div className="relative w-full">
+                    {/* Map with Overlaid Stats */}
+                    <div className="relative w-full" style={{ height: '700px' }}>
                         <InteractiveMap
-                            locations={locations.map(loc => ({
-                                id: loc.id,
-                                city: loc.city,
-                                lat: loc.lat,
-                                lng: loc.lng,
-                                status: loc.status,
-                                capacity: loc.capacity
-                            }))}
-                            onLocationSelect={(locationId) => setActiveLocation(locationId)}
+                            locations={mapLocations}
+                            onLocationSelect={handleLocationSelect}
                         />
+
+                        {/* Map Overlay Cards */}
+                        {/* Overlay Legend - Bottom Left */}
+                        <div className="absolute bottom-8 left-8 z-20">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.3 }}
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 backdrop-blur-xl bg-white/95"
+                            >
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-5 h-5 flex items-center justify-center">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40D1FB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                    </div>
+                                    <h4 className="font-bold text-slate-900">Data Center Locations</h4>
+                                </div>
+                                <div className="space-y-3">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-3 h-3 rounded-full bg-[#1e3a8a] border-2 border-[#40D1FB]" />
+                                        <span className="text-sm font-medium text-slate-700">Operational Facilities</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-3 h-3 rounded-full relative">
+                                            <div className="absolute inset-0 bg-white rounded-full border-2 border-[#fb923c]"></div>
+                                            <div className="absolute inset-[3px] bg-[#fb923c] rounded-full"></div>
+                                        </div>
+                                        <span className="text-sm font-medium text-slate-700">In Development</span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        {/* Overlay Stats Cards - Right Side */}
+                        <div className="absolute top-8 right-8 flex flex-col gap-4 z-20">
+                            {/* Active Locations Card */}
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.1 }}
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 backdrop-blur-xl bg-white/95"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
+                                        <Box className="w-6 h-6 text-cyan-500" />
+                                    </div>
+                                    <div>
+                                        <p className="text-2xl md:text-3xl font-black text-slate-900">4</p>
+                                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Active Locations</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Total Capacity Card */}
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 backdrop-blur-xl bg-white/95"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                                        <Zap className="w-6 h-6 text-green-500" />
+                                    </div>
+                                    <div>
+                                        <p className="text-2xl md:text-3xl font-black text-slate-900">400 MW</p>
+                                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Total Capacity</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
