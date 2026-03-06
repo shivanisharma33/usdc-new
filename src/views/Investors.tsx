@@ -14,46 +14,61 @@ import {
     Activity,
     Lock,
 } from 'lucide-react';
+import {
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer,
+    Area,
+    AreaChart,
+} from 'recharts';
 import ContactUs from '../components/ContactUs';
-import StockChart from '../components/StockChart';
 
 
 // Use an internal API route so Vercel-hosted site can access upstream HTTP endpoints
 const STOCK_API_URL = '/api/live-stock';
 
-type LiveStockResponse = {
+const api = (path: string) => {
+    const trimmed = path.startsWith('/') ? path : `/${path}`;
+    return trimmed;
+};
+
+interface StockDataPoint {
+    date: string;
+    price: number;
+    volume: number;
+}
+
+interface LiveStockAPIResponse {
     symbol: string;
     price: number;
-    open: number;
-    high: number;
-    low: number;
-    volume: number;
-    previousClose: number;
     change: number;
     changePercent: number;
+    volume: number;
+    high: number | null;
+    low: number | null;
+    open: number;
+    previousClose?: number | null;
     lastUpdated: string;
-    source: string;
-};
+    source?: string;
+}
 
-const usdFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 3,
-});
-
-const volumeFormatter = new Intl.NumberFormat('en-US');
-
-const formatUsd = (value?: number) => (typeof value === 'number' ? usdFormatter.format(value) : '--');
-const formatVolume = (value?: number) => (typeof value === 'number' ? volumeFormatter.format(value) : '--');
-const formatLastUpdated = (value?: string) => {
-    if (!value) return '--';
-    return `${new Date(value).toLocaleString('en-US', {
-        dateStyle: 'medium',
-        timeStyle: 'short',
-        timeZone: 'UTC',
-    })} UTC`;
-};
+interface StockData {
+    symbol: string;
+    price: number;
+    change: number;
+    changePercent: number;
+    volume: number;
+    high: number;
+    low: number;
+    open: number;
+    lastUpdated: string;
+    marketCap: string;
+    weekHigh52: string;
+    weekLow52: string;
+    avgVolume: string;
+}
 
 const Investors = () => {
     const heroRef = useRef(null);
@@ -63,38 +78,238 @@ const Investors = () => {
     });
     const heroY = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
     const heroOpacity = useTransform(heroScroll, [0, 1], [1, 0]);
-    const [stockData, setStockData] = useState<LiveStockResponse | null>(null);
-    const [isStockLoading, setIsStockLoading] = useState(true);
+    const [chartPeriod, setChartPeriod] = useState<"1D" | "1W" | "1M" | "3M" | "6M" | "ALL">("1M");
+    const [liveStockData, setLiveStockData] = useState<StockData | null>(null);
+    const [isLoadingStock, setIsLoadingStock] = useState(true);
     const [stockError, setStockError] = useState<string | null>(null);
+    const [historicalData, setHistoricalData] = useState<StockDataPoint[]>([]);
+    const [cachedData, setCachedData] = useState<Record<string, StockDataPoint[]>>({});
+    const [isLoadingChart, setIsLoadingChart] = useState(false);
+    const cachedDataRef = useRef<Record<string, StockDataPoint[]>>({});
 
     useEffect(() => {
         const fetchStockData = async () => {
             try {
+                setIsLoadingStock(true);
                 setStockError(null);
-                const response = await fetch(STOCK_API_URL, { cache: 'no-store' });
+
+                const response = await fetch(api(STOCK_API_URL), { cache: 'no-store' });
+
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
+                    throw new Error('Failed to fetch stock data');
                 }
-                const data = (await response.json()) as LiveStockResponse;
-                setStockData(data);
-            } catch (error) {
-                setStockError(error instanceof Error ? error.message : 'Failed to load live stock data');
+
+                const contentType = response.headers.get('content-type') || '';
+                if (!contentType.includes('application/json')) {
+                    const text = await response.text();
+                    throw new Error(`Unexpected response from /api/live-stock: ${text.slice(0, 120)}`);
+                }
+
+                const data: LiveStockAPIResponse = await response.json();
+
+                const lastUpdated = new Date(data.lastUpdated || Date.now()).toLocaleString('en-US', {
+                    month: '2-digit',
+                    day: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true,
+                });
+
+                const stockInfo: StockData = {
+                    symbol: data.symbol || 'DGXX',
+                    price: Number(data.price),
+                    change: Number(data.change),
+                    changePercent: Number(data.changePercent),
+                    volume: Number(data.volume),
+                    high: Number(data.high ?? data.price),
+                    low: Number(data.low ?? data.price),
+                    open: Number(data.open ?? data.price),
+                    lastUpdated,
+                    marketCap: '$450M',
+                    weekHigh52: '$32.15',
+                    weekLow52: '$18.40',
+                    avgVolume: '1.8M',
+                };
+
+                setLiveStockData(stockInfo);
+            } catch (err) {
+                console.error('Error fetching stock data:', err);
+                setStockError('Unable to load stock data. Please try again later.');
             } finally {
-                setIsStockLoading(false);
+                setIsLoadingStock(false);
             }
         };
 
         fetchStockData();
-        const intervalId = window.setInterval(fetchStockData, 30000);
+        const interval = setInterval(fetchStockData, 60 * 1000);
 
-        return () => window.clearInterval(intervalId);
+        return () => clearInterval(interval);
     }, []);
 
-    const isPositiveChange = (stockData?.change ?? 0) >= 0;
-    const changePrefix = isPositiveChange ? '+' : '';
-    const changeLabel = stockData
-        ? `${changePrefix}${stockData.change.toFixed(3)} (${changePrefix}${stockData.changePercent.toFixed(2)}%) Today`
-        : 'Live data unavailable';
+    useEffect(() => {
+        cachedDataRef.current = cachedData;
+    }, [cachedData]);
+
+    useEffect(() => {
+        const fetchHistoricalData = async () => {
+            try {
+                if (cachedDataRef.current[chartPeriod]) {
+                    setHistoricalData(cachedDataRef.current[chartPeriod]);
+                    return;
+                }
+
+                setIsLoadingChart(true);
+                const today = new Date();
+                const dataPoints: StockDataPoint[] = [];
+
+                if (chartPeriod === '1D') {
+                    setIsLoadingChart(false);
+                    return;
+                }
+
+                let daysToFetch: number;
+                let intervalDays: number;
+
+                switch (chartPeriod) {
+                    case '1W':
+                        daysToFetch = 7;
+                        intervalDays = 1;
+                        break;
+                    case '1M':
+                        daysToFetch = 30;
+                        intervalDays = 2;
+                        break;
+                    case '3M':
+                        daysToFetch = 90;
+                        intervalDays = 4;
+                        break;
+                    case '6M':
+                        daysToFetch = 180;
+                        intervalDays = 7;
+                        break;
+                    case 'ALL':
+                        daysToFetch = 730;
+                        intervalDays = 21;
+                        break;
+                    default:
+                        daysToFetch = 30;
+                        intervalDays = 2;
+                }
+
+                const dates: string[] = [];
+                for (let i = daysToFetch - 1; i >= 0; i -= intervalDays) {
+                    const date = new Date(today);
+                    date.setDate(date.getDate() - i);
+
+                    const dayOfWeek = date.getDay();
+                    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                        dates.push(date.toISOString().split('T')[0]);
+                    }
+                }
+
+                const batchSize = 10;
+                const results: (unknown | null)[] = [];
+
+                for (let i = 0; i < dates.length; i += batchSize) {
+                    const batch = dates.slice(i, i + batchSize);
+                    const batchPromises = batch.map(dateString =>
+                        fetch(api(`/api/live-stock?date=${dateString}`))
+                            .then(res => (res.ok ? res.json() : null))
+                            .catch(() => null)
+                    );
+
+                    const batchResults = await Promise.all(batchPromises);
+                    results.push(...batchResults);
+
+                    if (i + batchSize < dates.length) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                    }
+                }
+
+                results.forEach((data, index) => {
+                    if (data && typeof data === 'object' && 'status' in data && data.status === 'OK') {
+                        const dateStr = dates[index];
+                        const date = new Date(dateStr);
+
+                        const apiData = data as {
+                            status: string;
+                            close?: number;
+                            preMarket?: number;
+                            high?: number;
+                            open?: number;
+                            volume?: number;
+                        };
+
+                        const currentPrice = apiData.close ?? apiData.preMarket ?? apiData.high ?? apiData.open;
+
+                        if (currentPrice) {
+                            dataPoints.push({
+                                date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                                price: Number(currentPrice.toFixed(2)),
+                                volume: apiData.volume || 0,
+                            });
+                        }
+                    }
+                });
+
+                if (dataPoints.length > 0) {
+                    setHistoricalData(dataPoints);
+                    setCachedData(prev => {
+                        const newCache = { ...prev, [chartPeriod]: dataPoints };
+                        cachedDataRef.current = newCache;
+                        return newCache;
+                    });
+                } else {
+                    setHistoricalData([]);
+                }
+
+                setIsLoadingChart(false);
+            } catch {
+                setIsLoadingChart(false);
+            }
+        };
+
+        fetchHistoricalData();
+    }, [chartPeriod]);
+
+    useEffect(() => {
+        if (chartPeriod === '1D' && liveStockData && !cachedDataRef.current['1D']) {
+            const dataPoints: StockDataPoint[] = [];
+            const intervals = 14;
+
+            for (let i = 0; i <= intervals; i++) {
+                const time = 9.5 + (i * 0.5);
+                const hour = Math.floor(time);
+                const minute = (time % 1) * 60;
+                const timeStr = `${hour}:${minute === 0 ? '00' : '30'}`;
+                const progress = i / intervals;
+                let price;
+
+                if (progress < 0.3) {
+                    price = liveStockData.open + (liveStockData.high - liveStockData.open) * (progress / 0.3);
+                } else if (progress < 0.7) {
+                    price = liveStockData.high - (liveStockData.high - liveStockData.low) * ((progress - 0.3) / 0.4);
+                } else {
+                    price = liveStockData.low + (liveStockData.price - liveStockData.low) * ((progress - 0.7) / 0.3);
+                }
+
+                dataPoints.push({
+                    date: timeStr,
+                    price: Number(price.toFixed(2)),
+                    volume: Math.floor(liveStockData.volume / intervals),
+                });
+            }
+
+            setHistoricalData(dataPoints);
+            setCachedData(prev => {
+                const newCache = { ...prev, '1D': dataPoints };
+                cachedDataRef.current = newCache;
+                return newCache;
+            });
+        }
+    }, [chartPeriod, liveStockData]);
 
     const resources = [
         {
@@ -153,6 +368,28 @@ const Investors = () => {
         }
     ];
 
+    const CustomTooltip = ({
+        active,
+        payload,
+    }: {
+        active?: boolean;
+        payload?: Array<{ payload: { date: string }; value: number }>;
+    }) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-lg">
+                    <p className="text-sm font-semibold text-slate-900">
+                        {payload[0].payload.date}
+                    </p>
+                    <p className="text-lg font-bold text-cyan-500">
+                        ${payload[0].value.toFixed(2)}
+                    </p>
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
         <div className="bg-white">
             {/* ── CINEMATIC INVESTOR HERO (Navbar Synchronized) ── */}
@@ -197,148 +434,238 @@ const Investors = () => {
                 <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
             </section>
 
-            {/* ── Stock Information Card Section ── */}
-            <section className="py-32 bg-white relative overflow-hidden">
+            {/* ── Stock Information Card + Chart (Recharts, matching shared implementation) ── */}
+            <section
+                id="stock-info"
+                className="py-24 bg-gradient-to-b from-white to-gray-50 border-y border-slate-100"
+            >
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="text-5xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">Stock Information</h2>
-                        <p className="text-slate-500 font-medium text-lg max-w-2xl mx-auto">Track USDC&apos;s real-time stock performance and key financial metrics</p>
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">
+                            Stock Information
+                        </h2>
+                        <p className="text-slate-500 font-medium text-lg max-w-2xl mx-auto">
+                            Track USDC&apos;s real-time stock performance and key financial metrics
+                        </p>
                     </div>
 
-                    {/* Stock Info Card */}
-                    <div className="max-w-2xl mx-auto">
-                        <div className="bg-white border border-slate-200 rounded-3xl p-8 md:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.08)]">
-                            {/* Header with Symbol and Timestamp */}
-                            <div className="flex items-start justify-between mb-8 pb-8 border-b border-slate-100">
-                                <div>
-                                    <h3 className="text-sm font-black text-cyan-600 uppercase tracking-widest mb-2">Nasdaq</h3>
-                                    <p className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">{stockData?.symbol ?? 'DGXX'}</p>
-                                </div>
-                                <p className="text-xs md:text-sm font-bold text-slate-400 text-right">{formatLastUpdated(stockData?.lastUpdated)}</p>
-                            </div>
+                    <div className="max-w-4xl mx-auto mb-12 px-4">
+                        <motion.div
+                            whileHover={{ scale: 1.01 }}
+                            className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-200"
+                        >
+                            {isLoadingStock ? (
+                                <div className="space-y-4 relative overflow-hidden">
+                                    <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"></div>
 
-                            {/* Price Section */}
-                            <div className="mb-8">
-                                <p className="text-6xl md:text-7xl font-black text-slate-900 tracking-tighter mb-4">
-                                    {isStockLoading ? '--' : formatUsd(stockData?.price)}
-                                </p>
-                                <div className="flex items-center gap-3">
-                                    <div className={`px-4 py-2 rounded-full text-sm font-black tracking-wide flex items-center gap-2 ${isPositiveChange ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
-                                        <span className={`w-2 h-2 rounded-full ${isPositiveChange ? 'bg-emerald-500' : 'bg-rose-500'}`}></span>
-                                        {isStockLoading ? 'Loading...' : `${changePrefix}${stockData?.change.toFixed(2)} (${changePrefix}${stockData?.changePercent.toFixed(2)}%)`}
+                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-4 border-b border-gray-200">
+                                        <div className="space-y-2">
+                                            <div className="h-6 bg-gray-200 rounded w-32 animate-pulse"></div>
+                                            <div className="h-12 bg-gray-300 rounded w-40 animate-pulse"></div>
+                                        </div>
+                                        <div className="space-y-2 text-left md:text-right">
+                                            <div className="h-4 bg-gray-200 rounded w-36 animate-pulse"></div>
+                                            <div className="h-10 bg-gray-300 rounded w-32 ml-auto animate-pulse"></div>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+                                        {[...Array(6)].map((_, i) => (
+                                            <div key={i} className="space-y-2">
+                                                <div className="h-3 bg-gray-200 rounded w-16 animate-pulse"></div>
+                                                <div className="h-6 bg-gray-300 rounded w-20 animate-pulse"></div>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
-                            </div>
+                            ) : stockError ? (
+                                <div className="text-center py-8">
+                                    <p className="text-xl font-semibold text-red-500">{stockError}</p>
+                                </div>
+                            ) : liveStockData ? (
+                                <div className="space-y-4">
+                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-4 border-b border-gray-200">
+                                        <div>
+                                            <h3 className="text-xl md:text-2xl font-bold text-cyan-500 mb-1">
+                                                Nasdaq: {liveStockData.symbol}
+                                            </h3>
+                                            <p className="text-4xl md:text-5xl font-bold text-slate-900">
+                                                ${liveStockData.price.toFixed(2)}
+                                            </p>
+                                        </div>
+                                        <div className="text-left md:text-right">
+                                            <p className="text-sm text-slate-500 mb-1">
+                                                {liveStockData.lastUpdated}
+                                            </p>
+                                            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold ${liveStockData.changePercent >= 0
+                                                ? 'bg-green-100 text-green-600'
+                                                : 'bg-red-100 text-red-600'
+                                                }`}>
+                                                <span className="text-xl">
+                                                    {liveStockData.changePercent >= 0 ? '▲' : '▼'}
+                                                </span>
+                                                <span>
+                                                    {liveStockData.changePercent >= 0 ? '+' : ''}${liveStockData.change.toFixed(2)} ({liveStockData.changePercent.toFixed(2)}%)
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            {/* Key Metrics Grid */}
-                            <div className="grid grid-cols-2 gap-6 pt-8 border-t border-slate-100">
-                                <div className="space-y-2">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Change</p>
-                                    <p className={`text-2xl font-black ${isPositiveChange ? 'text-emerald-600' : 'text-rose-600'}`}>
-                                        {isStockLoading ? '--' : `${changePrefix}${stockData?.change.toFixed(2)}`}
-                                    </p>
-                                </div>
-                                <div className="space-y-2">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Change %</p>
-                                    <p className={`text-2xl font-black ${isPositiveChange ? 'text-emerald-600' : 'text-rose-600'}`}>
-                                        {isStockLoading ? '--' : `${changePrefix}${stockData?.changePercent.toFixed(2)}%`}
-                                    </p>
-                                </div>
-                                <div className="space-y-2">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Volume</p>
-                                    <p className="text-2xl font-black text-slate-900">
-                                        {isStockLoading ? '--' : `${(Number(stockData?.volume) / 1000000).toFixed(3)}M`}
-                                    </p>
-                                </div>
-                                <div className="space-y-2">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Open</p>
-                                    <p className="text-2xl font-black text-slate-900">
-                                        {isStockLoading ? '--' : formatUsd(stockData?.open)}
-                                    </p>
-                                </div>
-                                <div className="space-y-2">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Today&apos;s High</p>
-                                    <p className="text-2xl font-black text-slate-900">
-                                        {isStockLoading ? '--' : formatUsd(stockData?.high)}
-                                    </p>
-                                </div>
-                                <div className="space-y-2">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Today&apos;s Low</p>
-                                    <p className="text-2xl font-black text-slate-900">
-                                        {isStockLoading ? '--' : formatUsd(stockData?.low)}
-                                    </p>
-                                </div>
-                            </div>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+                                        <div className="space-y-1">
+                                            <p className="text-xs md:text-sm text-slate-500 font-medium">Change</p>
+                                            <p className={`text-lg md:text-xl font-bold ${liveStockData.changePercent >= 0 ? 'text-green-600' : 'text-red-600'
+                                                }`}>
+                                                {liveStockData.changePercent >= 0 ? '▲' : '▼'} ${Math.abs(liveStockData.change).toFixed(2)}
+                                            </p>
+                                        </div>
 
-                            {/* Source and Status */}
-                            {stockError && (
-                                <div className="mt-6 pt-6 border-t border-slate-100 text-center">
-                                    <p className="text-xs font-bold text-rose-600 uppercase tracking-widest">
-                                        Live API unavailable ({stockError})
-                                    </p>
+                                        <div className="space-y-1">
+                                            <p className="text-xs md:text-sm text-slate-500 font-medium">Change %</p>
+                                            <p className={`text-lg md:text-xl font-bold ${liveStockData.changePercent >= 0 ? 'text-green-600' : 'text-red-600'
+                                                }`}>
+                                                {liveStockData.changePercent.toFixed(2)}%
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <p className="text-xs md:text-sm text-slate-500 font-medium">Volume</p>
+                                            <p className="text-lg md:text-xl font-bold text-slate-900">
+                                                {(liveStockData.volume / 1_000_000).toFixed(3)}M
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <p className="text-xs md:text-sm text-slate-500 font-medium">Open</p>
+                                            <p className="text-lg md:text-xl font-bold text-slate-900">
+                                                ${liveStockData.open.toFixed(2)}
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <p className="text-xs md:text-sm text-slate-500 font-medium">Today&apos;s High</p>
+                                            <p className="text-lg md:text-xl font-bold text-slate-900">
+                                                ${liveStockData.high.toFixed(2)}
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <p className="text-xs md:text-sm text-slate-500 font-medium">Today&apos;s Low</p>
+                                            <p className="text-lg md:text-xl font-bold text-slate-900">
+                                                ${liveStockData.low.toFixed(2)}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            )}
-                        </div>
+                            ) : null}
+                        </motion.div>
                     </div>
-                </div>
-            </section>
 
-            {/* ── Real-World Stock Performance (DGXX) ── */}
-            <section className="py-24 bg-slate-50 border-y border-slate-100">
-                <div className="max-w-7xl mx-auto px-6">
-                    {/* Stock Performance Heading */}
-                    <div className="text-center mb-16 px-4">
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-4">
-                            Stock <span className="text-cyan-600">Performance</span>
-                        </h2>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="bg-white rounded-3xl shadow-2xl p-4 md:p-8 max-w-6xl mx-auto border-2 border-gray-200 backdrop-blur-sm"
+                        style={{
+                            boxShadow: '0 20px 60px -15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(6, 182, 212, 0.1)'
+                        }}
+                    >
+                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
+                            <h3 className="text-xl md:text-2xl font-bold text-slate-900">Stock Performance</h3>
 
-                    {/* Full-Width Graph Card below centered text */}
-                    <div className="bg-sky-50 p-6 md:p-16 shadow-2xl relative overflow-hidden group border border-sky-100 w-full rounded-3xl md:rounded-none">
-
-
-                        <div className="flex flex-col md:flex-row justify-between items-center mb-16 relative z-10 gap-8">
-                            <div className="space-y-2 text-center md:text-left">
-                                <h4 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter">
-                                    {isStockLoading ? 'Loading…' : formatUsd(stockData?.price)}
-                                </h4>
-                                <span className={`text-xs md:text-sm font-bold flex items-center justify-center md:justify-start gap-1 ${isPositiveChange ? 'text-emerald-600' : 'text-rose-600'}`}>
-                                    <TrendingUp className="w-4 h-4" /> {isStockLoading ? 'Updating live feed…' : changeLabel}
-                                </span>
-                            </div>
-                            <div className="flex bg-slate-900/5 p-1.5 rounded-2xl border border-slate-900/10 backdrop-blur-sm">
-                                {['1M', '3M', '6M'].map(t => (
-                                    <button key={t} className={`px-6 py-2.5 text-[10px] font-black rounded-xl transition-all ${t === '6M' ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/30' : 'text-slate-400 hover:text-slate-900'}`}>
-                                        {t}
-                                    </button>
+                            <div className="flex gap-1 bg-slate-100 p-1 rounded-xl w-full md:w-auto">
+                                {(['1D', '1W', '1M', '3M', '6M', 'ALL'] as const).map((period) => (
+                                    <motion.button
+                                        key={period}
+                                        onClick={() => setChartPeriod(period)}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className={`flex-1 md:flex-none px-4 md:px-5 py-2 rounded-lg font-bold text-xs md:text-sm transition-all duration-300 ${chartPeriod === period
+                                            ? 'bg-white text-cyan-500 shadow-lg shadow-cyan-500/20 border border-cyan-500/20'
+                                            : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                                            }`}
+                                    >
+                                        {period}
+                                    </motion.button>
                                 ))}
                             </div>
                         </div>
-                        {stockError && (
-                            <p className="text-[12px] font-black text-rose-500 uppercase tracking-widest mb-10 text-center relative z-10">
-                                Live API unavailable ({stockError})
-                            </p>
-                        )}
 
-                        {/* Enhanced Stock Chart Component - making it larger for full viewport feel */}
-                        <div className="h-[250px] sm:h-[350px] md:h-[400px] w-full relative mb-12">
-                            <StockChart
-                                currentPrice={stockData?.price ?? 2.77}
-                                changePercent={stockData?.changePercent ?? 0}
-                            />
+                        <div className="h-[400px] md:h-[500px] w-full relative bg-gradient-to-b from-slate-50 to-white rounded-xl p-4">
+                            {isLoadingChart && historicalData.length === 0 && (
+                                <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-10 rounded-xl">
+                                    <div className="text-center">
+                                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto mb-2"></div>
+                                        <p className="text-sm text-slate-500">Loading chart data...</p>
+                                    </div>
+                                </div>
+                            )}
+                            {historicalData.length === 0 && !isLoadingChart ? (
+                                <div className="flex flex-col items-center justify-center h-full space-y-3 px-4">
+                                    <div className="text-slate-400">
+                                        <svg className="w-16 h-16 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                        </svg>
+                                    </div>
+                                    <div className="text-center">
+                                        <p className="text-slate-600 font-medium mb-1">No historical data available</p>
+                                        <p className="text-sm text-slate-500">
+                                            Historical data for {chartPeriod} period is not yet available. <br className="hidden md:block" />
+                                            Try a shorter time period (1D, 1W, or 1M).
+                                        </p>
+                                    </div>
+                                </div>
+                            ) : historicalData.length > 0 ? (
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <AreaChart data={historicalData}>
+                                        <defs>
+                                            <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.3} />
+                                                <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
+                                            </linearGradient>
+                                        </defs>
+                                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                                        <XAxis
+                                            dataKey="date"
+                                            stroke="#94a3b8"
+                                            style={{ fontSize: "12px" }}
+                                        />
+                                        <YAxis
+                                            stroke="#94a3b8"
+                                            style={{ fontSize: "12px" }}
+                                            domain={["auto", "auto"]}
+                                            tickFormatter={(value) => `$${value.toFixed(2)}`}
+                                        />
+                                        <Tooltip content={<CustomTooltip />} />
+                                        <Area
+                                            type="monotone"
+                                            dataKey="price"
+                                            stroke="#06b6d4"
+                                            strokeWidth={3}
+                                            fill="url(#colorPrice)"
+                                            animationDuration={1000}
+                                        />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                            ) : null}
                         </div>
 
-                        <div className="flex flex-wrap justify-center md:justify-between items-center gap-6 text-[10px] font-black text-slate-400 uppercase tracking-widest mt-12 border-t border-slate-200 pt-10">
-                            <div className="flex gap-12">
-                                <span>Vol: {formatVolume(stockData?.volume)}</span>
-                                <span>MCAP: $148.2M</span>
-                            </div>
-                            <div className="flex gap-12">
-                                <span>Source: {stockData?.source ? stockData.source.replace(/_/g, ' ').toUpperCase() : '--'}</span>
-                                <span>Updated: {formatLastUpdated(stockData?.lastUpdated)}</span>
+                        <div className="mt-6 pt-6 border-t border-gray-200">
+                            <div className="flex justify-between items-center">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 rounded-full bg-cyan-500"></div>
+                                    <span className="text-sm text-slate-600">Stock Price (USD)</span>
+                                </div>
+                                <div className="text-right">
+                                    <p className="text-xs text-slate-500">Last Updated</p>
+                                    <p className="text-sm font-semibold text-slate-900">
+                                        {liveStockData?.lastUpdated ?? "Waiting for live data..."}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 

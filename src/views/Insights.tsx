@@ -23,69 +23,32 @@ const Insights = () => {
 
     const allInsights = [
         {
-            title: "The Future of Liquid Cooling in AI Data Centers",
-            description: "As power densities climb, traditional air cooling is reaching its limits. Explore how USDC is pioneering liquid immersion to sustain next-gen workloads.",
-            category: "Technology",
-            date: "May 24, 2024",
-            author: "Sarah Johnson",
-            image: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?auto=format&fit=crop&q=80&w=2070",
-        },
-        {
-            title: "Converting Stranded Energy into Digital Gold",
-            description: "How we identify underutilized power assets and transform them into Tier III computing hubs with minimal grid impact.",
-            category: "Sustainability",
-            date: "May 18, 2024",
-            author: "Michael Chen",
-            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
-        },
-        {
-            title: "USDC Expands Footprint in Northern Virginia",
-            description: "Announcement of our latest 40MW facility designed specifically for hyperscale cloud providers and AI research firms.",
+            title: "Microsoft Expects to Spend $80 Bn on Ai-enabled data centers in fiscal 2025",
+            description: "Microsoft announces massive investment in AI-enabled data center infrastructure, signaling accelerated momentum in enterprise AI adoption and hyperscale computing expansion.",
             category: "Industry News",
-            date: "May 12, 2024",
-            author: "David Ross",
-            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070",
+            date: "January 3, 2025",
+            author: "Microsoft",
+            image: "/first-news.webp",
         },
         {
-            title: "Achieving Net Zero: A Real-World Case Study",
-            description: "A deep dive into the operational metrics of our Ohio facility, which recently celebrated one year of carbon-negative operations.",
-            category: "Case Studies",
-            date: "May 05, 2024",
-            author: "Emma Wilson",
-            image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=2070",
-        },
-        {
-            title: "AI-Driven Efficiency: Optimization at the Edge",
-            description: "Using machine learning algorithms to predict and manage thermal loads in real-time across multiple geographic regions.",
-            category: "Technology",
-            date: "April 28, 2024",
-            author: "Justin Blake",
-            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070",
-        },
-        {
-            title: "Security in Hyperscale: Future-Proofing Data",
-            description: "Reviewing the multi-layered security protocols being implemented to protect enterprise-grade AI training models.",
+            title: "McKinsey & Co on AI power: Expanding data center capacity to meet growing demand",
+            description: "McKinsey analysis reveals critical infrastructure gaps and expansion strategies needed to meet surging global demand for AI computing capacity and low-latency workloads.",
             category: "Industry News",
-            date: "April 20, 2024",
-            author: "Robert Vance",
-            image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=2070",
+            date: "January 2, 2025",
+            author: "McKinsey & Company",
+            image: "/sec-news.webp",
         },
         {
-            title: "The Impact of Cloud Edge on Local Economies",
-            description: "How our data center deployments are fostering digital growth and high-tech job creation in rural corridors.",
-            category: "Case Studies",
-            date: "April 15, 2024",
-            author: "Alicia Keys",
-            image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2070",
+            title: "AI Power: Expanding data center capacity to meet growing demand",
+            description: "Comprehensive overview of data center modernization strategies, capacity planning, and infrastructure investments required to support the explosive growth in AI workloads.",
+            category: "Technology",
+            date: "December 28, 2024",
+            author: "USDC team",
+            image: "/third-news.webp",
         },
-        {
-            title: "Integrating Renewables into the Grid Mix",
-            description: "Exploring the technical challenges and triumphs of direct-wiring wind and solar farms into high-density server clusters.",
-            category: "Sustainability",
-            date: "April 08, 2024",
-            author: "Samuel Lee",
-            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
-        }
+       
+     
+      
     ];
 
     const filteredInsights = activeCategory === "All"

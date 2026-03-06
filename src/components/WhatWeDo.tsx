@@ -47,7 +47,7 @@ const WhatWeDo = () => {
                     <div className="flex-1 w-full max-w-2xl relative">
                         <div className="relative w-full h-auto overflow-hidden rounded-[2rem] shadow-2xl group">
                             <OptimizedImage
-                                src="/image%20(11).jpg"
+                                src="/Arms 200.png"
                                 alt="Data Center Facility"
                                 width={1200}
                                 height={1500}

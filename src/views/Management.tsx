@@ -1,12 +1,23 @@
 'use client';
 
 import OptimizedImage from '../components/OptimizedImage';
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, ChevronDown, Globe, Award, ShieldCheck, Zap } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, ChevronDown, Globe, Award, ShieldCheck, Zap, X } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
+interface TeamMember {
+    name: string;
+    role: string;
+    bio: string;
+    image: string;
+    linkedin?: string;
+    email?: string;
+}
+
 const Management = () => {
+    const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+    
     // Parallax Hero
     const heroRef = useRef(null);
     const { scrollYProgress: heroScroll } = useScroll({
@@ -19,7 +30,7 @@ const Management = () => {
     const team = [
         {
             name: "Michel Amar",
-            role: "Chief Executive Officer ",
+            role: "Chief Executive Officer",
             bio: "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance. In 2019, Michel partnered with Brookstone, a novelty retailer, in developing exclusive, technologically advanced products for their consumer electronics market.",
             image: "/michal.webp",
             linkedin: "https://www.linkedin.com/search/results/all/?keywords=Michel%20Amar%20DigiPowerX",
@@ -28,7 +39,7 @@ const Management = () => {
         {
             name: "Alec Amar",
             role: "President",
-            bio: "Mr. Amar is an entrepreneur and infrastructure executive with deep experience in energy, high-density data-center development, and advanced digital infrastructure. Under Mr. Amar's leadership, DigiPowerX has expanded into multiple U.S. markets with a growing portfolio of high-power data-center properties, including the development of a Tier III campus in Columbiana, Alabama; the modernization and repurposing of critical-power infrastructure in New York; and a national pipeline tied to power-station redevelopment, modular AI-ready facilities, and long-term energy-backed compute sites. Mr. Amar guided the creation of DigiPowerX's proprietary ARMS 200 modular Tier III data-center system, engineered specifically for ultra-dense GPU clusters such as Nvidia B200/B300 deployments.",
+            bio: "Mr. Amar is an entrepreneur and infrastructure executive with deep experience in energy, high-density data-center development, and advanced digital infrastructure. Under Mr. Amar's leadership, DigiPowerX has expanded into multiple U.S. markets with a growing portfolio of high-power data-center properties, including the development of a Tier III campus in Columbiana, Alabama; the modernization and repurposing of critical-power infrastructure in New York; and a national pipeline tied to power-station redevelopment, modular AI-ready facilities, and long-term energy-backed compute sites.\n\nMr. Amar guided the creation of DigiPowerX's proprietary ARMS 200 modular Tier III data-center system, engineered specifically for ultra-dense GPU clusters such as Nvidia B200/B300 deployments. His work bridges the gap between power system design, mission-critical facility engineering, and the rapidly accelerating demands of AI and high-performance computing.\n\nAn experienced operator with roots in entrepreneurship, Mr. Amar previously built and scaled multiple ventures across wholesale distribution, logistics, manufacturing, and retail channels. His background gives DigiPowerX a unique blend of strategic vision and hands-on execution—allowing the company to move infrastructure projects from conception to deployment with uncommon speed and efficiency.\n\nAt DigiPowerX, Mr. Amar focuses on power acquisition, large-scale project execution, capital strategy, and forging the partnerships required to build a national footprint in AI-driven digital infrastructure. His vision centers on the convergence of clean power, high-density compute, and sustainable next-generation data centers, positioning DigiPowerX to lead the transformation of AI infrastructure in the United States.",
             image: "/alec.webp",
             linkedin: "https://www.linkedin.com/search/results/all/?keywords=Alec%20Amar%20DigiPowerX",
             email: "alec@digipowerx.com"
@@ -179,11 +190,18 @@ const Management = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-7xl mx-auto">
                         {team.map((member, i) => (
-                            <LeadershipCard key={i} index={i} {...member} />
+                            <LeadershipCard key={i} index={i} {...member} onProfileClick={() => setSelectedMember(member)} />
                         ))}
                     </div>
                 </div>
             </section>
+
+            {/* BIO Modal Popup */}
+            <AnimatePresence>
+                {selectedMember && (
+                    <BioModal member={selectedMember} onClose={() => setSelectedMember(null)} />
+                )}
+            </AnimatePresence>
 
             {/* Vision Quote Section */}
             <section className="bg-white py-32 relative text-center border-t border-slate-100">
@@ -219,9 +237,10 @@ interface LeadershipCardProps {
     role: string;
     bio: string;
     image: string;
+    onProfileClick?: () => void;
 }
 
-const LeadershipCard = ({ index, name, role, bio, image }: LeadershipCardProps) => {
+const LeadershipCard = ({ index, name, role, bio, image, onProfileClick }: LeadershipCardProps) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -267,12 +286,13 @@ const LeadershipCard = ({ index, name, role, bio, image }: LeadershipCardProps) 
                     </p>
 
                     <div className="pt-4 flex items-center justify-end border-t border-slate-100">
-                        <motion.div
+                        <motion.button
+                            onClick={onProfileClick}
                             whileHover={{ x: 5 }}
-                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-900 cursor-pointer"
+                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-900 cursor-pointer hover:text-cyan-500 transition-colors"
                         >
                             Full Profile <ArrowUpRight className="w-3 h-3 text-cyan-500" />
-                        </motion.div>
+                        </motion.button>
                     </div>
                 </div>
             </div>
@@ -285,3 +305,83 @@ const LeadershipCard = ({ index, name, role, bio, image }: LeadershipCardProps) 
 };
 
 export default Management;
+
+// ─── BIO Modal Component - DigiPowerX Style ───
+interface BioModalProps {
+    member: {
+        name: string;
+        role: string;
+        bio: string;
+        image: string;
+        linkedin?: string;
+        email?: string;
+    };
+    onClose: () => void;
+}
+
+const BioModal = ({ member, onClose }: BioModalProps) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
+        >
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-4xl bg-white rounded-lg shadow-2xl overflow-hidden"
+            >
+                {/* Close Button */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-6 right-6 z-20 p-2 hover:bg-slate-100 rounded-full transition-all"
+                >
+                    <X className="w-6 h-6 text-slate-600" />
+                </button>
+
+                {/* Main Content */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-0">
+                    {/* Image Section */}
+                    <div className="hidden md:flex md:col-span-1 bg-slate-100 items-center justify-center p-8">
+                        <div className="relative w-48 h-48 overflow-hidden rounded-lg shadow-md">
+                            <OptimizedImage
+                                src={member.image}
+                                alt={member.name}
+                                width={300}
+                                height={300}
+                                className="w-full h-full object-cover object-top"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="md:col-span-3 p-8 md:p-12 space-y-6 max-h-[80vh] overflow-y-auto">
+                        {/* Header */}
+                        <div className="space-y-2">
+                            <h2 className="text-4xl font-bold text-slate-900">
+                                {member.name}
+                            </h2>
+                            <p className="text-lg font-semibold text-slate-600">
+                                {member.role}
+                            </p>
+                        </div>
+
+                        {/* Bio */}
+                        <div className="space-y-4 text-slate-700 leading-relaxed">
+                            {member.bio.split('\n\n').map((paragraph, idx) => (
+                                <p key={idx} className="text-base font-normal">
+                                    {paragraph}
+                                </p>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+};

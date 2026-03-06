@@ -1,10 +1,19 @@
 import { NextResponse } from 'next/server';
 
-const UPSTREAM = process.env.LIVE_STOCK_UPSTREAM ?? 'http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com/api/live-stock';
+const LIVE_UPSTREAM = process.env.LIVE_STOCK_UPSTREAM ?? 'http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com/api/live-stock';
+const HISTORICAL_UPSTREAM = process.env.HISTORICAL_STOCK_UPSTREAM ?? 'http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com/api/stock';
 
 export async function GET(request: Request) {
   try {
-    const res = await fetch(UPSTREAM, { cache: 'no-store' });
+    const incomingUrl = new URL(request.url);
+    const date = incomingUrl.searchParams.get('date');
+
+    const targetUrl = new URL(date ? HISTORICAL_UPSTREAM : LIVE_UPSTREAM);
+    if (date) {
+      targetUrl.searchParams.set('date', date);
+    }
+
+    const res = await fetch(targetUrl.toString(), { cache: 'no-store' });
 
     const contentType = res.headers.get('content-type') || 'application/json';
     const text = await res.text();
@@ -17,7 +26,7 @@ export async function GET(request: Request) {
       try {
         const data = JSON.parse(text);
         return NextResponse.json(data);
-      } catch (e) {
+      } catch {
         return NextResponse.json({ error: 'Invalid JSON from upstream' }, { status: 502 });
       }
     }

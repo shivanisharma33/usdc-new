@@ -61,22 +61,19 @@ const RedefiningSection = () => {
                     {/* Image / Visual Content */}
                     <div className="flex-1 relative group">
                         {/* More subtle glow for light mode */}
-                        <div className="absolute -inset-4 bg-cyan-400/10 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition duration-700" />
-
-                        <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-xl">
-                            <OptimizedImage
-                                src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070"
-                                alt="Technology Circuit Board"
-                                className="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
-                            />
+                       
+                        <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-xl max-w-xl mx-auto">
+                             <OptimizedImage
+                                                           src="/image%20(11).jpg"
+                                                           alt="Data Center Facility"
+                                                           width={900}
+                                                           height={1350}
+                                                           className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-102"
+                                                       />
                             {/* Gradient Overlay adjusted for white theme visibility */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-[#001738]/20 via-transparent to-transparent opacity-40" />
 
-                            {/* Tech Schematic Lines - more visible in light mode */}
-                            <div className="absolute inset-0 pointer-events-none opacity-20">
-                                <div className="absolute h-[1px] w-full bg-cyan-500 top-1/4 animate-[scan_3s_linear_infinite]" />
-                                <div className="absolute w-[1px] h-full bg-cyan-500 left-1/4 animate-[scan_4s_linear_infinite]" />
-                            </div>
+                          
                         </div>
 
                         {/* Floating Card */}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, ArrowUpRight, Tag, Zap } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
@@ -13,36 +14,36 @@ const LatestNews = () => {
     const newsData = [
         {
             id: "01",
-            title: "USDC Expands Tier III Footprint with New Ohio Facility",
-            category: "Expansion",
-            date: "May 12, 2024",
-            readTime: "4 min read",
-            image: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?auto=format&fit=crop&q=80&w=2070",
-            description: "Strategically located to serve the growing Midwest tech corridor, our newest site adds 15MW of HPC capacity with industry-leading PUE ratings.",
+            title: "Microsoft Expects to Spend $80 Bn on Ai-enabled data centers in fiscal 2025",
+            category: "Industry News",
+            date: "January 3, 2025",
+            readTime: "5 min read",
+            image: "/first-news.webp",
+            description: "Microsoft announces massive investment in AI-enabled data center infrastructure, signaling accelerated momentum in enterprise AI adoption and hyperscale computing expansion.",
             accent: "#40D1FB",
-            tag: "Expansion"
+            tag: "Industry News"
         },
         {
             id: "02",
-            title: "Achieving 100% Renewable Energy Across All Sites",
-            category: "Sustainability",
-            date: "April 28, 2024",
-            readTime: "6 min read",
-            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
-            description: "USDC hits a major milestone in carbon-neutral operations through integrated waste-to-energy systems and direct renewable PPAs.",
+            title: "McKinsey & Co on AI power: Expanding data center capacity to meet growing demand",
+            category: "Industry News",
+            date: "January 2, 2025",
+            readTime: "7 min read",
+            image: "/sec-news.webp",
+            description: "McKinsey analysis reveals critical infrastructure gaps and expansion strategies needed to meet surging global demand for AI computing capacity and low-latency workloads.",
             accent: "#40D1FB",
-            tag: "Sustainability"
+            tag: "Industry News"
         },
         {
             id: "03",
-            title: "Revolutionizing AI Infrastructure with Liquid Cooling",
-            category: "Innovation",
-            date: "April 15, 2024",
-            readTime: "5 min read",
-            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070",
-            description: "Next-gen cooling technologies implemented to support intense high-performance computing density beyond traditional air-cooled limits.",
+            title: "AI Power: Expanding data center capacity to meet growing demand",
+            category: "Technology",
+            date: "December 28, 2024",
+            readTime: "6 min read",
+            image: "/third-news.webp",
+            description: "Comprehensive overview of data center modernization strategies, capacity planning, and infrastructure investments required to support the explosive growth in AI workloads.",
             accent: "#40D1FB",
-            tag: "Innovation"
+            tag: "Technology"
         }
     ];
 
@@ -121,33 +122,36 @@ const LatestNews = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.3 }}
                     >
-                        <motion.button
-                            whileHover={{ scale: 1.04, y: -2 }}
-                            whileTap={{ scale: 0.97 }}
-                            className="flex items-center gap-3 px-8 py-4 font-bold text-white rounded-full text-sm shadow-xl transition-shadow hover:shadow-2xl"
-                            style={{ background: `linear-gradient(135deg, ${brandNavy} 0%, #002860 100%)` }}
-                        >
-                            View All Stories
-                            <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: cyanColor }}>
-                                <ArrowUpRight className="w-4 h-4 text-white" />
-                            </span>
-                        </motion.button>
+                        <Link href="/insights">
+                            <motion.button
+                                whileHover={{ scale: 1.04, y: -2 }}
+                                whileTap={{ scale: 0.97 }}
+                                className="flex items-center gap-3 px-8 py-4 font-bold text-white rounded-full text-sm shadow-xl transition-shadow hover:shadow-2xl"
+                                style={{ background: `linear-gradient(135deg, ${brandNavy} 0%, #002860 100%)` }}
+                            >
+                                View All Stories
+                                <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: cyanColor }}>
+                                    <ArrowUpRight className="w-4 h-4 text-white" />
+                                </span>
+                            </motion.button>
+                        </Link>
                     </motion.div>
                 </div>
 
                 {/* ── News Grid ── */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 xl:gap-8">
                     {newsData.map((news, i) => (
-                        <NewsCard
-                            key={i}
-                            news={news}
-                            index={i}
-                            isHovered={hoveredIndex === i}
-                            isSiblingsHovered={hoveredIndex !== null && hoveredIndex !== i}
-                            onHover={() => setHoveredIndex(i)}
-                            onLeave={() => setHoveredIndex(null)}
-                            brandNavy={brandNavy}
-                        />
+                        <Link key={i} href="/insights">
+                            <NewsCard
+                                news={news}
+                                index={i}
+                                isHovered={hoveredIndex === i}
+                                isSiblingsHovered={hoveredIndex !== null && hoveredIndex !== i}
+                                onHover={() => setHoveredIndex(i)}
+                                onLeave={() => setHoveredIndex(null)}
+                                brandNavy={brandNavy}
+                            />
+                        </Link>
                     ))}
                 </div>
 

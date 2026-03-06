@@ -1,10 +1,32 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial,
     Noto Sans, Liberation Sans, sans-serif;
   --font-serif: "Playfair Display", serif;
+  --surface-page: #ffffff;
+  --surface-card: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-soft: #f1f5f9;
+  --border-subtle: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  color-scheme: light;
+}
+
+html.dark {
+  --surface-page: #020617;
+  --surface-card: #0b1220;
+  --surface-muted: #0f172a;
+  --surface-soft: #1e293b;
+  --border-subtle: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  color-scheme: dark;
 }
 
 * {
@@ -19,9 +41,195 @@ body {
 
 body {
   font-family: var(--font-sans);
+  background-color: var(--surface-page);
+  color: var(--text-primary);
 }
 
 .hero-title-italic {
   font-family: var(--font-serif);
   font-style: italic;
+}
+
+/* Global dark-mode mapping for the existing light-first utility classes. */
+html.dark .bg-white {
+  background-color: var(--surface-card);
+}
+
+html.dark .bg-white\/97 {
+  background-color: rgb(11 18 32 / 0.97);
+}
+
+html.dark .bg-white\/90 {
+  background-color: rgb(11 18 32 / 0.9);
+}
+
+html.dark .bg-white\/60 {
+  background-color: rgb(15 23 42 / 0.75);
+}
+
+html.dark .bg-white\/30 {
+  background-color: rgb(30 41 59 / 0.5);
+}
+
+html.dark .bg-white\/20 {
+  background-color: rgb(30 41 59 / 0.4);
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/50,
+html.dark .bg-gray-50,
+html.dark .bg-gray-50\/50 {
+  background-color: var(--surface-muted);
+}
+
+html.dark .bg-slate-100 {
+  background-color: var(--surface-soft);
+}
+
+html.dark .bg-slate-200 {
+  background-color: #334155;
+}
+
+html.dark .bg-cyan-50 {
+  background-color: rgb(6 182 212 / 0.1);
+}
+
+html.dark .bg-cyan-100,
+html.dark .bg-cyan-100\/50 {
+  background-color: rgb(8 145 178 / 0.22);
+}
+
+html.dark .bg-sky-50 {
+  background-color: rgb(14 165 233 / 0.12);
+}
+
+html.dark .text-slate-950,
+html.dark .text-slate-900,
+html.dark .text-gray-900 {
+  color: var(--text-primary);
+}
+
+html.dark .text-slate-800,
+html.dark .text-gray-800 {
+  color: #e2e8f0;
+}
+
+html.dark .text-slate-700,
+html.dark .text-slate-600,
+html.dark .text-gray-700,
+html.dark .text-gray-600 {
+  color: var(--text-secondary);
+}
+
+html.dark .text-slate-500,
+html.dark .text-slate-400,
+html.dark .text-slate-300,
+html.dark .text-gray-500,
+html.dark .text-gray-400 {
+  color: var(--text-muted);
+}
+
+html.dark .border-slate-50,
+html.dark .border-slate-100,
+html.dark .border-slate-100\/80,
+html.dark .border-slate-200,
+html.dark .border-slate-200\/50,
+html.dark .border-slate-300,
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-sky-100 {
+  border-color: var(--border-subtle);
+}
+
+html.dark .border-slate-400 {
+  border-color: #475569;
+}
+
+html.dark .border-white,
+html.dark .border-white\/60,
+html.dark .border-white\/40,
+html.dark .border-white\/30,
+html.dark .border-white\/20,
+html.dark .border-white\/10,
+html.dark .border-white\/5 {
+  border-color: rgb(71 85 105 / 0.6);
+}
+
+html.dark .hover\:bg-white:hover {
+  background-color: #1e293b;
+}
+
+html.dark .hover\:bg-slate-50:hover {
+  background-color: #1e293b;
+}
+
+html.dark .hover\:bg-slate-100:hover {
+  background-color: #334155;
+}
+
+html.dark .hover\:bg-slate-200:hover {
+  background-color: #475569;
+}
+
+html.dark .hover\:text-slate-950:hover,
+html.dark .hover\:text-slate-900:hover {
+  color: #f8fafc;
+}
+
+html.dark .hover\:text-black:hover {
+  color: #f8fafc;
+}
+
+html.dark .hover\:border-slate-400:hover,
+html.dark .hover\:border-slate-300:hover,
+html.dark .hover\:border-slate-200:hover,
+html.dark .hover\:border-slate-100:hover {
+  border-color: #475569;
+}
+
+html.dark .group:hover .group-hover\:bg-white {
+  background-color: #1e293b;
+}
+
+html.dark .group:hover .group-hover\:text-slate-950,
+html.dark .group:hover .group-hover\:text-slate-900 {
+  color: #f8fafc;
+}
+
+html.dark .from-white {
+  --tw-gradient-from: #0b1220 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(11 18 32 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to);
+}
+
+html.dark .via-white {
+  --tw-gradient-via: #0f172a var(--tw-gradient-via-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to);
+}
+
+html.dark .to-white {
+  --tw-gradient-to: #020617 var(--tw-gradient-to-position);
+}
+
+html.dark .from-slate-50 {
+  --tw-gradient-from: #0f172a var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(15 23 42 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to);
+}
+
+html.dark .to-slate-50 {
+  --tw-gradient-to: #0f172a var(--tw-gradient-to-position);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.8s linear infinite;
 }

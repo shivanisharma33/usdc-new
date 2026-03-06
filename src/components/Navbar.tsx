@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, BookOpen, BarChart3, Layout, Newspaper, Lightbulb, Satellite, ArrowUpRight } from 'lucide-react';
+import { MessageSquare, Menu, X, ChevronDown, MapPin, Target, BookOpen, BarChart3, Layout, Newspaper, Satellite, ArrowUpRight, Moon, Sun } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -55,11 +55,33 @@ const navLinks: NavLink[] = [
     { name: 'Career', path: '/careers' },
 ];
 
+const THEME_STORAGE_KEY = 'theme';
+
+const applyTheme = (darkMode: boolean) => {
+    const root = document.documentElement;
+    root.classList.toggle('dark', darkMode);
+    root.style.colorScheme = darkMode ? 'dark' : 'light';
+    root.dataset.theme = darkMode ? 'dark' : 'light';
+
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+        themeColorMeta.setAttribute('content', darkMode ? '#020617' : '#001738');
+    }
+
+    window.dispatchEvent(
+        new CustomEvent('themechange', {
+            detail: { theme: darkMode ? 'dark' : 'light' },
+        }),
+    );
+};
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isThemeReady, setIsThemeReady] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -73,6 +95,44 @@ const Navbar = () => {
         setActiveDropdown(null);
         setMobileSubmenu(null);
     }, [pathname]);
+
+    useEffect(() => {
+        let mediaQuery: MediaQueryList | null = null;
+        let mediaQueryHandler: ((event: MediaQueryListEvent) => void) | null = null;
+
+        const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialIsDark = storedTheme ? storedTheme === 'dark' : systemPrefersDark;
+
+        applyTheme(initialIsDark);
+        setIsDarkMode(initialIsDark);
+        setIsThemeReady(true);
+
+        // Follow system preference until a manual selection is persisted.
+        if (!storedTheme) {
+            mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            mediaQueryHandler = (event: MediaQueryListEvent) => {
+                applyTheme(event.matches);
+                setIsDarkMode(event.matches);
+            };
+            mediaQuery.addEventListener('change', mediaQueryHandler);
+        }
+
+        return () => {
+            if (mediaQuery && mediaQueryHandler) {
+                mediaQuery.removeEventListener('change', mediaQueryHandler);
+            }
+        };
+    }, []);
+
+    const toggleTheme = () => {
+        setIsDarkMode((currentTheme) => {
+            const nextThemeIsDark = !currentTheme;
+            applyTheme(nextThemeIsDark);
+            window.localStorage.setItem(THEME_STORAGE_KEY, nextThemeIsDark ? 'dark' : 'light');
+            return nextThemeIsDark;
+        });
+    };
 
     const isActive = (path: string) => pathname === path;
 
@@ -198,6 +258,18 @@ const Navbar = () => {
 
                 {/* Right Actions */}
                 <div className="flex items-center gap-3">
+                    {/* Theme Toggle */}
+                    <motion.button
+                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.04 }}
+                        onClick={toggleTheme}
+                        className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-100 flex items-center justify-center transition-colors"
+                        aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                        title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                    >
+                        {isThemeReady && isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                    </motion.button>
+
                     {/* DigiPowerX External Link - Icon Only */}
                     <a href="https://www.digipowerx.com/" target="_blank" rel="noopener noreferrer" className="hidden md:block no-underline">
                         <motion.button
