@@ -29,6 +29,7 @@ const Insights = () => {
             date: "January 3, 2025",
             author: "Microsoft",
             image: "/first-news.webp",
+            link: "https://blogs.microsoft.com/on-the-issues/2025/01/03/the-golden-opportunity-for-american-ai/",
         },
         {
             title: "McKinsey & Co on AI power: Expanding data center capacity to meet growing demand",
@@ -37,6 +38,7 @@ const Insights = () => {
             date: "January 2, 2025",
             author: "McKinsey & Company",
             image: "/sec-news.webp",
+            link: "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/ai-power-expanding-data-center-capacity-to-meet-growing-demand",
         },
         {
             title: "AI Power: Expanding data center capacity to meet growing demand",
@@ -45,6 +47,7 @@ const Insights = () => {
             date: "December 28, 2024",
             author: "USDC team",
             image: "/third-news.webp",
+            link: "https://www.usdatacenters.ai/news/revolutionizing-data-center-efficiency-the-rise-of-liquid-cooling-systems-ntr54-wfnkl",
         },
        
      
@@ -126,7 +129,9 @@ const Insights = () => {
                     >
                         <AnimatePresence mode='popLayout'>
                             {filteredInsights.map((insight, i) => (
-                                <NewsCard key={insight.title} {...insight} index={i} />
+                                <a key={insight.title} href={insight.link} target="_blank" rel="noopener noreferrer" className="no-underline block">
+                                    <NewsCard {...insight} index={i} />
+                                </a>
                             ))}
                         </AnimatePresence>
                     </motion.div>
@@ -177,6 +182,7 @@ interface NewsCardProps {
     author: string;
     image: string;
     index: number;
+    link: string;
 }
 
 const NewsCard = ({ title, description, category, date, author, image, index }: NewsCardProps) => {

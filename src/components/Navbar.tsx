@@ -279,7 +279,7 @@ const Navbar = () => {
                             title=""
                         >
                             <Image
-                                src="/DigiLogo Icon Black.png"
+                                src="/digipowerx-logo-black.png"
                                 alt=""
                                 width={28}
                                 height={28}
@@ -414,7 +414,7 @@ const Navbar = () => {
                                 <a href="https://www.digipowerx.com/" target="_blank" rel="noopener noreferrer" className="no-underline block" onClick={() => setIsOpen(false)}>
                                     <button className="w-full flex items-center justify-center bg-slate-900 text-white py-3.5 rounded-xl shadow-lg shadow-slate-900/10 transition-all active:scale-95 border border-slate-800">
                                         <Image
-                                            src="/DigiLogo Icon Black.png"
+                                            src="/digipowerx-logo-black.png"
                                             alt="DigiPowerX"
                                             width={24}
                                             height={24}

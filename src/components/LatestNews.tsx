@@ -21,7 +21,8 @@ const LatestNews = () => {
             image: "/first-news.webp",
             description: "Microsoft announces massive investment in AI-enabled data center infrastructure, signaling accelerated momentum in enterprise AI adoption and hyperscale computing expansion.",
             accent: "#40D1FB",
-            tag: "Industry News"
+            tag: "Industry News",
+            link: "https://blogs.microsoft.com/on-the-issues/2025/01/03/the-golden-opportunity-for-american-ai/"
         },
         {
             id: "02",
@@ -32,7 +33,8 @@ const LatestNews = () => {
             image: "/sec-news.webp",
             description: "McKinsey analysis reveals critical infrastructure gaps and expansion strategies needed to meet surging global demand for AI computing capacity and low-latency workloads.",
             accent: "#40D1FB",
-            tag: "Industry News"
+            tag: "Industry News",
+            link: "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/ai-power-expanding-data-center-capacity-to-meet-growing-demand"
         },
         {
             id: "03",
@@ -43,7 +45,8 @@ const LatestNews = () => {
             image: "/third-news.webp",
             description: "Comprehensive overview of data center modernization strategies, capacity planning, and infrastructure investments required to support the explosive growth in AI workloads.",
             accent: "#40D1FB",
-            tag: "Technology"
+            tag: "Technology",
+            link: "https://www.usdatacenters.ai/news/revolutionizing-data-center-efficiency-the-rise-of-liquid-cooling-systems-ntr54-wfnkl"
         }
     ];
 
@@ -141,7 +144,7 @@ const LatestNews = () => {
                 {/* ── News Grid ── */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 xl:gap-8">
                     {newsData.map((news, i) => (
-                        <Link key={i} href="/insights">
+                        <a key={i} href={news.link} target="_blank" rel="noopener noreferrer" className="no-underline block">
                             <NewsCard
                                 news={news}
                                 index={i}
@@ -151,7 +154,7 @@ const LatestNews = () => {
                                 onLeave={() => setHoveredIndex(null)}
                                 brandNavy={brandNavy}
                             />
-                        </Link>
+                        </a>
                     ))}
                 </div>
 
@@ -191,7 +194,7 @@ const NewsCard = ({
     onLeave,
     brandNavy
 }: {
-    news: { id: string, title: string, category: string, date: string, readTime: string, image: string, description: string, accent: string, tag: string };
+    news: { id: string, title: string, category: string, date: string, readTime: string, image: string, description: string, accent: string, tag: string, link: string };
     index: number;
     isHovered: boolean;
     isSiblingsHovered: boolean;
