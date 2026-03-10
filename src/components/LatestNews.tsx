@@ -7,8 +7,6 @@ import { Calendar, ArrowUpRight, Tag, Zap } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
 
 const LatestNews = () => {
-    const brandNavy = "#001738";
-    const cyanColor = "#40D1FB";
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     const newsData = [
@@ -51,14 +49,12 @@ const LatestNews = () => {
     ];
 
     return (
-        <section className="relative py-28 overflow-hidden" style={{ background: '#f8fafd' }}>
+        <section className="relative py-28 overflow-hidden bg-slate-50 dark:bg-slate-900">
             {/* Top accent line */}
-            <div className="absolute top-0 left-0 w-full h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${cyanColor}, transparent)` }} />
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-cyan to-transparent" />
 
-            {/* Background watermark text */}
             <div
-                className="absolute right-0 top-1/2 -translate-y-1/2 text-[12rem] font-black leading-none select-none pointer-events-none opacity-[0.03] hidden xl:block translate-x-1/3"
-                style={{ color: brandNavy }}
+                className="absolute right-0 top-1/2 -translate-y-1/2 text-[12rem] font-black leading-none select-none pointer-events-none opacity-[0.03] hidden xl:block translate-x-1/3 text-brand-navy dark:text-slate-400"
             >
                 NEWS
             </div>
@@ -75,9 +71,9 @@ const LatestNews = () => {
                             transition={{ duration: 0.6 }}
                             className="flex items-center gap-3"
                         >
-                            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border" style={{ borderColor: `${cyanColor}40`, background: `${cyanColor}0f` }}>
-                                <Zap className="w-3.5 h-3.5" style={{ color: cyanColor }} />
-                                <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: cyanColor }}>
+                            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-cyan/40 bg-brand-cyan/10">
+                                <Zap className="w-3.5 h-3.5 text-brand-cyan" />
+                                <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-cyan">
                                     News &  Insights
                                 </span>
                             </div>
@@ -88,13 +84,11 @@ const LatestNews = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.7, delay: 0.1 }}
-                            className="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.05] tracking-tight"
-                            style={{ color: brandNavy }}
+                            className="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.05] tracking-tight text-brand-navy dark:text-white"
                         >
                             Latest{' '}
                             <span
-                                className="relative inline-block"
-                                style={{ color: cyanColor }}
+                                className="relative inline-block text-brand-cyan"
                             >
                                 News
                                 <motion.span
@@ -102,8 +96,7 @@ const LatestNews = () => {
                                     whileInView={{ scaleX: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: 0.5 }}
-                                    className="absolute -bottom-1 left-0 w-full h-[3px] origin-left"
-                                    style={{ background: `linear-gradient(90deg, ${cyanColor}, transparent)` }}
+                                    className="absolute -bottom-1 left-0 w-full h-[3px] origin-left bg-gradient-to-r from-brand-cyan to-transparent"
                                 />
                             </span>
                         </motion.h2>
@@ -129,11 +122,10 @@ const LatestNews = () => {
                             <motion.button
                                 whileHover={{ scale: 1.04, y: -2 }}
                                 whileTap={{ scale: 0.97 }}
-                                className="flex items-center gap-3 px-8 py-4 font-bold text-white rounded-full text-sm shadow-xl transition-shadow hover:shadow-2xl"
-                                style={{ background: `linear-gradient(135deg, ${brandNavy} 0%, #002860 100%)` }}
+                                className="flex items-center gap-3 px-8 py-4 font-bold text-white rounded-full text-sm shadow-xl transition-shadow hover:shadow-2xl bg-gradient-to-br from-brand-navy to-blue-900"
                             >
                                 View All Stories
-                                <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: cyanColor }}>
+                                <span className="w-8 h-8 rounded-full flex items-center justify-center bg-brand-cyan">
                                     <ArrowUpRight className="w-4 h-4 text-white" />
                                 </span>
                             </motion.button>
@@ -152,7 +144,6 @@ const LatestNews = () => {
                                 isSiblingsHovered={hoveredIndex !== null && hoveredIndex !== i}
                                 onHover={() => setHoveredIndex(i)}
                                 onLeave={() => setHoveredIndex(null)}
-                                brandNavy={brandNavy}
                             />
                         </a>
                     ))}
@@ -173,7 +164,7 @@ const LatestNews = () => {
                         { value: "5", label: "Content Categories" },
                     ].map((stat, i) => (
                         <div key={i} className="flex items-center gap-4">
-                            <span className="text-3xl font-black" style={{ color: i === 1 ? cyanColor : brandNavy }}>{stat.value}</span>
+                            <span className={`text-3xl font-black ${i === 1 ? 'text-brand-cyan' : 'text-brand-navy dark:text-white'}`}>{stat.value}</span>
                             <span className="text-sm font-semibold text-slate-400 uppercase tracking-wider">{stat.label}</span>
                             {i < 2 && <div className="hidden sm:block w-px h-8 bg-slate-200 ml-4" />}
                         </div>
@@ -192,7 +183,6 @@ const NewsCard = ({
     isSiblingsHovered,
     onHover,
     onLeave,
-    brandNavy
 }: {
     news: { id: string, title: string, category: string, date: string, readTime: string, image: string, description: string, accent: string, tag: string, link: string };
     index: number;
@@ -200,7 +190,6 @@ const NewsCard = ({
     isSiblingsHovered: boolean;
     onHover: () => void;
     onLeave: () => void;
-    brandNavy: string;
 }) => {
     return (
         <motion.article
@@ -248,9 +237,8 @@ const NewsCard = ({
 
                     {/* Gradient overlay */}
                     <div
-                        className="absolute inset-0"
+                        className="absolute inset-0 bg-gradient-to-t from-brand-navy/80 dark:from-slate-900/80 to-transparent"
                         style={{
-                            background: `linear-gradient(to top, ${brandNavy}cc 0%, transparent 60%)`,
                             opacity: isHovered ? 1 : 0.4,
                             transition: 'opacity 0.4s ease',
                         }}
@@ -266,13 +254,7 @@ const NewsCard = ({
 
                     {/* Category badge */}
                     <div
-                        className="absolute top-4 left-4 px-3 py-1 text-xs font-bold uppercase tracking-widest backdrop-blur-md"
-                        style={{
-                            background: `${news.accent}22`,
-                            color: news.accent,
-                            border: `1px solid ${news.accent}44`,
-                            borderRadius: '999px',
-                        }}
+                        className="absolute top-4 left-4 px-3 py-1 text-xs font-bold uppercase tracking-widest backdrop-blur-md bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30 rounded-full"
                     >
                         {news.category}
                     </div>
@@ -300,17 +282,13 @@ const NewsCard = ({
                 <div className="p-6 space-y-4">
                     {/* Date */}
                     <div className="flex items-center gap-2">
-                        <Calendar className="w-3.5 h-3.5" style={{ color: news.accent }} />
+                        <Calendar className="w-3.5 h-3.5 text-brand-cyan" />
                         <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{news.date}</span>
                     </div>
 
                     {/* Title */}
                     <h3
-                        className="text-xl font-black leading-snug"
-                        style={{
-                            color: isHovered ? news.accent : brandNavy,
-                            transition: 'color 0.3s ease',
-                        }}
+                        className={`text-xl font-black leading-snug transition-colors ${isHovered ? 'text-brand-cyan' : 'text-brand-navy dark:text-white'}`}
                     >
                         {news.title}
                     </h3>
@@ -336,8 +314,7 @@ const NewsCard = ({
                                 y: isHovered ? -2 : 0,
                             }}
                             transition={{ duration: 0.25 }}
-                            className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest"
-                            style={{ color: isHovered ? news.accent : brandNavy, transition: 'color 0.3s ease' }}
+                            className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest transition-colors ${isHovered ? 'text-brand-cyan' : 'text-brand-navy dark:text-white'}`}
                         >
                             Read More
                             <ArrowUpRight className="w-4 h-4" />
@@ -347,10 +324,9 @@ const NewsCard = ({
 
                 {/* Bottom accent line */}
                 <motion.div
-                    className="absolute bottom-0 left-0 h-[3px]"
+                    className="absolute bottom-0 left-0 h-[3px] bg-gradient-to-r from-brand-cyan to-transparent"
                     animate={{ width: isHovered ? '100%' : '0%' }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ background: `linear-gradient(90deg, ${news.accent}, transparent)` }}
                 />
             </motion.div>
         </motion.article>

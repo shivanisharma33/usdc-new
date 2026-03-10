@@ -8,7 +8,14 @@ const config: Config = {
     './src/views/**/*.{ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          navy: "#001738",
+          cyan: "#40D1FB",
+        },
+      },
+    },
   },
   plugins: [],
 };

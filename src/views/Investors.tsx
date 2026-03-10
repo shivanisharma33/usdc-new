@@ -331,7 +331,7 @@ const Investors = () => {
             link: "/investors"
         },
         {
-            title: "Press Releases",
+            title: "Press Room",
             desc: "Latest news and announcements from DigiPowerX.",
             icon: Newspaper,
             link: "/press-release"
@@ -425,7 +425,7 @@ const Investors = () => {
                         </div>
 
                         <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[12rem] font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase select-none">
-                            VALUE <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-black">PORTAL.</span>
+                            INVESTOR <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-black"> OVERVIEW.</span>
                         </h1>
                     </motion.div>
                 </div>
@@ -745,10 +745,10 @@ const Investors = () => {
                     <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
                         <div className="space-y-4">
                             <span className="text-xs font-black text-cyan-500 uppercase tracking-[0.6em]">Recent Updates</span>
-                            <h2 className="text-5xl font-black text-white uppercase tracking-tighter">Latest Press Releases</h2>
+                            <h2 className="text-5xl font-black text-white uppercase tracking-tighter">Latest Press Room</h2>
                         </div>
                         <Link href="/press-release" className="text-xs font-black text-cyan-500 uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">
-                            View All Press Releases <ArrowUpRight className="w-4 h-4" />
+                            View All Press Room <ArrowUpRight className="w-4 h-4" />
                         </Link>
                     </div>
 

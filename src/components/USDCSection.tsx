@@ -39,14 +39,7 @@ const USDCSection = () => {
             </div>
           </div>
 
-          <div className="mt-8 flex items-center gap-4">
-            <button className="px-6 py-3 bg-gradient-to-r from-[#40D1FB] to-blue-500 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform flex items-center gap-3">
-              Explore ARMS 200 <ArrowRight className="w-4 h-4" />
-            </button>
-            <button className="px-5 py-3 bg-white border border-slate-200 text-slate-900 font-semibold rounded-lg flex items-center gap-2">
-              <Zap className="w-4 h-4 text-yellow-500" /> ARMS 200 Specs
-            </button>
-          </div>
+
         </div>
 
         <div className="relative">

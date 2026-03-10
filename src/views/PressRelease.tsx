@@ -172,7 +172,7 @@ const PressRelease = () => {
                             Live Transmission
                         </div>
                         <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[14rem] font-black text-white tracking-tighter leading-none mb-8 uppercase select-none">
-                            PRESS <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">ROOM.</span>
+                            PRESS <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">RELEASE.</span>
                         </h1>
                         <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mt-10 md:mt-16 scale-100 md:scale-110">
                             <div className="text-center group cursor-pointer">
@@ -200,8 +200,7 @@ const PressRelease = () => {
                     transition={{ duration: 2, repeat: Infinity }}
                     className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 flex flex-col items-center gap-3"
                 >
-                    <span className="text-[9px] font-black uppercase tracking-[0.6em] rotate-180 [writing-mode:vertical-lr]">Scroll</span>
-                    <div className="w-[1px] h-10 bg-gradient-to-b from-cyan-500 to-transparent" />
+                       <div className="w-[1px] h-10 bg-gradient-to-b from-cyan-500 to-transparent" />
                 </motion.div>
             </section>
 

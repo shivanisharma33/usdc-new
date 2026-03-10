@@ -5,7 +5,7 @@ import InteractiveMap from '../components/InteractiveMap';
 import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { Globe, Zap, ArrowUpRight, Activity, ShieldCheck, Box, Server, Lock } from 'lucide-react';
+import { Globe, Zap, Activity, ShieldCheck, Box, Server, Lock } from 'lucide-react';
 import ContactUs from '../components/ContactUs';
 
 const Locations = () => {
@@ -151,8 +151,8 @@ const Locations = () => {
                 </div>
 
                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
-                    <div className="w-[1px] h-20 bg-gradient-to-b from-cyan-500 to-transparent" />
-                    <span className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.6em] rotate-180 [writing-mode:vertical-lr]">Scroll</span>
+                    
+             
                 </div>
             </section>
 
@@ -283,11 +283,6 @@ const Locations = () => {
 
                                     <div className="relative overflow-hidden rounded-2xl h-48 mb-4">
                                         <OptimizedImage src={loc.image} alt={loc.city} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
-                                        <div className="absolute top-3 right-3">
-                                            <div className="w-12 h-12 bg-slate-50 flex items-center justify-center border border-slate-100 rounded-lg transition-colors group-hover:bg-cyan-500 group-hover:text-slate-950">
-                                                <ArrowUpRight className="w-5 h-5" />
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <h3 className="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-tighter leading-tight">{loc.city}</h3>

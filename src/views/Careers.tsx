@@ -80,9 +80,7 @@ const Careers = () => {
       </section>
 
       <section className="relative overflow-hidden border-y border-slate-100 bg-white py-24">
-        <div className="pointer-events-none absolute top-0 right-0 -z-0 translate-x-1/4 translate-y-1/4 select-none text-[18rem] leading-none font-black text-slate-50 uppercase">
-          Team
-        </div>
+       
         <div className="relative z-10 mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
             {benefits.map((benefit, i) => (

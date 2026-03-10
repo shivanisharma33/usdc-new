@@ -1,10 +1,14 @@
 "use client";
 
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram, ArrowRight, ArrowUpRight, X } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './Logo';
+import CookieModal from './CookieModal';
 
 const Footer = () => {
+  const [showCookies, setShowCookies] = useState(false);
+
   return (
     <footer className="bg-[#020617] text-slate-300 relative border-t border-[#1e293b] overflow-hidden">
       {/* Premium Background Glows */}
@@ -123,10 +127,20 @@ const Footer = () => {
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
             <Link href="/privacy-policy" className="hover:text-[#40D1FB] transition-colors">Privacy Policy</Link>
             <Link href="/terms-of-service" className="hover:text-[#40D1FB] transition-colors">Terms of Service</Link>
-            <Link href="/cookies" className="hover:text-[#40D1FB] transition-colors">Cookie Policy</Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setShowCookies(true);
+              }}
+              className="hover:text-[#40D1FB] transition-colors"
+            >
+              Cookie Policy
+            </button>
           </div>
         </div>
       </div>
+
+      {showCookies && <CookieModal onClose={() => setShowCookies(false)} />}
     </footer>
   );
 };
