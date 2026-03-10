@@ -39,7 +39,13 @@ const MapContent = ({ locations, onLocationSelect, themeMode }: MapContentProps)
         import('leaflet').then((L) => {
             const map = L.map('map', {
                 preferCanvas: true,
-                zoomControl: true
+                zoomControl: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                keyboard: false,
+                dragging: false,
+                touchZoom: false
             }).setView([38.8283, -85.5795], 5);
 
             // Use colored OpenStreetMap tiles

@@ -441,30 +441,6 @@ const PressRelease = () => {
                 </div>
             </section>
 
-            {/* ── FOOTER ── */}
-            <section className="py-32 bg-slate-950 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-2/3 h-full bg-cyan-500/5 skew-x-[-20deg] translate-x-1/2" />
-                <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-                        <div className="space-y-10">
-                            <h3 className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none">
-                                Press <br /> <span className="text-cyan-500">Center.</span>
-                            </h3>
-                            <p className="text-slate-400 text-lg font-medium leading-relaxed max-w-md">
-                                For institutional inquiries, high-resolution brand assets, or executive commentary.
-                            </p>
-                            <div className="space-y-4">
-                                <a href="mailto:IR@digihostpower.com" className="text-2xl font-black text-white hover:text-cyan-500 transition-colors flex items-center gap-4 group">
-                                    IR@digihostpower.com
-                                    <ArrowUpRight className="w-6 h-6 text-cyan-500 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
-                                </a>
-                                <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">Global Press Relations</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <ContactUs />
         </div>
     );
