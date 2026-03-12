@@ -6,7 +6,7 @@ const WhatWeDo = () => {
     const brandNavy = "#001738";
 
     return (
-        <section className="relative py-24 bg-gray-50/50 overflow-hidden">
+        <section className="relative py-24 bg-gray-50/50 dark:bg-slate-950/50 overflow-hidden">
 
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
@@ -19,7 +19,7 @@ const WhatWeDo = () => {
                                 <div className="h-[2px] w-12 bg-cyan-400" />
                                 <span className="text-sm font-bold text-cyan-500 uppercase tracking-widest">Our Mission</span>
                             </div>
-                            <h2 className="text-5xl lg:text-7xl font-bold leading-tight" style={{ color: brandNavy }}>
+                            <h2 className="text-5xl lg:text-7xl font-bold leading-tight text-brand-navy dark:text-white">
                                 What We <span style={{ color: '#00d3f2' }}>Do</span>
                             </h2>
                         </div>
@@ -27,10 +27,10 @@ const WhatWeDo = () => {
                         <div className="relative group">
                             <div className="absolute -left-6 top-0 h-full w-[2px] bg-gradient-to-b from-cyan-400 via-cyan-200 to-transparent" />
                             <div className="space-y-6">
-                                <p className="text-xl lg:text-3xl text-gray-800 font-bold leading-[1.3]">
+                                <p className="text-xl lg:text-3xl text-gray-800 dark:text-slate-200 font-bold leading-[1.3]">
                                     At USDC, we believe high-performance computing can unlock <span className="text-cyan-500">transformative opportunities</span> for businesses and research.
                                 </p>
-                                <p className="text-lg lg:text-xl text-gray-500 leading-relaxed font-medium">
+                                <p className="text-lg lg:text-xl text-gray-500 dark:text-slate-400 leading-relaxed font-medium">
                                     By integrating cutting-edge technology with renewable energy and waste management systems,
                                     we deliver exceptional results for our partners while prioritizing sustainability
                                     and responsibility.
@@ -45,7 +45,7 @@ const WhatWeDo = () => {
 
                     {/* Image Side */}
                     <div className="flex-1 w-full max-w-2xl relative">
-                        <div className="relative w-full h-auto overflow-hidden rounded-[2rem] shadow-2xl group">
+                        <div className="relative w-full h-auto overflow-hidden rounded-[2rem] shadow-2xl dark:shadow-cyan-900/10 group">
                             <OptimizedImage
                                 src="/Arms 200.png"
                                 alt="Data Center Facility"

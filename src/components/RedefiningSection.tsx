@@ -7,33 +7,33 @@ const RedefiningSection = () => {
     const brandNavy = "#001738";
 
     return (
-        <section className="relative py-24 bg-white overflow-hidden">
+        <section className="relative py-24 bg-white dark:bg-slate-950 overflow-hidden">
             {/* Background Decorative Elements - Subtle gradients for white theme */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-100/50 rounded-full blur-[120px] -mr-64 -mt-64" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-50/50 rounded-full blur-[100px] -ml-40 -mb-40" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-100/50 dark:bg-cyan-900/10 rounded-full blur-[120px] -mr-64 -mt-64" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-50/50 dark:bg-blue-900/10 rounded-full blur-[100px] -ml-40 -mb-40" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 
                     {/* Text Content */}
                     <div className="flex-1 space-y-8 z-10">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-100 dark:border-cyan-800/50">
                             <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-                            <span className="text-xs font-bold text-cyan-600 uppercase tracking-widest">Innovation Leader</span>
+                            <span className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest">Innovation Leader</span>
                         </div>
 
-                        <h2 className="text-5xl lg:text-7xl font-bold leading-tight" style={{ color: brandNavy }}>
+                        <h2 className="text-5xl lg:text-7xl font-bold leading-tight text-brand-navy dark:text-white">
                             Redefining <span style={{ color: cyanColor }}>Data</span>
                         </h2>
 
                         <div className="space-y-6">
-                            <p className="text-lg lg:text-xl text-gray-600 leading-relaxed font-medium">
+                            <p className="text-lg lg:text-xl text-gray-600 dark:text-slate-400 leading-relaxed font-medium">
                                 At US Data Centers (USDC), we&apos;re redefining data center infrastructure to deliver
-                                <span className="italic text-gray-900"> unmatched performance, efficiency, and sustainability </span>
+                                <span className="italic text-gray-900 dark:text-white"> unmatched performance, efficiency, and sustainability </span>
                                 for data-intensive organizations.
                             </p>
 
-                            <p className="text-gray-500 leading-relaxed border-l-2 border-cyan-500 pl-6 italic">
+                            <p className="text-gray-500 dark:text-slate-500 leading-relaxed border-l-2 border-cyan-500 pl-6 italic">
                                 Purpose-built to support next-generation high-performance computing, our expertise lies
                                 in identifying and purchasing misused or under-utilized energy assets and converting
                                 them to high-demand tier III HPC data centers.
@@ -49,10 +49,10 @@ const RedefiningSection = () => {
                                 { icon: Layers, label: "HPC Ready" }
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-4 group">
-                                    <div className="p-3 rounded-lg bg-gray-50 border border-gray-100 group-hover:border-cyan-400 group-hover:bg-white transition-all shadow-sm">
-                                        <item.icon className="w-5 h-5 text-cyan-600" />
+                                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-slate-900/50 border border-gray-100 dark:border-slate-800 group-hover:border-cyan-400 dark:group-hover:border-cyan-500/50 group-hover:bg-white dark:group-hover:bg-slate-900 transition-all shadow-sm">
+                                        <item.icon className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
                                     </div>
-                                    <span className="text-gray-700 font-bold text-sm tracking-wide">{item.label}</span>
+                                    <span className="text-gray-700 dark:text-slate-300 font-bold text-sm tracking-wide">{item.label}</span>
                                 </div>
                             ))}
                         </div>
@@ -62,7 +62,7 @@ const RedefiningSection = () => {
                     <div className="flex-1 relative group">
                         {/* More subtle glow for light mode */}
                        
-                        <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-xl max-w-xl mx-auto">
+                        <div className="relative rounded-2xl overflow-hidden border border-gray-100 dark:border-slate-800 shadow-xl max-w-xl mx-auto">
                              <OptimizedImage
                                                            src="/image%20(11).jpg"
                                                            alt="Data Center Facility"
@@ -71,20 +71,20 @@ const RedefiningSection = () => {
                                                            className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-102"
                                                        />
                             {/* Gradient Overlay adjusted for white theme visibility */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-[#001738]/20 via-transparent to-transparent opacity-40" />
+                            <div className="absolute inset-0 bg-gradient-to-tr from-[#001738]/20 via-transparent to-transparent opacity-40 dark:opacity-60" />
 
                           
                         </div>
 
                         {/* Floating Card */}
-                        <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl border border-gray-100 shadow-2xl hidden md:block animate-bounce-slow">
+                        <div className="absolute -bottom-8 -left-8 bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-100 dark:border-slate-800 shadow-2xl hidden md:block animate-bounce-slow">
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-[#001738] flex items-center justify-center text-white font-bold text-xl shadow-lg ring-4 ring-cyan-50">
+                                <div className="w-12 h-12 rounded-full bg-[#001738] dark:bg-brand-navy flex items-center justify-center text-white font-bold text-xl shadow-lg ring-4 ring-cyan-50 dark:ring-slate-800">
                                     III
                                 </div>
                                 <div>
-                                    <p className="text-[#001738] font-bold">Tier III Ready</p>
-                                    <p className="text-gray-400 text-sm">Enterprise Critical</p>
+                                    <p className="text-[#001738] dark:text-white font-bold">Tier III Ready</p>
+                                    <p className="text-gray-400 dark:text-slate-500 text-sm">Enterprise Critical</p>
                                 </div>
                             </div>
                         </div>
@@ -112,3 +112,4 @@ const RedefiningSection = () => {
 };
 
 export default RedefiningSection;
+
