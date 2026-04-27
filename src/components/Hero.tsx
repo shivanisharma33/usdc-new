@@ -40,7 +40,7 @@ const Hero = () => {
 
                     {/* Main Heading */}
                     <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
-                        Powering the <span className="bg-gradient-to-r from-[#40D1FB] to-blue-400 bg-clip-text text-transparent">Future of Data</span>: Expert Development for the Digital Age
+                        Deploy <span className="bg-gradient-to-r from-[#40D1FB] to-blue-400 bg-clip-text text-transparent">AI Infrastructure</span><br /> in Weeks Not Years
                     </h1>
 
                     {/* Tagline */}

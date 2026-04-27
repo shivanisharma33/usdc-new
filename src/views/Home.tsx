@@ -3,6 +3,7 @@ import RedefiningSection from '../components/RedefiningSection';
 import WhatWeDo from '../components/WhatWeDo';
 import Opportunity from '../components/Opportunity';
 import Arm200 from '../components/Arm200';
+import NvidiaArchitecture from '../components/NvidiaArchitecture';
 import DigiPowerXSection from '../components/DigiPowerXSection';
 import EarthSection from '../components/EarthSection';
 import LatestNews from '../components/LatestNews';
@@ -17,6 +18,7 @@ const Home = () => {
       <WhatWeDo />
       <Opportunity />
       <Arm200 />
+      <NvidiaArchitecture />
       <DigiPowerXSection />
       <EarthSection />
       <USDCSection />
